@@ -10,6 +10,8 @@ public class Main {
 		
 		login.setVisible(true);
 		login.setLocationRelativeTo(null);
+		
+		
 
 	}
 
