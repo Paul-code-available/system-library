@@ -60,6 +60,12 @@ public class LoginView extends JFrame {
 		txtEmail.setFont(fuente);
 		txtEmail.setBounds(txtX, y, 200, 40);
 		add(txtEmail);
+		
+		JLabel lblEmailRequerido = new JLabel("El email es requerido.");
+		lblEmailRequerido.setBounds(txtX, y+30, 200, 30);
+		lblEmailRequerido.setFont(new Font("Arial", Font.BOLD, 10));
+		lblEmailRequerido.setForeground(Color.RED);
+		add(lblEmailRequerido);
 
 		y += 70;
 		
@@ -72,6 +78,12 @@ public class LoginView extends JFrame {
 		contrasena.setFont(fuente);
 		contrasena.setBounds(txtX, y, 200, 40);
 		add(contrasena);
+		
+		JLabel lblContrasenaRequerida = new JLabel("La contraseña es requerida.");
+		lblContrasenaRequerida.setBounds(txtX, y+30, 200, 30);
+		lblContrasenaRequerida.setFont(new Font("Arial", Font.BOLD, 10));
+		lblContrasenaRequerida.setForeground(Color.RED);
+		add(lblContrasenaRequerida);
 		
 	}
 	
