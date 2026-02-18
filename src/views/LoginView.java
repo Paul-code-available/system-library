@@ -3,6 +3,7 @@ package views;
 import java.awt.Color;
 import java.awt.Font;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -10,6 +11,15 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
+
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.border.Border;
 
 
 public class LoginView extends JFrame {
@@ -19,10 +29,17 @@ public class LoginView extends JFrame {
 	public LoginView() {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 400, 500);
+		
+		setLayout(new BorderLayout());
+		//setBackground(Color.BLUE);
+		Border emptyBorder = BorderFactory.createEmptyBorder(20,10,20,10);
+		
+		
+		JPanel panelSuperior = new JPanel();
+		panelSuperior.setBackground(Color.GREEN);
+		add(panelSuperior, BorderLayout.NORTH);
 		
 		fuente = new Font("Arial", Font.PLAIN, 14);
-		setLayout(null);
 		
 		inicializarComponentes();
 
