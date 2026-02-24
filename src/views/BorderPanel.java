@@ -6,6 +6,8 @@ import java.awt.Component;
 import java.awt.FlowLayout;
 
 import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -30,16 +32,16 @@ public class BorderPanel extends JPanel {
 	
 	public void crearPanelSuperior() {
 		JPanel panelSuperior = new JPanel();
-		panelSuperior.setBackground(Color.GREEN);
+		//panelSuperior.setBackground(Color.GREEN);
 		add(panelSuperior, BorderLayout.NORTH);
 		
 		JLabel lbltitle = new JLabel("User Login");
 		panelSuperior.add(lbltitle);
 	}
 	
-	public void crearPanelIzquierdo() { // falta crear un flow layout dentro del panel izquierdo
+	public void crearPanelIzquierdo() { 
 		JPanel panelIzquierda = new JPanel();
-		panelIzquierda.setBackground(Color.CYAN);
+		panelIzquierda.setLayout(new BoxLayout(panelIzquierda, BoxLayout.Y_AXIS));
 		add(panelIzquierda, BorderLayout.WEST);
 		
 		JLabel lblEmail = new JLabel("Email:");
@@ -47,14 +49,18 @@ public class BorderPanel extends JPanel {
 		
 		JLabel lblContrasena = new JLabel("Contraseña:"); 
 		panelIzquierda.add(lblContrasena);
+		
 	}
 	
-	public void crearPanelCentro() { // falta crear un flow layout dentro del panel centro
+	
+	public void crearPanelCentro() { 
 		JPanel panelCentro = new JPanel();
-		panelCentro.setBackground(Color.BLUE);
+		//panelCentro.setBackground(Color.BLUE);
+		
+		panelCentro.setLayout(new BoxLayout(panelCentro, BoxLayout.Y_AXIS));
 		add(panelCentro, BorderLayout.CENTER);
 		
-		JTextField txtEmail = new JTextField(20);
+		JTextField txtEmail = new JTextField();
 		panelCentro.add(txtEmail);
 		
 		JPasswordField contrasena = new JPasswordField(); 
