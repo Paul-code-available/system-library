@@ -2,51 +2,67 @@ package views;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.FlowLayout;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 import javax.swing.border.Border;
 
 public class BorderPanel extends JPanel {
 	
 	public BorderPanel() {
 		setLayout(new BorderLayout());
-		//setBackground(Color.BLUE);
 		Border emptyBorder = BorderFactory.createEmptyBorder(20,10,20,10);
 		setBorder(emptyBorder);
 		
+		crearPanelSuperior();
+		
+		crearPanelIzquierdo();
+		
+		crearPanelCentro();
+	
+	}
+	
+	public void crearPanelSuperior() {
 		JPanel panelSuperior = new JPanel();
 		panelSuperior.setBackground(Color.GREEN);
 		add(panelSuperior, BorderLayout.NORTH);
 		
-		JButton b = new JButton("User Login");
-		panelSuperior.add(b);
-		
-		crearPanelCentro();
-		
-		JButton btnSur = new JButton("SUR");
-		add(btnSur, BorderLayout.SOUTH);
+		JLabel lbltitle = new JLabel("User Login");
+		panelSuperior.add(lbltitle);
 	}
 	
-	public void crearPanelCentro() {
-		JPanel panelCentro = new JPanel(new BorderLayout());
-		panelCentro.setBackground(Color.RED);
+	public void crearPanelIzquierdo() { // falta crear un flow layout dentro del panel izquierdo
+		JPanel panelIzquierda = new JPanel();
+		panelIzquierda.setBackground(Color.CYAN);
+		add(panelIzquierda, BorderLayout.WEST);
 		
-		JPanel panelCentroSur = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-		panelCentro.add(panelCentroSur, BorderLayout.SOUTH);
-		panelCentroSur.setBackground(Color.ORANGE);
+		JLabel lblEmail = new JLabel("Email:");
+		panelIzquierda.add(lblEmail);
 		
-		JButton btnInicio = new JButton("Iniciar sesión");
-		panelCentroSur.add(btnInicio);
-		
-		JButton btnCancelar = new JButton("Cancelar");
-		panelCentroSur.add(btnCancelar);
-		
+		JLabel lblContrasena = new JLabel("Contraseña:"); 
+		panelIzquierda.add(lblContrasena);
+	}
+	
+	public void crearPanelCentro() { // falta crear un flow layout dentro del panel centro
+		JPanel panelCentro = new JPanel();
+		panelCentro.setBackground(Color.BLUE);
 		add(panelCentro, BorderLayout.CENTER);
-	
+		
+		JTextField txtEmail = new JTextField(20);
+		panelCentro.add(txtEmail);
+		
+		JPasswordField contrasena = new JPasswordField(); 
+		panelCentro.add(contrasena);
 	}
+	
+	
+
 
 
 }
