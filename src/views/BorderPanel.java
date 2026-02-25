@@ -3,6 +3,7 @@ package views;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 
 import javax.swing.BorderFactory;
@@ -27,6 +28,8 @@ public class BorderPanel extends JPanel {
 		crearPanelIzquierdo();
 		
 		crearPanelCentro();
+		
+		crearPanelInferior();
 	
 	}
 	
@@ -37,6 +40,8 @@ public class BorderPanel extends JPanel {
 		
 		JLabel lbltitle = new JLabel("User Login");
 		panelSuperior.add(lbltitle);
+		
+		
 	}
 	
 	public void crearPanelIzquierdo() { 
@@ -44,8 +49,12 @@ public class BorderPanel extends JPanel {
 		panelIzquierda.setLayout(new BoxLayout(panelIzquierda, BoxLayout.Y_AXIS));
 		add(panelIzquierda, BorderLayout.WEST);
 		
+		panelIzquierda.add(Box.createRigidArea(new Dimension(50, 50)));
+		
 		JLabel lblEmail = new JLabel("Email:");
 		panelIzquierda.add(lblEmail);
+		
+		panelIzquierda.add(Box.createRigidArea(new Dimension(50, 50)));
 		
 		JLabel lblContrasena = new JLabel("Contraseña:"); 
 		panelIzquierda.add(lblContrasena);
@@ -60,13 +69,29 @@ public class BorderPanel extends JPanel {
 		panelCentro.setLayout(new BoxLayout(panelCentro, BoxLayout.Y_AXIS));
 		add(panelCentro, BorderLayout.CENTER);
 		
-		JTextField txtEmail = new JTextField();
-		panelCentro.add(txtEmail);
+		panelCentro.add(Box.createRigidArea(new Dimension(50, 50)));
 		
-		JPasswordField contrasena = new JPasswordField(); 
+		JTextField txtEmail = new JTextField(15);
+	
+		txtEmail.setMaximumSize(txtEmail.getPreferredSize());
+		panelCentro.add(txtEmail);
+
+		panelCentro.add(Box.createRigidArea(new Dimension(50, 45)));
+		
+		JPasswordField contrasena = new JPasswordField(15); 
+		contrasena.setMaximumSize(contrasena.getPreferredSize());
 		panelCentro.add(contrasena);
 	}
 	
+	public void crearPanelInferior() {
+		JPanel panelInferior = new JPanel();
+		
+		add(panelInferior, BorderLayout.SOUTH);
+		
+		JButton btnIniciarSesion = new JButton("Ingresar");
+		panelInferior.add(btnIniciarSesion);
+		
+	}
 	
 
 
