@@ -1,4 +1,4 @@
-package views;
+package trash;
 
 import java.awt.Component;
 import java.awt.Dimension;

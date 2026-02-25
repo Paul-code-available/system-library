@@ -18,7 +18,7 @@ public class LoginWindow extends JFrame {
 
 		setLocationRelativeTo(null);
 		
-		BorderPanel panelito = new BorderPanel();
+		LoginView panelito = new LoginView();
 		
 		setVisible(true);
 		add(panelito);
