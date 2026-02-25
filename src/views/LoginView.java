@@ -1,7 +1,6 @@
 package views;
 
-import java.awt.Color;
-import java.awt.Font;
+import java.awt.*;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -12,9 +11,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -25,7 +22,7 @@ import javax.swing.border.Border;
 public class LoginView extends JFrame {
 
 	Font fuente;
-	
+
 	public LoginView() {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -103,9 +100,5 @@ public class LoginView extends JFrame {
 		add(lblContrasenaRequerida);
 		
 	}
-	
-	
-	
-	
 	
 }

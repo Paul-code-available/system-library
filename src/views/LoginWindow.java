@@ -1,6 +1,7 @@
 package views;
 
 import javax.swing.JFrame;
+import java.awt.*;
 
 public class LoginWindow extends JFrame {
 	
@@ -8,6 +9,10 @@ public class LoginWindow extends JFrame {
 		
 		setSize(320, 300);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        Image icono = tk.getImage("src/img/logoo.png");
+        setIconImage(icono);
 		
 		setResizable(true);
 
