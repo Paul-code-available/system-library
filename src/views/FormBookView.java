@@ -17,6 +17,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 
 import components.TextPrompt;
+import utils.SwingUtils;
 
 public class FormBookView extends JPanel {
 	
@@ -25,76 +26,62 @@ public class FormBookView extends JPanel {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
 	
-		inicializarComponentes();
+		panelSuperior();
+		
+		panelCentro();
+		
 	}
 	
-	public void inicializarComponentes() {
-		
+	public void panelSuperior() {
 		JLabel lblTitulo = new JLabel("Registro");
-
 		add(lblTitulo, BorderLayout.NORTH);
+	}
+	
+	public void panelCentro() {
 		
+		JPanel panelCentro = new JPanel();
+		panelCentro.setLayout(new BoxLayout(panelCentro, BoxLayout.Y_AXIS));
+		panelCentro.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
 		
-		JPanel panelComponentes = new JPanel();
-		panelComponentes.setLayout(new BoxLayout(panelComponentes, BoxLayout.Y_AXIS));
-		panelComponentes.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
+		JTextField txtNombre = SwingUtils.crearJtf(0, 30, "Nombre del libro");
+		panelCentro.add(txtNombre);
+		panelCentro.add(Box.createRigidArea(new Dimension(10, 10)));
 		
+		JTextField txtAutor = SwingUtils.crearJtf(0, 30, "Autor");
+		panelCentro.add(txtAutor);
 		
-		JTextField txtNombre = new JTextField();
-		txtNombre.setMaximumSize(new Dimension(Integer.MAX_VALUE, 30));
-		TextPrompt promptLibro = new TextPrompt("Nombre del libro", txtNombre);
+		panelCentro.add(Box.createRigidArea(new Dimension(10, 10)));
 		
-		panelComponentes.add(txtNombre);
+		JTextField txtEditorial = SwingUtils.crearJtf(0, 30, "Editorial");
+		panelCentro.add(txtEditorial);
 		
-		panelComponentes.add(Box.createRigidArea(new Dimension(10, 10)));
+		panelCentro.add(Box.createRigidArea(new Dimension(10, 10)));
 		
-		JTextField txtAutor = new JTextField(60);
-		txtAutor.setMaximumSize(txtAutor.getPreferredSize());
-		TextPrompt promptAutor = new TextPrompt("Autor", txtAutor);
-		panelComponentes.add(txtAutor);
+		JTextField txtAnioPublicacion = SwingUtils.crearJtf(0, 30, "Año de publicación");
+		panelCentro.add(txtAnioPublicacion);
 		
-		panelComponentes.add(Box.createRigidArea(new Dimension(10, 10)));
+		panelCentro.add(Box.createRigidArea(new Dimension(10, 10)));
 		
-		JTextField txtEditorial = new JTextField(60);
-		txtEditorial.setMaximumSize(txtEditorial.getPreferredSize());
-		TextPrompt promptEditorial = new TextPrompt("Editorial", txtEditorial);
-		panelComponentes.add(txtEditorial);
+		JTextField txtGenero = SwingUtils.crearJtf(0, 30, "Género");
+		panelCentro.add(txtGenero);
 		
-		panelComponentes.add(Box.createRigidArea(new Dimension(10, 10)));
+		panelCentro.add(Box.createRigidArea(new Dimension(10, 10)));
 		
-		JTextField txtAnioPublicacion = new JTextField(60);
-		txtAnioPublicacion.setMaximumSize(txtAnioPublicacion.getPreferredSize());
-		TextPrompt promptAnioPublicacion = new TextPrompt("Año de publicación", txtAnioPublicacion);
-		panelComponentes.add(txtAnioPublicacion);
+		JTextField txtIdioma = SwingUtils.crearJtf(0, 30, "Idioma");
+		panelCentro.add(txtIdioma);
 		
-		panelComponentes.add(Box.createRigidArea(new Dimension(10, 10)));
+		panelCentro.add(Box.createRigidArea(new Dimension(10, 10)));
 		
-		JTextField txtGenero = new JTextField(60);
-		txtGenero.setMaximumSize(txtGenero.getPreferredSize());
-		TextPrompt promptGenero = new TextPrompt("Género", txtGenero);
-		panelComponentes.add(txtGenero);
+		JTextField txtNumPaginas = SwingUtils.crearJtf(0, 30, "Número de páginas");
+		panelCentro.add(txtNumPaginas);
 		
-		panelComponentes.add(Box.createRigidArea(new Dimension(10, 10)));
-		
-		JTextField txtIdioma = new JTextField(60);
-		txtIdioma.setMaximumSize(txtIdioma.getPreferredSize());
-		TextPrompt promptIdioma = new TextPrompt("Idioma", txtIdioma);
-		panelComponentes.add(txtIdioma);
-		
-		panelComponentes.add(Box.createRigidArea(new Dimension(10, 10)));
-		
-		JTextField txtNumPaginas = new JTextField(60);
-		txtNumPaginas.setMaximumSize(txtNumPaginas.getPreferredSize());
-		TextPrompt promptNumPaginas = new TextPrompt("Número de páginas", txtNumPaginas);
-		panelComponentes.add(txtNumPaginas);
-		
-		panelComponentes.add(Box.createRigidArea(new Dimension(10, 10)));
+		panelCentro.add(Box.createRigidArea(new Dimension(10, 10)));
 		
 		JButton btnRegistrarse = new JButton("Registrarse");
-		panelComponentes.add(btnRegistrarse);
+		panelCentro.add(btnRegistrarse);
 		
 		
-		add(panelComponentes);
+		add(panelCentro);
 	}
 	
 }

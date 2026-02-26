@@ -7,7 +7,7 @@ public class FormBookWindow extends JFrame{
 	
 	public FormBookWindow() {
 		
-		setSize(400, 500);
+		setSize(350, 450);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		setResizable(false);
