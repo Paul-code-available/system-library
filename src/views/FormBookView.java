@@ -39,36 +39,55 @@ public class FormBookView extends JPanel {
 		panelComponentes.setLayout(new BoxLayout(panelComponentes, BoxLayout.Y_AXIS));
 		panelComponentes.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
 		
-		JLabel lblTituloLibro = new JLabel("Nombre del libro: ");
 		
-		panelComponentes.add(lblTituloLibro);
-		
-		JTextField txtTituloLibro = new JTextField(60);
-		txtTituloLibro.setMaximumSize(txtTituloLibro.getPreferredSize());
-		TextPrompt promptLibro = new TextPrompt("Nombre del Libro", txtTituloLibro);
-		panelComponentes.add(txtTituloLibro);
+		JTextField txtNombre = new JTextField(60);
+		txtNombre.setMaximumSize(txtNombre.getPreferredSize());
+		TextPrompt promptLibro = new TextPrompt("Nombre del libro", txtNombre);
+		panelComponentes.add(txtNombre);
 		
 		panelComponentes.add(Box.createRigidArea(new Dimension(10, 10)));
 		
-		JLabel lblAutor = new JLabel("Autor: ");
-		panelComponentes.add(lblAutor);
-		
 		JTextField txtAutor = new JTextField(60);
 		txtAutor.setMaximumSize(txtAutor.getPreferredSize());
+		TextPrompt promptAutor = new TextPrompt("Autor", txtAutor);
 		panelComponentes.add(txtAutor);
 		
 		panelComponentes.add(Box.createRigidArea(new Dimension(10, 10)));
 		
-		JLabel lblFechaPublicacion = new JLabel("Fecha de publicación: ");
-		panelComponentes.add(lblFechaPublicacion);
-		
-		JTextField txtFechaPublicacion = new JTextField(60);
-		txtFechaPublicacion.setMaximumSize(txtFechaPublicacion.getPreferredSize());
-		panelComponentes.add(txtFechaPublicacion);
+		JTextField txtEditorial = new JTextField(60);
+		txtEditorial.setMaximumSize(txtEditorial.getPreferredSize());
+		TextPrompt promptEditorial = new TextPrompt("Editorial", txtEditorial);
+		panelComponentes.add(txtEditorial);
 		
 		panelComponentes.add(Box.createRigidArea(new Dimension(10, 10)));
 		
+		JTextField txtAnioPublicacion = new JTextField(60);
+		txtAnioPublicacion.setMaximumSize(txtAnioPublicacion.getPreferredSize());
+		TextPrompt promptAnioPublicacion = new TextPrompt("Año de publicación", txtAnioPublicacion);
+		panelComponentes.add(txtAnioPublicacion);
 		
+		panelComponentes.add(Box.createRigidArea(new Dimension(10, 10)));
+		
+		JTextField txtGenero = new JTextField(60);
+		txtGenero.setMaximumSize(txtGenero.getPreferredSize());
+		TextPrompt promptGenero = new TextPrompt("Género", txtGenero);
+		panelComponentes.add(txtGenero);
+		
+		panelComponentes.add(Box.createRigidArea(new Dimension(10, 10)));
+		
+		JTextField txtIdioma = new JTextField(60);
+		txtIdioma.setMaximumSize(txtIdioma.getPreferredSize());
+		TextPrompt promptIdioma = new TextPrompt("Idioma", txtIdioma);
+		panelComponentes.add(txtIdioma);
+		
+		panelComponentes.add(Box.createRigidArea(new Dimension(10, 10)));
+		
+		JTextField txtNumPaginas = new JTextField(60);
+		txtNumPaginas.setMaximumSize(txtNumPaginas.getPreferredSize());
+		TextPrompt promptNumPaginas = new TextPrompt("Número de páginas", txtNumPaginas);
+		panelComponentes.add(txtNumPaginas);
+		
+		panelComponentes.add(Box.createRigidArea(new Dimension(10, 10)));
 		
 		
 		add(panelComponentes);
