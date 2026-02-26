@@ -2,11 +2,13 @@ package views;
 
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -23,8 +25,6 @@ public class FormBookView extends JPanel {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
 	
-		
-		
 		inicializarComponentes();
 	}
 	
@@ -33,16 +33,17 @@ public class FormBookView extends JPanel {
 		JLabel lblTitulo = new JLabel("Registro");
 
 		add(lblTitulo, BorderLayout.NORTH);
-		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
+		
 		
 		JPanel panelComponentes = new JPanel();
 		panelComponentes.setLayout(new BoxLayout(panelComponentes, BoxLayout.Y_AXIS));
 		panelComponentes.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
 		
 		
-		JTextField txtNombre = new JTextField(60);
-		txtNombre.setMaximumSize(txtNombre.getPreferredSize());
+		JTextField txtNombre = new JTextField();
+		txtNombre.setMaximumSize(new Dimension(Integer.MAX_VALUE, 30));
 		TextPrompt promptLibro = new TextPrompt("Nombre del libro", txtNombre);
+		
 		panelComponentes.add(txtNombre);
 		
 		panelComponentes.add(Box.createRigidArea(new Dimension(10, 10)));
@@ -88,6 +89,9 @@ public class FormBookView extends JPanel {
 		panelComponentes.add(txtNumPaginas);
 		
 		panelComponentes.add(Box.createRigidArea(new Dimension(10, 10)));
+		
+		JButton btnRegistrarse = new JButton("Registrarse");
+		panelComponentes.add(btnRegistrarse);
 		
 		
 		add(panelComponentes);
