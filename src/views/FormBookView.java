@@ -3,7 +3,9 @@ package views;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -23,18 +25,27 @@ public class FormBookView extends JPanel {
 	
 	public FormBookView() {
 		
-		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		setLayout(new BorderLayout());
 		setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
 	
 		panelSuperior();
 		
 		panelCentro();
 		
+		panelInferior();
+		
 	}
 	
 	public void panelSuperior() {
+		JPanel panelSuperior = new JPanel();
+		panelSuperior.setLayout(new BoxLayout(panelSuperior, BoxLayout.Y_AXIS));
+	
 		JLabel lblTitulo = new JLabel("Registro");
-		add(lblTitulo, BorderLayout.NORTH);
+		lblTitulo.setAlignmentX(Component.CENTER_ALIGNMENT);
+		panelSuperior.add(lblTitulo);
+		
+		add(panelSuperior, BorderLayout.NORTH);
+		
 	}
 	
 	public void panelCentro() {
@@ -73,15 +84,34 @@ public class FormBookView extends JPanel {
 		panelCentro.add(Box.createRigidArea(new Dimension(10, 10)));
 		
 		JTextField txtNumPaginas = SwingUtils.crearJtf(0, 30, "Número de páginas");
-		panelCentro.add(txtNumPaginas);
+		panelCentro.add(txtNumPaginas);	
 		
-		panelCentro.add(Box.createRigidArea(new Dimension(10, 10)));
+		add(panelCentro, BorderLayout.CENTER);
+	}
+	
+	public void panelInferior() {
+		JPanel panelInferior = new JPanel();
+		panelInferior.setLayout(new BoxLayout(panelInferior, BoxLayout.X_AXIS));
+		
+		panelInferior.add(Box.createHorizontalGlue());
 		
 		JButton btnRegistrarse = new JButton("Registrarse");
-		panelCentro.add(btnRegistrarse);
+		panelInferior.add(btnRegistrarse);
 		
+		panelInferior.add(Box.createHorizontalStrut(10));
 		
-		add(panelCentro);
+		JButton btnCancelar = new JButton("Cancelar");
+		panelInferior.add(btnCancelar);
+		
+		add(panelInferior, BorderLayout.SOUTH);
+		
 	}
+	
+	
+	
+	
+	
+	
+	
 	
 }
