@@ -19,6 +19,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 
 import components.TextPrompt;
+import utils.AppFont;
 import utils.SwingUtils;
 
 public class FormBookView extends JPanel {
@@ -41,6 +42,7 @@ public class FormBookView extends JPanel {
 		panelSuperior.setLayout(new BoxLayout(panelSuperior, BoxLayout.Y_AXIS));
 	
 		JLabel lblTitulo = new JLabel("Registro");
+		lblTitulo.setFont(AppFont.normal());
 		lblTitulo.setAlignmentX(Component.CENTER_ALIGNMENT);
 		panelSuperior.add(lblTitulo);
 		
