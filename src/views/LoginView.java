@@ -14,18 +14,20 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
+
+import components.TextPrompt;
+import utils.SwingUtils;
 
 public class LoginView extends JPanel {
 	
 	public LoginView() {
 		setLayout(new BorderLayout());
-		Border emptyBorder = BorderFactory.createEmptyBorder(20,10,20,10);
+		Border emptyBorder = BorderFactory.createEmptyBorder(20,20,20,20);
 		setBorder(emptyBorder);
 		
 		crearPanelSuperior();
-		
-		crearPanelIzquierdo();
 		
 		crearPanelCentro();
 		
@@ -35,62 +37,52 @@ public class LoginView extends JPanel {
 	
 	public void crearPanelSuperior() {
 		JPanel panelSuperior = new JPanel();
-		//panelSuperior.setBackground(Color.GREEN);
+		panelSuperior.setLayout(new BoxLayout(panelSuperior, BoxLayout.Y_AXIS));
+		
+		JLabel lblTitle = new JLabel("Iniciar sesión");
+		lblTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
+		panelSuperior.add(lblTitle);
+		
 		add(panelSuperior, BorderLayout.NORTH);
-		
-		JLabel lbltitle = new JLabel("User Login");
-		panelSuperior.add(lbltitle);
-		
-		
-	}
-	
-	public void crearPanelIzquierdo() { 
-		JPanel panelIzquierda = new JPanel();
-		panelIzquierda.setLayout(new BoxLayout(panelIzquierda, BoxLayout.Y_AXIS));
-		add(panelIzquierda, BorderLayout.WEST);
-		
-		panelIzquierda.add(Box.createRigidArea(new Dimension(50, 50)));
-		
-		JLabel lblEmail = new JLabel("Email:");
-		panelIzquierda.add(lblEmail);
-		
-		panelIzquierda.add(Box.createRigidArea(new Dimension(50, 50)));
-		
-		JLabel lblContrasena = new JLabel("Contraseña:"); 
-		panelIzquierda.add(lblContrasena);
-		
 	}
 	
 	
 	public void crearPanelCentro() { 
 		JPanel panelCentro = new JPanel();
-		//panelCentro.setBackground(Color.BLUE);
-		
 		panelCentro.setLayout(new BoxLayout(panelCentro, BoxLayout.Y_AXIS));
-		add(panelCentro, BorderLayout.CENTER);
+		panelCentro.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
 		
-		panelCentro.add(Box.createRigidArea(new Dimension(50, 50)));
 		
-		JTextField txtEmail = new JTextField(15);
-	
-		txtEmail.setMaximumSize(txtEmail.getPreferredSize());
+		
+		JTextField txtEmail = SwingUtils.crearJtf(0, 30, "Correo electrónico");
 		panelCentro.add(txtEmail);
-
-		panelCentro.add(Box.createRigidArea(new Dimension(50, 45)));
 		
-		JPasswordField contrasena = new JPasswordField(15); 
-		contrasena.setMaximumSize(contrasena.getPreferredSize());
-		panelCentro.add(contrasena);
+		panelCentro.add(Box.createRigidArea(new Dimension(10, 10)));
+		
+		JPasswordField jpfContrasena = new JPasswordField(); 
+		jpfContrasena.setMaximumSize(new Dimension(Integer.MAX_VALUE, 30));
+		TextPrompt promptContrasena = new TextPrompt("Contraseña", jpfContrasena);
+		panelCentro.add(jpfContrasena);
+		
+		add(panelCentro, BorderLayout.CENTER);
 	}
 	
 	public void crearPanelInferior() {
 		JPanel panelInferior = new JPanel();
+		panelInferior.setLayout(new BoxLayout(panelInferior, BoxLayout.X_AXIS));
 		
-		add(panelInferior, BorderLayout.SOUTH);
+		panelInferior.add(Box.createHorizontalGlue());
 		
 		JButton btnIniciarSesion = new JButton("Ingresar");
 		panelInferior.add(btnIniciarSesion);
 		
+		panelInferior.add(Box.createHorizontalStrut(10));
+		
+		JButton btnCancelar = new JButton("Cancelar");
+		panelInferior.add(btnCancelar);
+		
+		
+		add(panelInferior, BorderLayout.SOUTH);
 	}
 	
 

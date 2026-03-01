@@ -14,7 +14,7 @@ public class Main {
 		
 		FlatLightLaf.setup();
 		
-		 LoginWindow ventanita = new LoginWindow();
+		LoginWindow ventanita = new LoginWindow();
 		
 		// FormBookWindow ventanita = new FormBookWindow();
 

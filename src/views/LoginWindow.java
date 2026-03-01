@@ -7,14 +7,14 @@ public class LoginWindow extends JFrame {
 	
 	public LoginWindow() {
 		
-		setSize(320, 300);
+		setSize(350, 240);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         Toolkit tk = Toolkit.getDefaultToolkit();
         Image icono = tk.getImage("src/img/logoo.png");
         setIconImage(icono);
 		
-		setResizable(true);
+		setResizable(false);
 
 		setLocationRelativeTo(null);
 		
