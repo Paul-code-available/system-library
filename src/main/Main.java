@@ -13,7 +13,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		FlatLightLaf.setup();
+		FlatDarkLaf.setup();
 		
 		LoginWindow ventanita = new LoginWindow();
 		

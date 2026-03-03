@@ -29,8 +29,8 @@ public class LoginView extends JPanel {
 	
 	JTextField txtEmail;
 	JPasswordField jpfContrasena;
-	JLabel lblEmailRequerido;
-	JLabel lblContrasenaRequerida;
+	JLabel lblErrorEmail;
+	JLabel lblErrorPassword;
 	
 	public LoginView() {
 		setLayout(new BorderLayout());
@@ -66,10 +66,10 @@ public class LoginView extends JPanel {
 		txtEmail = SwingUtils.crearJtf(0, 30, "Email");
 		panelCentro.add(txtEmail);
 		
-		lblEmailRequerido = new JLabel("El email es requerido");
-		lblEmailRequerido.setForeground(Color.RED);
-		lblEmailRequerido.setVisible(false);
-		panelCentro.add(lblEmailRequerido);
+		lblErrorEmail = new JLabel();
+		lblErrorEmail.setForeground(Color.RED);
+		lblErrorEmail.setVisible(false);
+		panelCentro.add(lblErrorEmail);
 		
 		panelCentro.add(Box.createVerticalStrut(10));
 		
@@ -78,10 +78,10 @@ public class LoginView extends JPanel {
 		TextPrompt promptContrasena = new TextPrompt("Contraseña", jpfContrasena);
 		panelCentro.add(jpfContrasena);
 		
-		lblContrasenaRequerida = new JLabel("La contraseña es requerida");
-		lblContrasenaRequerida.setForeground(Color.RED);
-		lblContrasenaRequerida.setVisible(false);
-		panelCentro.add(lblContrasenaRequerida);
+		lblErrorPassword = new JLabel();
+		lblErrorPassword.setForeground(Color.RED);
+		lblErrorPassword.setVisible(false);
+		panelCentro.add(lblErrorPassword);
 		
 		add(panelCentro, BorderLayout.CENTER);
 	}
@@ -93,9 +93,7 @@ public class LoginView extends JPanel {
 		panelInferior.add(Box.createHorizontalGlue());
 		
 		JButton btnIniciarSesion = new JButton("Ingresar");
-		btnIniciarSesion.addActionListener(e -> {	
-			login();
-		});
+		btnIniciarSesion.addActionListener(e -> validateForm());
 		
 		panelInferior.add(btnIniciarSesion);
 		
@@ -108,19 +106,40 @@ public class LoginView extends JPanel {
 		add(panelInferior, BorderLayout.SOUTH);
 	}
 	
-	private void login() {
-		validateLogin(txtEmail.getText(), String.valueOf(jpfContrasena.getPassword()));
+	private void validateForm() {
+		
+		resetMensajeError();
+		
+		if (!validateEmail()) {
+			mostrarErrorCorreo();;
+		}
+		
+		if (!validatePassword()) {
+			mostrarErrorContrasena();
+		}
+		
 	}
 	
-	private boolean validateLogin(String email, String password) {
-			
-		if (email.trim().isEmpty()) {
-			mostrarErrorCorreo();
+	private boolean validateEmail() {
+		
+		if (txtEmail.getText().trim().isEmpty()) {
+			lblErrorEmail.setText("El email es requerido");
 			return false;
 		}
 		
-		if (password.trim().isEmpty()) {
-			mostrarErrorContrasena();
+		if (!txtEmail.getText().contains("@")) {
+			lblErrorEmail.setText("Falta '@' en el email");
+			return false;
+		}
+
+		return true;
+		
+	}
+	
+	private boolean validatePassword() {
+		
+		if (String.valueOf(jpfContrasena.getPassword()).trim().isEmpty()) {
+			lblErrorPassword.setText("La contraseña es requerida");
 			return false;
 		}
 		
@@ -129,15 +148,16 @@ public class LoginView extends JPanel {
 	}
 	
 	private void mostrarErrorCorreo() {
-		lblEmailRequerido.setVisible(true);
+		lblErrorEmail.setVisible(true);
 	}
 	
 	private void mostrarErrorContrasena() {
-		lblContrasenaRequerida.setVisible(true);
+		lblErrorPassword.setVisible(true);
 	}
 	
 	private void resetMensajeError() {
-		lblEmailRequerido.setText("");
+		lblErrorEmail.setText("");
+		lblErrorPassword.setText("");
 	}
 
 
