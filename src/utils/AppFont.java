@@ -10,14 +10,14 @@ public class AppFont {
 		try {
 			base = Font.createFont(
 					Font.TRUETYPE_FONT,
-					AppFont.class.getResourceAsStream("/fonts/Inter_18pt-Regular.ttf"));
+					AppFont.class.getResourceAsStream("/fonts/Merriweather-VariableFont_opsz,wdth,wght.ttf"));
 		} catch (Exception e) {
 			base = new Font("Times New Roman", Font.PLAIN, 14);
 		}
 	}
 	
-	public static Font normal() {
-		return base.deriveFont(14f);
+	public static Font title() {
+		return base.deriveFont(22f);
 	}
 	
 }

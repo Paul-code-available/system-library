@@ -42,7 +42,7 @@ public class FormBookView extends JPanel {
 		panelSuperior.setLayout(new BoxLayout(panelSuperior, BoxLayout.Y_AXIS));
 	
 		JLabel lblTitulo = new JLabel("Registro");
-		lblTitulo.setFont(AppFont.normal());
+		lblTitulo.setFont(AppFont.title());
 		lblTitulo.setAlignmentX(Component.CENTER_ALIGNMENT);
 		panelSuperior.add(lblTitulo);
 		
@@ -97,7 +97,7 @@ public class FormBookView extends JPanel {
 		
 		panelInferior.add(Box.createHorizontalGlue());
 		
-		JButton btnRegistrarse = new JButton("Registrarse");
+		JButton btnRegistrarse = new JButton("Registrar");
 		panelInferior.add(btnRegistrarse);
 		
 		panelInferior.add(Box.createHorizontalStrut(10));
