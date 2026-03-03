@@ -1,7 +1,6 @@
 package main;
 
 import javax.swing.UIManager;
-
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 
