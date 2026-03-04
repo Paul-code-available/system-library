@@ -8,6 +8,7 @@ import trash.LoginView;
 import views.FormBookWindow;
 import views.FormularioWindowUsuario;
 import views.LoginWindow;
+import views.mainWindow;
 
 public class Main {
 
@@ -20,6 +21,8 @@ public class Main {
 		// FormBookWindow ventanita = new FormBookWindow();
 
         // FormularioWindowUsuario ventana = new FormularioWindowUsuario();
+		
+		// mainWindow ventana = new mainWindow();
 
 		
 	}

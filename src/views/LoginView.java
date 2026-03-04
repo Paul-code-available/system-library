@@ -67,6 +67,7 @@ public class LoginView extends JPanel {
 		panelCentro.add(txtEmail);
 		
 		lblErrorEmail = new JLabel();
+		lblErrorEmail.setFont(AppFont.small());
 		lblErrorEmail.setForeground(Color.RED);
 		lblErrorEmail.setVisible(false);
 		panelCentro.add(lblErrorEmail);
@@ -79,6 +80,7 @@ public class LoginView extends JPanel {
 		panelCentro.add(jpfContrasena);
 		
 		lblErrorPassword = new JLabel();
+		lblErrorPassword.setFont(AppFont.small());
 		lblErrorPassword.setForeground(Color.RED);
 		lblErrorPassword.setVisible(false);
 		panelCentro.add(lblErrorPassword);
@@ -106,17 +108,23 @@ public class LoginView extends JPanel {
 		add(panelInferior, BorderLayout.SOUTH);
 	}
 	
-	private void validateForm() {
+	private boolean validateForm() {
 		
 		resetMensajeError();
 		
+		boolean valid = true;
+		
 		if (!validateEmail()) {
-			mostrarErrorCorreo();;
+			mostrarErrorCorreo();
+			valid = false;
 		}
 		
 		if (!validatePassword()) {
 			mostrarErrorContrasena();
+			valid = false;
 		}
+		
+		return valid;
 		
 	}
 	
