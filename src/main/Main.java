@@ -1,26 +1,17 @@
 package main;
 
-import javax.swing.UIManager;
-import com.formdev.flatlaf.FlatDarkLaf;
-import com.formdev.flatlaf.FlatLightLaf;
-
-import trash.LoginView;
 import views.FormBookWindow;
-import views.FormularioWindowUsuario;
-import views.LoginWindow;
+import views.FormUserWindow;
 
 public class Main {
 
 	public static void main(String[] args) {
 		
-		FlatLightLaf.setup();
-		
-		LoginWindow ventanita = new LoginWindow();
-		
-		// FormBookWindow ventanita = new FormBookWindow();
+		//LoginWindow ventanita = new LoginWindow();
 
-        // FormularioWindowUsuario ventana = new FormularioWindowUsuario();
+        //FormBookWindow ventanita = new FormBookWindow();
 
+        FormUserWindow ventana = new FormUserWindow();
 		
 	}
 

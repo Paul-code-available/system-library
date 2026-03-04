@@ -4,9 +4,19 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 
-public class FormularioUsuario extends JPanel {
+public class FormUserView extends JPanel {
 
-    public FormularioUsuario(){
+    JTextField txtApellido;
+    JTextField txtNombre;
+    JTextField txtEmail;
+    JPasswordField jpfContrasena;
+    JLabel lblApellidoRequerido;
+    JLabel lblNombreRequerido;
+    JLabel lblEmailRequerido;
+    JLabel lblContrasenaRequerida;
+
+
+    public FormUserView(){
         setLayout(new BorderLayout());
         Border emptyBorder = BorderFactory.createEmptyBorder(20,10,20,10);
 
@@ -58,6 +68,12 @@ public class FormularioUsuario extends JPanel {
         panelHorizontal.add(txtnombre);
         txtnombre.setMaximumSize(new Dimension(200,30));
 
+        lblNombreRequerido = new JLabel("El nombre es requerido.");
+        lblNombreRequerido.setFont(new Font("Arial", Font.BOLD, 10));
+        lblNombreRequerido.setForeground(Color.RED);
+        lblNombreRequerido.setVisible(false);
+        panelHorizontal.add(lblNombreRequerido);
+
         JLabel lblApellidos = new JLabel("Apellidos: ");
         lblApellidos.setAlignmentX(Component.CENTER_ALIGNMENT);
         panelHorizontal.add(lblApellidos);
@@ -67,16 +83,11 @@ public class FormularioUsuario extends JPanel {
         panelHorizontal.add(txtApellidos);
         txtApellidos.setMaximumSize(new Dimension(200,30));
 
-        /*
-        JLabel lblsegundoApellido = new JLabel("Segundo apellido: ");
-        lblsegundoApellido.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panelVertical.add(lblsegundoApellido);
-
-        JTextField txtsegundoApellido = new JTextField();
-        txtsegundoApellido.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panelVertical.add(txtsegundoApellido);
-        txtsegundoApellido.setMaximumSize(new Dimension(200,30));
-        */
+        lblApellidoRequerido = new JLabel("El apellido es requerido.");
+        lblApellidoRequerido.setFont(new Font("Arial", Font.BOLD, 10));
+        lblApellidoRequerido.setForeground(Color.RED);
+        lblApellidoRequerido.setVisible(false);
+        panelHorizontal.add(lblApellidoRequerido);
 
         JLabel lblEmail = new JLabel("Email:");
         lblEmail.setAlignmentX(Component.RIGHT_ALIGNMENT);
@@ -87,6 +98,12 @@ public class FormularioUsuario extends JPanel {
         panelVertical.add(txtEmail);
         txtEmail.setMaximumSize(new Dimension(200,30));
 
+        lblEmailRequerido = new JLabel("El email es requerido.");
+        lblEmailRequerido.setFont(new Font("Arial", Font.BOLD, 10));
+        lblEmailRequerido.setForeground(Color.RED);
+        lblEmailRequerido.setVisible(false);
+        panelHorizontal.add(lblEmailRequerido);
+
         JLabel lblContrasena = new JLabel("Contraseña:");
         lblContrasena.setAlignmentX(Component.CENTER_ALIGNMENT);
         panelVertical.add(lblContrasena);
@@ -96,6 +113,12 @@ public class FormularioUsuario extends JPanel {
         panelVertical.add(contrasena);
         contrasena.setMaximumSize(new Dimension(200,30));
 
+        lblContrasenaRequerida = new JLabel("La contraseña es requerida.");
+        lblContrasenaRequerida.setFont(new Font("Arial", Font.BOLD, 10));
+        lblContrasenaRequerida.setForeground(Color.RED);
+        lblContrasenaRequerida.setVisible(false);
+        panelHorizontal.add(lblContrasenaRequerida);
+
         JLabel lblConfirmarContrasena = new JLabel("Confirmar contraseña:");
         lblConfirmarContrasena.setAlignmentX(Component.CENTER_ALIGNMENT);
         panelVertical.add(lblConfirmarContrasena);
@@ -104,6 +127,12 @@ public class FormularioUsuario extends JPanel {
         confirmarContrasena.setAlignmentX(Component.CENTER_ALIGNMENT);
         panelVertical.add(confirmarContrasena);
         confirmarContrasena.setMaximumSize(new Dimension(200,30));
+
+        lblContrasenaRequerida = new JLabel("Confirmar la contraseña es requerido.");
+        lblContrasenaRequerida.setFont(new Font("Arial", Font.BOLD, 10));
+        lblContrasenaRequerida.setForeground(Color.RED);
+        lblContrasenaRequerida.setVisible(false);
+        panelHorizontal.add(lblContrasenaRequerida);
 
         panelCentro.add(panelVertical, BorderLayout.CENTER);//Agrega el panel vertical al centro del border layout secundario.
         add(panelCentro, BorderLayout.CENTER);//Agrega el border layout secundario al centro del border layout principal
@@ -122,9 +151,63 @@ public class FormularioUsuario extends JPanel {
         JButton registro = new JButton("Registarse ahora");
         registro.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(registro);
-
-        
     }
 
 
+
+    private void mostrarErrorNombre(String mensaje){
+        lblNombreRequerido.setText(mensaje);
+        lblNombreRequerido.setVisible(true);
+    }
+
+    private void mostrarErrorApellido(String mensaje){
+        lblApellidoRequerido.setText(mensaje);
+        lblApellidoRequerido.setVisible(true);
+    }
+
+    private void mostrarErrorEmail(String mensaje){
+        lblContrasenaRequerida.setText(mensaje);
+        lblContrasenaRequerida.setVisible(true);
+    }
+
+    private void mostrarErrorContrasena(String mensaje){
+        lblContrasenaRequerida.setText(mensaje);
+        lblContrasenaRequerida.setVisible(true);
+    }
+
+    private void reiniciarMensajeError(){
+        lblApellidoRequerido.setText("");
+        lblNombreRequerido.setText("");
+        lblEmailRequerido.setText("");
+        lblContrasenaRequerida.setText("");
+    }
+
+    private boolean validarCredenciales(String nombre, String apellido, String email, String contrasena){
+
+        reiniciarMensajeError();
+
+        boolean validar = true;
+
+        if(nombre.trim().isEmpty()){
+            mostrarErrorNombre("El nombre es obligatorio");
+            validar = false;
+        }
+
+        if(nombre.trim().isEmpty()){
+            mostrarErrorApellido("El apellido es obligatorio");
+            validar = false;
+        }
+
+        if(nombre.trim().isEmpty()){
+            mostrarErrorEmail("El correo es obligatorio");
+            validar = false;
+        }
+
+        if(nombre.trim().isEmpty()){
+            mostrarErrorContrasena("La contraseña es obligatorio");
+            validar = false;
+        }
+
+        return validar;
+    }
 }
