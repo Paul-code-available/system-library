@@ -5,8 +5,11 @@ import javax.swing.border.Border;
 import java.awt.*;
 
 public class FormularioUsuario extends JPanel {
+	
+	FormularioWindowUsuario window;
 
-    public FormularioUsuario(){
+    public FormularioUsuario(FormularioWindowUsuario window){
+    	this.window = window;
         setLayout(new BorderLayout());
         Border emptyBorder = BorderFactory.createEmptyBorder(20,10,20,10);
 
@@ -119,11 +122,22 @@ public class FormularioUsuario extends JPanel {
         checkTerminos.setAlignmentX(Component.LEFT_ALIGNMENT);
         panel.add(checkTerminos);
 
-        JButton registro = new JButton("Registarse ahora");
+        JButton registro = new JButton("Continuar");
         registro.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(registro);
-
         
+        JButton btnCancelar = new JButton("Cancelar");
+        btnCancelar.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnCancelar.addActionListener(e -> handleRegistration());
+        
+        panel.add(btnCancelar);
+
+    }
+    
+    public void handleRegistration() {
+    	new LoginWindow();
+    	window.dispose();
+    	
     }
 
 

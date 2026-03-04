@@ -32,7 +32,11 @@ public class LoginView extends JPanel {
 	JLabel lblErrorEmail;
 	JLabel lblErrorPassword;
 	
-	public LoginView() {
+	LoginWindow window;
+	
+	public LoginView(LoginWindow window) {
+		this.window = window;
+		
 		setLayout(new BorderLayout());
 		Border emptyBorder = BorderFactory.createEmptyBorder(20,20,20,20);
 		setBorder(emptyBorder);
@@ -95,18 +99,34 @@ public class LoginView extends JPanel {
 		panelInferior.add(Box.createHorizontalGlue());
 		
 		JButton btnIniciarSesion = new JButton("Ingresar");
-		btnIniciarSesion.addActionListener(e -> validateForm());
+		btnIniciarSesion.addActionListener(e -> handleLogin());
 		
 		panelInferior.add(btnIniciarSesion);
 		
 		panelInferior.add(Box.createHorizontalStrut(10));
 		
-		JButton btnCancelar = new JButton("Cancelar");
-		panelInferior.add(btnCancelar);
+		JButton btnRegister = new JButton("Registrarte");
+		btnRegister.addActionListener(e -> handleRegistration());
+		panelInferior.add(btnRegister);
 		
 		
 		add(panelInferior, BorderLayout.SOUTH);
 	}
+	
+	public void handleLogin() {
+		
+		if (validateForm()) {
+			new mainWindow();
+			window.dispose();
+		}
+		
+	}
+	
+	public void handleRegistration() {
+		new FormularioWindowUsuario();
+		window.dispose();
+	}
+	
 	
 	private boolean validateForm() {
 		

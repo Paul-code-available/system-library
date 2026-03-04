@@ -8,7 +8,7 @@ public class LoginWindow extends JFrame {
 	public LoginWindow() {
 		
 		setSize(350, 300);
-		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		/*
         Toolkit tk = Toolkit.getDefaultToolkit();
@@ -19,7 +19,7 @@ public class LoginWindow extends JFrame {
 
 		setLocationRelativeTo(null);
 		
-		LoginView panelito = new LoginView();
+		LoginView panelito = new LoginView(this);
 		
 		setVisible(true);
 		add(panelito);

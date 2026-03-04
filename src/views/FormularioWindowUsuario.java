@@ -12,7 +12,7 @@ public class FormularioWindowUsuario extends JFrame {
         setTitle("Registro de usuario");
         setLocationRelativeTo(null);
 
-        FormularioUsuario formularioUsuarios = new FormularioUsuario();
+        FormularioUsuario formularioUsuarios = new FormularioUsuario(this);
         add(formularioUsuarios);
 
         setVisible(true);
