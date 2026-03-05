@@ -1,6 +1,7 @@
 package views;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class FormUserWindow extends JFrame {
 
@@ -11,7 +12,7 @@ public class FormUserWindow extends JFrame {
         setTitle("Registro de usuario");
         setLocationRelativeTo(null);
 
-        FormUserView formularioUsuarios = new FormUserView();
+        FormUserView formularioUsuarios = new FormUserView(this);
         add(formularioUsuarios);
 
         setVisible(true);

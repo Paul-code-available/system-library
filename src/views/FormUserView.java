@@ -6,6 +6,8 @@ import java.awt.*;
 
 public class FormUserView extends JPanel {
 
+    FormUserWindow window;
+
     JTextField txtApellido;
     JTextField txtNombre;
     JTextField txtEmail;
@@ -15,8 +17,8 @@ public class FormUserView extends JPanel {
     JLabel lblEmailRequerido;
     JLabel lblContrasenaRequerida;
 
-
-    public FormUserView(){
+    public FormUserView(FormUserWindow window){
+        this.window = window;
         setLayout(new BorderLayout());
         Border emptyBorder = BorderFactory.createEmptyBorder(20,10,20,10);
 
@@ -148,12 +150,21 @@ public class FormUserView extends JPanel {
         checkTerminos.setAlignmentX(Component.LEFT_ALIGNMENT);
         panel.add(checkTerminos);
 
-        JButton registro = new JButton("Registarse ahora");
+        JButton registro = new JButton("Continuar");
         registro.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(registro);
+
+        JButton btnCancelar = new JButton("Cancelar");
+        btnCancelar.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnCancelar.addActionListener(e -> handleRegistration());
+
+        panel.add(btnCancelar);
     }
 
-
+    public void handleRegistration() {
+        new LoginWindow();
+        window.dispose();
+    }
 
     private void mostrarErrorNombre(String mensaje){
         lblNombreRequerido.setText(mensaje);
