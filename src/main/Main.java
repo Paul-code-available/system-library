@@ -4,9 +4,10 @@ import javax.swing.UIManager;
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 
+
 import trash.LoginView;
 import views.FormBookWindow;
-import views.FormularioWindowUsuario;
+import views.FormUserWindow;
 import views.LoginWindow;
 import views.mainWindow;
 
@@ -16,15 +17,13 @@ public class Main {
 		
 		FlatDarkLaf.setup();
 		
-		LoginWindow ventanita = new LoginWindow();
-		
-		// FormBookWindow ventanita = new FormBookWindow();
+		//LoginWindow ventanita = new LoginWindow();
 
-        // FormularioWindowUsuario ventana = new FormularioWindowUsuario();
-		
-		// mainWindow ventana = new mainWindow();
+        //FormBookWindow ventanita = new FormBookWindow();
 
-		
+        FormUserWindow ventana = new FormUserWindow();
+
+        // mainWindow ventana = new mainWindow();
 	}
 
 }
