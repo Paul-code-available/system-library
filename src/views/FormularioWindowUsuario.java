@@ -18,5 +18,4 @@ public class FormularioWindowUsuario extends JFrame {
         setVisible(true);
     }
 
-
 }

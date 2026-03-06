@@ -18,7 +18,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 import javax.swing.border.Border;
 
 import components.TextPrompt;
@@ -40,6 +42,9 @@ public class LoginView extends JPanel {
 		setLayout(new BorderLayout());
 		Border emptyBorder = BorderFactory.createEmptyBorder(20,20,20,20);
 		setBorder(emptyBorder);
+		
+		UIManager.put("TextComponent.arc", 10);
+		UIManager.put("Button.arc", 10);
 		
 		crearPanelSuperior();
 		
@@ -68,11 +73,13 @@ public class LoginView extends JPanel {
 		panelCentro.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
 		
 		txtEmail = SwingUtils.crearJtf(0, 30, "Email");
+		txtEmail.setAlignmentX(Component.LEFT_ALIGNMENT);
 		panelCentro.add(txtEmail);
 		
 		lblErrorEmail = new JLabel();
 		lblErrorEmail.setFont(AppFont.small());
 		lblErrorEmail.setForeground(Color.RED);
+		lblErrorEmail.setAlignmentX(Component.LEFT_ALIGNMENT);
 		lblErrorEmail.setVisible(false);
 		panelCentro.add(lblErrorEmail);
 		
@@ -80,12 +87,14 @@ public class LoginView extends JPanel {
 		
 		jpfContrasena = new JPasswordField(); 
 		jpfContrasena.setMaximumSize(new Dimension(Integer.MAX_VALUE, 30));
+		jpfContrasena.setAlignmentX(Component.LEFT_ALIGNMENT);
 		TextPrompt promptContrasena = new TextPrompt("Contraseña", jpfContrasena);
 		panelCentro.add(jpfContrasena);
 		
 		lblErrorPassword = new JLabel();
 		lblErrorPassword.setFont(AppFont.small());
 		lblErrorPassword.setForeground(Color.RED);
+		lblErrorPassword.setAlignmentX(Component.LEFT_ALIGNMENT);
 		lblErrorPassword.setVisible(false);
 		panelCentro.add(lblErrorPassword);
 		
