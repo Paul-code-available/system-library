@@ -88,6 +88,8 @@ public class LoginView extends JPanel {
 		lblErrorPassword.setForeground(Color.RED);
 		lblErrorPassword.setVisible(false);
 		panelCentro.add(lblErrorPassword);
+
+        panelCentro.add(Box.createVerticalStrut(10));
 		
 		add(panelCentro, BorderLayout.CENTER);
 	}
@@ -123,7 +125,7 @@ public class LoginView extends JPanel {
 	}
 	
 	public void handleRegistration() {
-		new FormularioWindowUsuario();
+		new FormUserWindow();
 		window.dispose();
 	}
 	
