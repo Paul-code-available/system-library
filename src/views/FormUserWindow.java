@@ -18,5 +18,4 @@ public class FormUserWindow extends JFrame {
         setVisible(true);
     }
 
-
 }

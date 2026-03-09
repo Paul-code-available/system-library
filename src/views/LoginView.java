@@ -18,8 +18,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 import javax.swing.border.Border;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import components.TextPrompt;
 import utils.AppFont;
@@ -41,12 +45,17 @@ public class LoginView extends JPanel {
 		Border emptyBorder = BorderFactory.createEmptyBorder(20,20,20,20);
 		setBorder(emptyBorder);
 		
+		UIManager.put("TextComponent.arc", 10);
+		UIManager.put("Button.arc", 10);
+		
 		crearPanelSuperior();
 		
 		crearPanelCentro();
 		
 		crearPanelInferior();
 	
+		assignListeners();
+		
 	}
 	
 	public void crearPanelSuperior() {
@@ -58,6 +67,8 @@ public class LoginView extends JPanel {
 		lblTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
 		panelSuperior.add(lblTitle);
 		
+		panelSuperior.add(Box.createVerticalStrut(10));
+		
 		add(panelSuperior, BorderLayout.NORTH);
 	}
 	
@@ -68,25 +79,28 @@ public class LoginView extends JPanel {
 		panelCentro.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
 		
 		txtEmail = SwingUtils.crearJtf(0, 30, "Email");
+		txtEmail.setAlignmentX(Component.LEFT_ALIGNMENT);
 		panelCentro.add(txtEmail);
 		
 		lblErrorEmail = new JLabel();
 		lblErrorEmail.setFont(AppFont.small());
 		lblErrorEmail.setForeground(Color.RED);
-		lblErrorEmail.setVisible(false);
+		lblErrorEmail.setAlignmentX(Component.LEFT_ALIGNMENT);
 		panelCentro.add(lblErrorEmail);
 		
 		panelCentro.add(Box.createVerticalStrut(10));
 		
 		jpfContrasena = new JPasswordField(); 
 		jpfContrasena.setMaximumSize(new Dimension(Integer.MAX_VALUE, 30));
+		jpfContrasena.setAlignmentX(Component.LEFT_ALIGNMENT);
 		TextPrompt promptContrasena = new TextPrompt("Contraseña", jpfContrasena);
 		panelCentro.add(jpfContrasena);
 		
 		lblErrorPassword = new JLabel();
 		lblErrorPassword.setFont(AppFont.small());
 		lblErrorPassword.setForeground(Color.RED);
-		lblErrorPassword.setVisible(false);
+		lblErrorPassword.setAlignmentX(Component.LEFT_ALIGNMENT);
+		
 		panelCentro.add(lblErrorPassword);
 
         panelCentro.add(Box.createVerticalStrut(10));
@@ -116,8 +130,7 @@ public class LoginView extends JPanel {
 	}
 	
 	public void handleLogin() {
-		
-		if (validateForm()) {
+		if (validateLogin()) {
 			new mainWindow();
 			window.dispose();
 		}
@@ -129,20 +142,58 @@ public class LoginView extends JPanel {
 		window.dispose();
 	}
 	
-	
-	private boolean validateForm() {
+	private void assignListeners() {
 		
-		resetMensajeError();
+		txtEmail.getDocument().addDocumentListener(new DocumentListener() {
+			
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				validateEmail();				
+			}
+			
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				 validateEmail();
+			}
+			
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+ 				validateEmail();
+			}
+			
+		});
+		
+		jpfContrasena.getDocument().addDocumentListener(new DocumentListener() {
+			
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				validatePassword();
+			}
+			
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				validatePassword();
+			}
+			
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				validatePassword();
+			}
+			
+		});
+		
+	}
+	
+	
+	private boolean validateLogin() {
 		
 		boolean valid = true;
 		
 		if (!validateEmail()) {
-			mostrarErrorCorreo();
 			valid = false;
 		}
 		
 		if (!validatePassword()) {
-			mostrarErrorContrasena();
 			valid = false;
 		}
 		
@@ -162,33 +213,29 @@ public class LoginView extends JPanel {
 			return false;
 		}
 
+		lblErrorEmail.setText("");
+		
 		return true;
 		
 	}
 	
 	private boolean validatePassword() {
 		
-		if (String.valueOf(jpfContrasena.getPassword()).trim().isEmpty()) {
+		String contrasena = String.valueOf(jpfContrasena.getPassword()).trim();
+		
+		if (contrasena.isEmpty()) {
 			lblErrorPassword.setText("La contraseña es requerida");
 			return false;
 		}
+		
+		// metodo que valida si la contraseña coicide
+		
+		lblErrorPassword.setText("");
 		
 		return true;
 		
 	}
 	
-	private void mostrarErrorCorreo() {
-		lblErrorEmail.setVisible(true);
-	}
-	
-	private void mostrarErrorContrasena() {
-		lblErrorPassword.setVisible(true);
-	}
-	
-	private void resetMensajeError() {
-		lblErrorEmail.setText("");
-		lblErrorPassword.setText("");
-	}
 
 
 
