@@ -22,6 +22,8 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import components.TextPrompt;
 import utils.AppFont;
@@ -52,6 +54,8 @@ public class LoginView extends JPanel {
 		
 		crearPanelInferior();
 	
+		assignListeners();
+		
 	}
 	
 	public void crearPanelSuperior() {
@@ -62,6 +66,8 @@ public class LoginView extends JPanel {
 		lblTitle.setFont(AppFont.title());
 		lblTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
 		panelSuperior.add(lblTitle);
+		
+		panelSuperior.add(Box.createVerticalStrut(10));
 		
 		add(panelSuperior, BorderLayout.NORTH);
 	}
@@ -80,7 +86,6 @@ public class LoginView extends JPanel {
 		lblErrorEmail.setFont(AppFont.small());
 		lblErrorEmail.setForeground(Color.RED);
 		lblErrorEmail.setAlignmentX(Component.LEFT_ALIGNMENT);
-		lblErrorEmail.setVisible(false);
 		panelCentro.add(lblErrorEmail);
 		
 		panelCentro.add(Box.createVerticalStrut(10));
@@ -95,7 +100,7 @@ public class LoginView extends JPanel {
 		lblErrorPassword.setFont(AppFont.small());
 		lblErrorPassword.setForeground(Color.RED);
 		lblErrorPassword.setAlignmentX(Component.LEFT_ALIGNMENT);
-		lblErrorPassword.setVisible(false);
+		
 		panelCentro.add(lblErrorPassword);
 		
 		add(panelCentro, BorderLayout.CENTER);
@@ -123,8 +128,7 @@ public class LoginView extends JPanel {
 	}
 	
 	public void handleLogin() {
-		
-		if (validateForm()) {
+		if (validateLogin()) {
 			new mainWindow();
 			window.dispose();
 		}
@@ -132,24 +136,62 @@ public class LoginView extends JPanel {
 	}
 	
 	public void handleRegistration() {
-		new FormularioWindowUsuario();
+		new FormUserWindow();
 		window.dispose();
 	}
 	
-	
-	private boolean validateForm() {
+	private void assignListeners() {
 		
-		resetMensajeError();
+		txtEmail.getDocument().addDocumentListener(new DocumentListener() {
+			
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				validateEmail();				
+			}
+			
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				 validateEmail();
+			}
+			
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+ 				validateEmail();
+			}
+			
+		});
+		
+		jpfContrasena.getDocument().addDocumentListener(new DocumentListener() {
+			
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				validatePassword();
+			}
+			
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				validatePassword();
+			}
+			
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				validatePassword();
+			}
+			
+		});
+		
+	}
+	
+	
+	private boolean validateLogin() {
 		
 		boolean valid = true;
 		
 		if (!validateEmail()) {
-			mostrarErrorCorreo();
 			valid = false;
 		}
 		
 		if (!validatePassword()) {
-			mostrarErrorContrasena();
 			valid = false;
 		}
 		
@@ -169,33 +211,29 @@ public class LoginView extends JPanel {
 			return false;
 		}
 
+		lblErrorEmail.setText("");
+		
 		return true;
 		
 	}
 	
 	private boolean validatePassword() {
 		
-		if (String.valueOf(jpfContrasena.getPassword()).trim().isEmpty()) {
+		String contrasena = String.valueOf(jpfContrasena.getPassword()).trim();
+		
+		if (contrasena.isEmpty()) {
 			lblErrorPassword.setText("La contraseña es requerida");
 			return false;
 		}
+		
+		// metodo que valida si la contraseña coicide
+		
+		lblErrorPassword.setText("");
 		
 		return true;
 		
 	}
 	
-	private void mostrarErrorCorreo() {
-		lblErrorEmail.setVisible(true);
-	}
-	
-	private void mostrarErrorContrasena() {
-		lblErrorPassword.setVisible(true);
-	}
-	
-	private void resetMensajeError() {
-		lblErrorEmail.setText("");
-		lblErrorPassword.setText("");
-	}
 
 
 
