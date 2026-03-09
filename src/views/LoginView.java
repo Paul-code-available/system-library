@@ -42,8 +42,7 @@ public class LoginView extends JPanel {
 		this.window = window;
 		
 		setLayout(new BorderLayout());
-		Border emptyBorder = BorderFactory.createEmptyBorder(20,20,20,20);
-		setBorder(emptyBorder);
+		setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
 		
 		UIManager.put("TextComponent.arc", 10);
 		UIManager.put("Button.arc", 10);
@@ -62,9 +61,7 @@ public class LoginView extends JPanel {
 		JPanel panelSuperior = new JPanel();
 		panelSuperior.setLayout(new BoxLayout(panelSuperior, BoxLayout.Y_AXIS));
 		
-		JLabel lblTitle = new JLabel("Iniciar sesión");
-		lblTitle.setFont(AppFont.title());
-		lblTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
+		JLabel lblTitle = SwingUtils.createLblTitle("Iniciar Sesión");
 		panelSuperior.add(lblTitle);
 		
 		panelSuperior.add(Box.createVerticalStrut(10));
@@ -78,29 +75,18 @@ public class LoginView extends JPanel {
 		panelCentro.setLayout(new BoxLayout(panelCentro, BoxLayout.Y_AXIS));
 		panelCentro.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
 		
-		txtEmail = SwingUtils.crearJtf(0, 30, "Email");
-		txtEmail.setAlignmentX(Component.LEFT_ALIGNMENT);
+		txtEmail = SwingUtils.crearJtfText("Email");
 		panelCentro.add(txtEmail);
 		
-		lblErrorEmail = new JLabel();
-		lblErrorEmail.setFont(AppFont.small());
-		lblErrorEmail.setForeground(Color.RED);
-		lblErrorEmail.setAlignmentX(Component.LEFT_ALIGNMENT);
+		lblErrorEmail = SwingUtils.createLblMessageError();
 		panelCentro.add(lblErrorEmail);
 		
 		panelCentro.add(Box.createVerticalStrut(10));
 		
-		jpfContrasena = new JPasswordField(); 
-		jpfContrasena.setMaximumSize(new Dimension(Integer.MAX_VALUE, 30));
-		jpfContrasena.setAlignmentX(Component.LEFT_ALIGNMENT);
-		TextPrompt promptContrasena = new TextPrompt("Contraseña", jpfContrasena);
+		jpfContrasena = SwingUtils.createJpfPassword("Contraseña"); 
 		panelCentro.add(jpfContrasena);
 		
-		lblErrorPassword = new JLabel();
-		lblErrorPassword.setFont(AppFont.small());
-		lblErrorPassword.setForeground(Color.RED);
-		lblErrorPassword.setAlignmentX(Component.LEFT_ALIGNMENT);
-		
+		lblErrorPassword = SwingUtils.createLblMessageError();
 		panelCentro.add(lblErrorPassword);
 		
 		add(panelCentro, BorderLayout.CENTER);
@@ -114,7 +100,6 @@ public class LoginView extends JPanel {
 		
 		JButton btnIniciarSesion = new JButton("Ingresar");
 		btnIniciarSesion.addActionListener(e -> handleLogin());
-		
 		panelInferior.add(btnIniciarSesion);
 		
 		panelInferior.add(Box.createHorizontalStrut(10));
@@ -122,7 +107,6 @@ public class LoginView extends JPanel {
 		JButton btnRegister = new JButton("Registrarte");
 		btnRegister.addActionListener(e -> handleRegistration());
 		panelInferior.add(btnRegister);
-		
 		
 		add(panelInferior, BorderLayout.SOUTH);
 	}

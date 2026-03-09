@@ -56,36 +56,36 @@ public class FormBookView extends JPanel {
 		panelCentro.setLayout(new BoxLayout(panelCentro, BoxLayout.Y_AXIS));
 		panelCentro.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
 		
-		JTextField txtNombre = SwingUtils.crearJtf(0, 30, "Nombre del libro");
+		JTextField txtNombre = SwingUtils.crearJtfText("Nombre del libro");
 		panelCentro.add(txtNombre);
 		panelCentro.add(Box.createRigidArea(new Dimension(10, 10)));
 		
-		JTextField txtAutor = SwingUtils.crearJtf(0, 30, "Autor");
+		JTextField txtAutor = SwingUtils.crearJtfText("Autor");
 		panelCentro.add(txtAutor);
 		
 		panelCentro.add(Box.createRigidArea(new Dimension(10, 10)));
 		
-		JTextField txtEditorial = SwingUtils.crearJtf(0, 30, "Editorial");
+		JTextField txtEditorial = SwingUtils.crearJtfText("Editorial");
 		panelCentro.add(txtEditorial);
 		
 		panelCentro.add(Box.createRigidArea(new Dimension(10, 10)));
 		
-		JTextField txtAnioPublicacion = SwingUtils.crearJtf(0, 30, "Año de publicación");
+		JTextField txtAnioPublicacion = SwingUtils.crearJtfText("Año de publicación");
 		panelCentro.add(txtAnioPublicacion);
 		
 		panelCentro.add(Box.createRigidArea(new Dimension(10, 10)));
 		
-		JTextField txtGenero = SwingUtils.crearJtf(0, 30, "Género");
+		JTextField txtGenero = SwingUtils.crearJtfText("Género");
 		panelCentro.add(txtGenero);
 		
 		panelCentro.add(Box.createRigidArea(new Dimension(10, 10)));
 		
-		JTextField txtIdioma = SwingUtils.crearJtf(0, 30, "Idioma");
+		JTextField txtIdioma = SwingUtils.crearJtfText("Idioma");
 		panelCentro.add(txtIdioma);
 		
 		panelCentro.add(Box.createRigidArea(new Dimension(10, 10)));
 		
-		JTextField txtNumPaginas = SwingUtils.crearJtf(0, 30, "Número de páginas");
+		JTextField txtNumPaginas = SwingUtils.crearJtfText("Número de páginas");
 		panelCentro.add(txtNumPaginas);	
 		
 		add(panelCentro, BorderLayout.CENTER);
