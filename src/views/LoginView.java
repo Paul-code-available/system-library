@@ -3,11 +3,14 @@ package views;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -44,7 +47,7 @@ public class LoginView extends JPanel {
 		setLayout(new BorderLayout());
 		setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
 		
-		UIManager.put("TextComponent.arc", 10);
+		UIManager.put("TextComponent.arc", 15);
 		UIManager.put("Button.arc", 10);
 		
 		
@@ -103,12 +106,14 @@ public class LoginView extends JPanel {
 		
 		JButton btnIniciarSesion = new JButton("Ingresar");
 		btnIniciarSesion.addActionListener(e -> handleLogin());
+		btnIniciarSesion.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		panelInferior.add(btnIniciarSesion);
 		
 		panelInferior.add(Box.createHorizontalStrut(10));
 		
-		JButton btnRegister = new JButton("Registrarte");
+		JButton btnRegister = new JButton("Registrate");
 		btnRegister.addActionListener(e -> handleRegistration());
+		btnRegister.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		panelInferior.add(btnRegister);
 		
 		add(panelInferior, BorderLayout.SOUTH);
