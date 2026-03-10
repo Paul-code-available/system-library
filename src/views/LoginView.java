@@ -89,6 +89,8 @@ public class LoginView extends JPanel {
 		
 		lblErrorPassword = SwingUtils.createLblMessageError();
 		panelCentro.add(lblErrorPassword);
+
+        panelCentro.add(Box.createVerticalStrut(10));
 		
 		add(panelCentro, BorderLayout.CENTER);
 	}
