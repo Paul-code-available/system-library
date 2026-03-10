@@ -47,6 +47,7 @@ public class LoginView extends JPanel {
 		UIManager.put("TextComponent.arc", 10);
 		UIManager.put("Button.arc", 10);
 		
+		
 		crearPanelSuperior();
 		
 		crearPanelCentro();
