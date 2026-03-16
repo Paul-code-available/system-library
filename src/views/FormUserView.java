@@ -316,14 +316,19 @@ public class FormUserView extends JPanel {
                         e.consume();
                 }
 
-                if (txtNombre.getText().length() >= 10){
+                if (txtNombre.getText().length() >= 25){
                     e.consume();
                 }
 
             }
         });
 
-
+        txtNombre.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                txtNombre.selectAll();
+            }
+        });
 
     }
 
@@ -417,4 +422,5 @@ public class FormUserView extends JPanel {
 
         return validar;
     }
+
 }
