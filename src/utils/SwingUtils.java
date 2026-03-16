@@ -55,7 +55,6 @@ public class SwingUtils {
 		
 	}
 	
-	
     public static JTextField crearJtf(int largo, int ancho, String prompt) {
 
         JTextField jtf = new JTextField();
