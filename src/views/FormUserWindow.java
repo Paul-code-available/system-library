@@ -11,6 +11,7 @@ public class FormUserWindow extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Registro de usuario");
         setLocationRelativeTo(null);
+        setResizable(false);
 
         FormUserView formularioUsuarios = new FormUserView(this);
         add(formularioUsuarios);
