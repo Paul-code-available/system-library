@@ -6,7 +6,12 @@ import javax.swing.border.Border;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
+import java.awt.event.*;
+
+import utils.AppFont;
 import utils.SwingUtilsUser;
+
+import static com.sun.java.accessibility.util.AWTEventMonitor.addWindowListener;
 
 public class FormUserView extends JPanel {
 
@@ -15,17 +20,18 @@ public class FormUserView extends JPanel {
     JTextField txtEmail;
     JPasswordField jpfContrasena;
     JPasswordField jpfConfirmarContrasena;
-    JPasswordField jpfContrasenasDiferentes;
     JLabel lblNombreRequerido;
     JLabel lblEmailRequerido;
     JLabel lblContrasenaRequerida;
     JLabel lblConfirmarContrasena;
     JLabel lblContrasenasDiferentes;
+    Color defaultButtonColor;
 
     public FormUserView(FormUserWindow window){
         this.window = window;
         setLayout(new BorderLayout());
-        setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
+        setBorder(BorderFactory.createEmptyBorder(5,20,5,20));
+
 
         UIManager.put("Text.Component.arc", 10);
         UIManager.put("Button.arc", 10);
@@ -40,16 +46,26 @@ public class FormUserView extends JPanel {
     public void panelSuperior(){
         JPanel panelVerticalSuperior = new JPanel();
         panelVerticalSuperior.setLayout(new BoxLayout(panelVerticalSuperior, BoxLayout.Y_AXIS));
-        Border emptyBorder = BorderFactory.createEmptyBorder(20,20,20,20);
+        Border emptyBorder = BorderFactory.createEmptyBorder(0,20,8,20);
         panelVerticalSuperior.setBorder(emptyBorder);
 
-        JLabel lblSingUp = new JLabel("Sing up");
-        lblSingUp.setAlignmentX(Component.LEFT_ALIGNMENT);
-        panelVerticalSuperior.add(lblSingUp);
+        JPanel pnlTitulo = new JPanel();
+        panelVerticalSuperior.add(pnlTitulo);
 
-        JLabel lblSingIn = new JLabel("Create an account or Sing in");
-        lblSingIn.setAlignmentX(Component.LEFT_ALIGNMENT);
-        panelVerticalSuperior.add(lblSingIn);
+        JLabel lblRegistrarse = new JLabel("Registrarse");
+        lblRegistrarse.setFont(AppFont.title());
+        lblRegistrarse.setAlignmentX(Component.CENTER_ALIGNMENT);
+        pnlTitulo.add(lblRegistrarse);
+        //panelVerticalSuperior.add(lblRegistrarse);
+
+        JPanel pnlMensajeInformacion = new JPanel();
+        panelVerticalSuperior.add(pnlMensajeInformacion);
+
+        JLabel lblMensajeInformativo = new JLabel("Crear una cuenta o iniciar sesión");
+        lblMensajeInformativo.setFont(AppFont.small());
+        lblMensajeInformativo.setAlignmentX(Component.LEFT_ALIGNMENT);
+        pnlMensajeInformacion.add(lblMensajeInformativo);
+        //panelVerticalSuperior.add(lblMensajeInformativo);
 
         add(panelVerticalSuperior, BorderLayout.NORTH);
     }
@@ -64,98 +80,71 @@ public class FormUserView extends JPanel {
         panelVertical.setBorder(BorderFactory.createEmptyBorder(20,30, 20, 30));
         panelVertical.setPreferredSize(new Dimension(350, 600));
 
-        //JScrollPane barraScroll = new JScrollPane(panelVertical);
-        //barraScroll.setHorizontalScrollBar(null);
-        //add(panelCentro);
-
         JScrollPane barraScroll = new JScrollPane(panelVertical);
         barraScroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         barraScroll.setBorder(null);
         barraScroll.getViewport().setBackground(panelVertical.getBackground());
         panelCentro.add(barraScroll, BorderLayout.CENTER);
 
-        /*
-        JPanel panelHorizontal = new JPanel();
-        panelHorizontal.setLayout(new BoxLayout(panelHorizontal, BoxLayout.X_AXIS));
-        panelVertical.add(panelHorizontal);
-        panelHorizontal.setMaximumSize(new Dimension(350,40));
-        */
-        //Border emptyBorder = BorderFactory.createEmptyBorder(20,10,20,10);
-        //setBorder(emptyBorder);
 
         txtNombre = new JTextField();
-        SwingUtilsUser.configurarComponente(0, 40, "Nombre(s)", txtNombre);
+        SwingUtilsUser.configurarComponente(0, 30, "Nombre(s)", txtNombre);
         txtNombre.setAlignmentX(Component.LEFT_ALIGNMENT);
         panelVertical.add(txtNombre);
         // panelHorizontal.add(Box.createHorizontalStrut(20)); //agrega un espacio horizontal de 10px entre un componente y otro dentro de un borderlayout
 
-        lblNombreRequerido = new JLabel("El nombre es requerido.");
-        lblNombreRequerido.setFont(new Font("Arial", Font.BOLD, 10));
+        lblNombreRequerido = new JLabel();
+        lblNombreRequerido.setFont(AppFont.small());
         lblNombreRequerido.setForeground(Color.RED);
         lblNombreRequerido.setAlignmentX(Component.LEFT_ALIGNMENT);
         panelVertical.add(lblNombreRequerido);
         panelVertical.add(Box.createVerticalStrut(20));
 
-        /*
-        txtApellido = new JTextField();
-        SwingUtilsUser.configurarComponente(170, 40, "Apellidos", txtApellido);
-        txtApellido.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panelHorizontal.add(txtApellido);
-
-        lblApellidoRequerido = new JLabel("El apellido es requerido.");
-        lblApellidoRequerido.setFont(new Font("Arial", Font.BOLD, 10));
-        lblApellidoRequerido.setForeground(Color.RED);
-        lblApellidoRequerido.setVisible(false);
-        panelHorizontal.add(lblApellidoRequerido);
-        */
 
         txtEmail = new JTextField();
-        SwingUtilsUser.configurarComponente(0, 40, "Email", txtEmail);
+        SwingUtilsUser.configurarComponente(0, 30, "Email", txtEmail);
         txtEmail.setAlignmentX(Component.LEFT_ALIGNMENT);
         panelVertical.add(txtEmail);
 
-
-        lblEmailRequerido = new JLabel("El email es requerido.");
-        lblEmailRequerido.setFont(new Font("Arial", Font.BOLD, 10));
+        lblEmailRequerido = new JLabel();
+        lblEmailRequerido.setFont(AppFont.small());
         lblEmailRequerido.setForeground(Color.RED);
         panelVertical.add(lblEmailRequerido);
         panelVertical.add(Box.createVerticalStrut(20));
         lblEmailRequerido.setAlignmentX(Component.LEFT_ALIGNMENT);
 
+
         jpfContrasena = new JPasswordField();
-        SwingUtilsUser.configurarComponente(350, 40, "Contraseña", jpfContrasena);
+        SwingUtilsUser.configurarComponente(350, 30, "Contraseña", jpfContrasena);
         jpfContrasena.setAlignmentX(Component.LEFT_ALIGNMENT);
         panelVertical.add(jpfContrasena);
 
-
-        lblContrasenaRequerida = new JLabel("La contraseña es requerida.");
-        lblContrasenaRequerida.setFont(new Font("Arial", Font.BOLD, 10));
+        lblContrasenaRequerida = new JLabel();
+        lblContrasenaRequerida.setFont(AppFont.small());
         lblContrasenaRequerida.setForeground(Color.RED);
         panelVertical.add(lblContrasenaRequerida);
         panelVertical.add(Box.createVerticalStrut(20));
         lblContrasenaRequerida.setAlignmentX(Component.LEFT_ALIGNMENT);
 
+
         jpfConfirmarContrasena = new JPasswordField();
-        SwingUtilsUser.configurarComponente(350, 40, "Confirmar contraseña", jpfConfirmarContrasena);
+        SwingUtilsUser.configurarComponente(350, 30, "Confirmar contraseña", jpfConfirmarContrasena);
         jpfConfirmarContrasena .setAlignmentX(Component.LEFT_ALIGNMENT);
         panelVertical.add(jpfConfirmarContrasena );
 
-        lblConfirmarContrasena = new JLabel("Confirmar la contraseña es requerido.");
-        lblConfirmarContrasena.setFont(new Font("Arial", Font.BOLD, 10));
+        lblConfirmarContrasena = new JLabel();
+        lblConfirmarContrasena.setFont(AppFont.small());
         lblConfirmarContrasena.setForeground(Color.RED);
         panelVertical.add(lblConfirmarContrasena);
         lblConfirmarContrasena.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        lblContrasenasDiferentes = new JLabel("Las contraseñas deben coincidir");
-        lblContrasenasDiferentes.setFont(new Font("Arial", Font.BOLD, 10));
+        lblContrasenasDiferentes = new JLabel();
+        lblContrasenasDiferentes.setFont(AppFont.small());
         lblContrasenasDiferentes.setForeground(Color.RED);
         panelVertical.add(lblContrasenasDiferentes);
         lblContrasenasDiferentes.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-
-        //panelCentro.add(panelVertical, BorderLayout.CENTER);//Agrega el panel vertical al centro del border layout secundario.
         add(panelCentro, BorderLayout.CENTER);//Agrega el border layout secundario al centro del border layout principal
-
     }
 
     public void panelInferior(){
@@ -163,28 +152,75 @@ public class FormUserView extends JPanel {
         panelVertical.setLayout(new BoxLayout(panelVertical, BoxLayout.Y_AXIS));
         add(panelVertical, BorderLayout.SOUTH);
 
+        panelVertical.add(Box.createVerticalStrut(5));
         JCheckBox checkTerminos = new JCheckBox("Acepto los terminos de uso y la politca de privacidad");
         panelVertical.add(checkTerminos);
         checkTerminos.setAlignmentX(Component.LEFT_ALIGNMENT);
-        panelVertical.add(Box.createVerticalStrut(30));
+        panelVertical.add(Box.createVerticalStrut(15));
 
         JPanel panelHorizontal  = new JPanel();
         panelHorizontal.setLayout(new BoxLayout(panelHorizontal, BoxLayout.X_AXIS));
         panelVertical.add(panelHorizontal);
 
-        JButton registro = new JButton("Continuar");
-        registro.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panelHorizontal.add(registro);
+        JButton btnregistro = new JButton("Continuar");
+        btnregistro.setAlignmentX(Component.LEFT_ALIGNMENT);
+        btnregistro.addActionListener(e -> controlRegistro() );
+        btnregistro.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+        btnregistro.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                handleRegistration();
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                cambiarFondo(btnregistro);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                resetFondo(btnregistro);
+            }
+        });
+        panelHorizontal.add(btnregistro);
+
         panelHorizontal.add(Box.createHorizontalStrut(10));
 
-        registro.addActionListener(e -> controlRegistro() );
 
         JButton btnCancelar = new JButton("Cancelar");
-        btnCancelar.setAlignmentX(Component.CENTER_ALIGNMENT);
-        btnCancelar.addActionListener(e -> handleRegistration());
+        defaultButtonColor = btnCancelar.getBackground();
+        btnCancelar.setAlignmentX(Component.LEFT_ALIGNMENT);
+        //btnCancelar.addActionListener(e -> handleRegistration());
+        btnCancelar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+        btnCancelar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                handleRegistration();
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                cambiarFondo(btnCancelar);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                resetFondo(btnCancelar);
+            }
+        });
         panelHorizontal.add(btnCancelar);
 
-        panelVertical.add(Box.createVerticalStrut(20));
+        panelVertical.add(Box.createVerticalStrut(10));
+    }
+
+    private void cambiarFondo(JComponent c){
+        c.setBackground(Color.GRAY);
+    }
+
+    private void resetFondo(JComponent c){
+        c.setBackground(defaultButtonColor);
     }
 
     private void controlRegistro(){
@@ -208,17 +244,17 @@ public class FormUserView extends JPanel {
         txtNombre.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                validarEmail();
+                validarNombre();
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                validarEmail();
+                validarNombre();
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
-                validarEmail();
+                validarNombre();
             }
         });
 
@@ -272,9 +308,39 @@ public class FormUserView extends JPanel {
                 validarConfirmarContrasena();
             }
         });
+
+        txtNombre.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                if (Character.isDigit(e.getKeyChar()) || !Character.isAlphabetic(e.getKeyChar())){
+                        e.consume();
+                }
+
+                if (txtNombre.getText().length() >= 25){
+                    e.consume();
+                }
+
+            }
+        });
+
+        txtNombre.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                txtNombre.selectAll();
+            }
+        });
+
     }
 
+    private void cerrarVentana() {
+        int opcion = JOptionPane.showConfirmDialog(this, "Seguro que deseas cerrar el programa");
+
+        if (opcion == JOptionPane.YES_OPTION) {
+            System.exit(0);
+        }
+    }
     private boolean validarNombre(){
+
         if(txtNombre.getText().trim().isEmpty()){
             lblNombreRequerido.setText("El nombre es obligatorio");
             return false;
@@ -286,6 +352,7 @@ public class FormUserView extends JPanel {
     }
 
     private boolean validarEmail(){
+
         if (txtEmail.getText().trim().isEmpty()){
             lblEmailRequerido.setText("El email es obligatorio");
             return false;
@@ -317,12 +384,18 @@ public class FormUserView extends JPanel {
             return false;
         }
 
-        if (String.valueOf(jpfContrasena.getPassword()).equals(String.valueOf(jpfConfirmarContrasena.getPassword()))){
+        if (!String.valueOf(jpfContrasena.getPassword()).equals(String.valueOf(jpfConfirmarContrasena.getPassword()))){
             lblConfirmarContrasena.setText("Las contraseñas deben coincidir");
             return false;
         }
 
         lblConfirmarContrasena.setText("");
+        lblContrasenasDiferentes.setText("");
+
+        return true;
+    }
+
+    private boolean validarCheckTerminos(){
 
         return true;
     }
@@ -349,4 +422,5 @@ public class FormUserView extends JPanel {
 
         return validar;
     }
+
 }
