@@ -13,15 +13,18 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
@@ -51,7 +54,6 @@ public class LoginView extends JPanel {
 		UIManager.put("TextComponent.arc", 15);
 		UIManager.put("Button.arc", 10);
 		
-		
 		crearPanelSuperior();
 		
 		crearPanelCentro();
@@ -69,7 +71,7 @@ public class LoginView extends JPanel {
 		JLabel lblTitle = SwingUtils.createLblTitle("Iniciar Sesión");
 		panelSuperior.add(lblTitle);
 		
-		panelSuperior.add(Box.createVerticalStrut(10));
+		panelSuperior.add(Box.createVerticalStrut(15));
 		
 		add(panelSuperior, BorderLayout.NORTH);
 	}
@@ -81,9 +83,7 @@ public class LoginView extends JPanel {
 		panelCentro.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
 		
 		txtEmail = SwingUtils.crearJtfText("Email");
-		txtEmail.addKeyListener(new KeyAdapter() {
-			
-		});
+		
 		panelCentro.add(txtEmail);
 		
 		lblErrorEmail = SwingUtils.createLblMessageError();
@@ -100,6 +100,10 @@ public class LoginView extends JPanel {
         panelCentro.add(Box.createVerticalStrut(10));
 		
 		add(panelCentro, BorderLayout.CENTER);
+		
+		moveFocus(txtEmail, "DOWN", "aPassword", jpfContrasena);
+		moveFocus(jpfContrasena, "UP", "aEmail", txtEmail);
+		
 	}
 	
 	public void crearPanelInferior() {
@@ -111,7 +115,10 @@ public class LoginView extends JPanel {
 		JButton btnIniciarSesion = new JButton("Ingresar");
 		btnIniciarSesion.addActionListener(e -> handleLogin());
 		btnIniciarSesion.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
 		panelInferior.add(btnIniciarSesion);
+		
+		window.getRootPane().setDefaultButton(btnIniciarSesion);
 		
 		panelInferior.add(Box.createHorizontalStrut(10));
 		
@@ -121,6 +128,13 @@ public class LoginView extends JPanel {
 		panelInferior.add(btnRegister);
 		
 		add(panelInferior, BorderLayout.SOUTH);
+		
+		moveFocus(jpfContrasena, "DOWN", "aIniciar", btnIniciarSesion);
+		moveFocus(btnIniciarSesion, "UP", "aPassword", jpfContrasena);
+		moveFocus(btnIniciarSesion, "RIGHT", "aRegistrar", btnRegister);
+		moveFocus(btnRegister, "LEFT", "aIniciar", btnIniciarSesion);
+		moveFocus(btnRegister, "UP", "aPassword", jpfContrasena);
+		
 	}
 	
 	public void handleLogin() {
@@ -134,6 +148,18 @@ public class LoginView extends JPanel {
 	public void handleRegistration() {
 		new FormUserWindow();
 		window.dispose();
+	}
+	
+	public void moveFocus(JComponent origen, String tecla, String nombre, JComponent destino) {
+		origen.getInputMap().put(KeyStroke.getKeyStroke(tecla), nombre);
+		origen.getActionMap().put(nombre, new AbstractAction() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				destino.requestFocus();
+				
+			}
+		});
 	}
 	
 	private void assignListeners() {
