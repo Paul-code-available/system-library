@@ -101,8 +101,8 @@ public class LoginView extends JPanel {
 		
 		add(panelCentro, BorderLayout.CENTER);
 		
-		moveFocus(txtEmail, "DOWN", "aPassword", jpfContrasena);
-		moveFocus(jpfContrasena, "UP", "aEmail", txtEmail);
+		SwingUtils.moveFocus(txtEmail, "DOWN", "aPassword", jpfContrasena);
+		SwingUtils.moveFocus(jpfContrasena, "UP", "aEmail", txtEmail);
 		
 	}
 	
@@ -129,11 +129,11 @@ public class LoginView extends JPanel {
 		
 		add(panelInferior, BorderLayout.SOUTH);
 		
-		moveFocus(jpfContrasena, "DOWN", "aIniciar", btnIniciarSesion);
-		moveFocus(btnIniciarSesion, "UP", "aPassword", jpfContrasena);
-		moveFocus(btnIniciarSesion, "RIGHT", "aRegistrar", btnRegister);
-		moveFocus(btnRegister, "LEFT", "aIniciar", btnIniciarSesion);
-		moveFocus(btnRegister, "UP", "aPassword", jpfContrasena);
+		SwingUtils.moveFocus(jpfContrasena, "DOWN", "aIniciar", btnIniciarSesion);
+		SwingUtils.moveFocus(btnIniciarSesion, "UP", "aPassword", jpfContrasena);
+		SwingUtils.moveFocus(btnIniciarSesion, "RIGHT", "aRegistrar", btnRegister);
+		SwingUtils.moveFocus(btnRegister, "LEFT", "aIniciar", btnIniciarSesion);
+		SwingUtils.moveFocus(btnRegister, "UP", "aPassword", jpfContrasena);
 		
 	}
 	
@@ -150,17 +150,7 @@ public class LoginView extends JPanel {
 		window.dispose();
 	}
 	
-	public void moveFocus(JComponent origen, String tecla, String nombre, JComponent destino) {
-		origen.getInputMap().put(KeyStroke.getKeyStroke(tecla), nombre);
-		origen.getActionMap().put(nombre, new AbstractAction() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				destino.requestFocus();
-				
-			}
-		});
-	}
+	
 	
 	private void assignListeners() {
 		
