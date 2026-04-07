@@ -33,6 +33,8 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import components.TextPrompt;
+import excepciones.InvalidPasswordException;
+import excepciones.InvalidUserException;
 import utils.AppFont;
 import utils.SwingUtils;
 
@@ -113,7 +115,15 @@ public class LoginView extends JPanel {
 		panelInferior.add(Box.createHorizontalGlue());
 		
 		JButton btnIniciarSesion = new JButton("Ingresar");
-		btnIniciarSesion.addActionListener(e -> handleLogin());
+		btnIniciarSesion.addActionListener(e -> {
+			try {
+				handleLogin();
+			} catch (InvalidUserException e1) {
+				lblErrorEmail.setText("Correo no registrado");
+			} catch (InvalidPasswordException e1) {
+				lblErrorPassword.setText("Contraseña incorrecta");
+			}
+		});
 		btnIniciarSesion.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
 		panelInferior.add(btnIniciarSesion);
@@ -137,7 +147,7 @@ public class LoginView extends JPanel {
 		
 	}
 	
-	public void handleLogin() {
+	public void handleLogin() throws InvalidUserException, InvalidPasswordException {
 		if (validateLogin()) {
 			new mainWindow();
 			window.dispose();
@@ -158,17 +168,29 @@ public class LoginView extends JPanel {
 			
 			@Override
 			public void removeUpdate(DocumentEvent e) {
-				validateEmail();				
+				try {
+					validateEmail();
+				} catch (InvalidUserException e1) {
+					
+				}				
 			}
 			
 			@Override
 			public void insertUpdate(DocumentEvent e) {
-				 validateEmail();
+				 try {
+					validateEmail();
+				 } catch (InvalidUserException e1) {
+					
+				 }
 			}
 			
 			@Override
 			public void changedUpdate(DocumentEvent e) {
- 				validateEmail();
+ 				try {
+					validateEmail();
+				} catch (InvalidUserException e1) {
+					
+				}
 			}
 			
 		});
@@ -177,17 +199,29 @@ public class LoginView extends JPanel {
 			
 			@Override
 			public void removeUpdate(DocumentEvent e) {
-				validatePassword();
+				try {
+					validatePassword();
+				} catch (InvalidPasswordException e1) {
+				
+				}
 			}
 			
 			@Override
 			public void insertUpdate(DocumentEvent e) {
-				validatePassword();
+				try {
+					validatePassword();
+				} catch (InvalidPasswordException e1) {
+					
+				}
 			}
 			
 			@Override
 			public void changedUpdate(DocumentEvent e) {
-				validatePassword();
+				try {
+					validatePassword();
+				} catch (InvalidPasswordException e1) {
+					
+				}
 			}
 			
 		});
@@ -197,7 +231,7 @@ public class LoginView extends JPanel {
 	
 	
 	
-	private boolean validateLogin() {
+	private boolean validateLogin() throws InvalidUserException, InvalidPasswordException {
 		
 		boolean valid = true;
 		
@@ -213,7 +247,7 @@ public class LoginView extends JPanel {
 		
 	}
 	
-	private boolean validateEmail() {
+	private boolean validateEmail() throws InvalidUserException {
 		
 		if (txtEmail.getText().trim().isEmpty()) {
 			lblErrorEmail.setText("El email es requerido");
@@ -224,6 +258,10 @@ public class LoginView extends JPanel {
 			lblErrorEmail.setText("Falta '@' en el email");
 			return false;
 		}
+		
+		if (!txtEmail.getText().equals("juanitoalcachofa123@gmail.com")) {
+			throw new InvalidUserException("Usuario no registrado");
+		}
 
 		lblErrorEmail.setText("");
 		
@@ -231,7 +269,7 @@ public class LoginView extends JPanel {
 		
 	}
 	
-	private boolean validatePassword() {
+	private boolean validatePassword() throws InvalidPasswordException {
 		
 		String contrasena = String.valueOf(jpfContrasena.getPassword()).trim();
 		
@@ -241,6 +279,10 @@ public class LoginView extends JPanel {
 		}
 		
 		// metodo que valida si la contraseña coicide
+		
+		if (!contrasena.equals("1234")) {
+			throw new InvalidPasswordException("Contraseña incorrecta");
+		}
 		
 		lblErrorPassword.setText("");
 		
