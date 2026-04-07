@@ -339,6 +339,7 @@ public class FormUserView extends JPanel {
             System.exit(0);
         }
     }
+
     private boolean validarNombre(){
 
         if(txtNombre.getText().trim().isEmpty()){
