@@ -120,7 +120,7 @@ public class LoginView extends JPanel {
 				handleLogin();
 			} catch (InvalidUserException e1) {
 				lblErrorEmail.setText("Correo no registrado");
-			} catch (InvalidPasswordException e1) {
+			} catch (InvalidPasswordException e2) {
 				lblErrorPassword.setText("Contraseña incorrecta");
 			}
 		});
@@ -254,10 +254,17 @@ public class LoginView extends JPanel {
 			return false;
 		}
 		
+		if (txtEmail.getText().trim().length() > 30) {
+			lblErrorEmail.setText("Longitud maxíma alcanzada");
+			return false;
+		}
+		
 		if (!txtEmail.getText().contains("@")) {
 			lblErrorEmail.setText("Falta '@' en el email");
 			return false;
 		}
+		
+		lblErrorEmail.setText("");
 		
 		if (!txtEmail.getText().equals("juanitoalcachofa123@gmail.com")) {
 			throw new InvalidUserException("Usuario no registrado");
@@ -278,7 +285,12 @@ public class LoginView extends JPanel {
 			return false;
 		}
 		
-		// metodo que valida si la contraseña coicide
+		if (contrasena.length() > 20) {
+			lblErrorPassword.setText("Longitud maxíma alcanzada");
+			return false;
+		}
+		
+		lblErrorPassword.setText("");
 		
 		if (!contrasena.equals("1234")) {
 			throw new InvalidPasswordException("Contraseña incorrecta");
