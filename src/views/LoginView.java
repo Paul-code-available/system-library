@@ -44,6 +44,8 @@ public class LoginView extends JPanel {
 	JPasswordField jpfContrasena;
 	JLabel lblErrorEmail;
 	JLabel lblErrorPassword;
+	JButton btnIniciarSesion;
+	JButton btnRegister;
 	
 	LoginWindow window;
 	
@@ -61,8 +63,7 @@ public class LoginView extends JPanel {
 		crearPanelCentro();
 		
 		crearPanelInferior();
-	
-		assignListeners();
+
 		
 	}
 	
@@ -114,16 +115,8 @@ public class LoginView extends JPanel {
 		
 		panelInferior.add(Box.createHorizontalGlue());
 		
-		JButton btnIniciarSesion = new JButton("Ingresar");
-		btnIniciarSesion.addActionListener(e -> {
-			try {
-				handleLogin();
-			} catch (InvalidUserException e1) {
-				lblErrorEmail.setText("Correo no registrado");
-			} catch (InvalidPasswordException e2) {
-				lblErrorPassword.setText("Contraseña incorrecta");
-			}
-		});
+		btnIniciarSesion = new JButton("Ingresar");
+		
 		btnIniciarSesion.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
 		panelInferior.add(btnIniciarSesion);
@@ -132,8 +125,8 @@ public class LoginView extends JPanel {
 		
 		panelInferior.add(Box.createHorizontalStrut(10));
 		
-		JButton btnRegister = new JButton("Registrate");
-		btnRegister.addActionListener(e -> handleRegistration());
+		btnRegister = new JButton("Registrate");
+		
 		btnRegister.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		panelInferior.add(btnRegister);
 		
@@ -147,162 +140,73 @@ public class LoginView extends JPanel {
 		
 	}
 	
-	public void handleLogin() throws InvalidUserException, InvalidPasswordException {
-		if (validateLogin()) {
-			new mainWindow();
-			window.dispose();
-		}
-		
+	public void showEmailError(String message) {
+		lblErrorEmail.setText(message);
 	}
 	
-	public void handleRegistration() {
-		new FormUserWindow();
-		window.dispose();
+	public void showPasswordError(String message) {
+		lblErrorPassword.setText(message);
 	}
 	
-	
-	
-	private void assignListeners() {
-		
-		txtEmail.getDocument().addDocumentListener(new DocumentListener() {
-			
-			@Override
-			public void removeUpdate(DocumentEvent e) {
-				try {
-					validateEmail();
-				} catch (InvalidUserException e1) {
-					
-				}				
-			}
-			
-			@Override
-			public void insertUpdate(DocumentEvent e) {
-				 try {
-					validateEmail();
-				 } catch (InvalidUserException e1) {
-					
-				 }
-			}
-			
-			@Override
-			public void changedUpdate(DocumentEvent e) {
- 				try {
-					validateEmail();
-				} catch (InvalidUserException e1) {
-					
-				}
-			}
-			
-		});
-		
-		jpfContrasena.getDocument().addDocumentListener(new DocumentListener() {
-			
-			@Override
-			public void removeUpdate(DocumentEvent e) {
-				try {
-					validatePassword();
-				} catch (InvalidPasswordException e1) {
-				
-				}
-			}
-			
-			@Override
-			public void insertUpdate(DocumentEvent e) {
-				try {
-					validatePassword();
-				} catch (InvalidPasswordException e1) {
-					
-				}
-			}
-			
-			@Override
-			public void changedUpdate(DocumentEvent e) {
-				try {
-					validatePassword();
-				} catch (InvalidPasswordException e1) {
-					
-				}
-			}
-			
-		});
-		
-	}
-	
-	
-	
-	
-	private boolean validateLogin() throws InvalidUserException, InvalidPasswordException {
-		
-		boolean valid = true;
-		
-		if (!validateEmail()) {
-			valid = false;
-		}
-		
-		if (!validatePassword()) {
-			valid = false;
-		}
-		
-		return valid;
-		
-	}
-	
-	private boolean validateEmail() throws InvalidUserException {
-		
-		if (txtEmail.getText().trim().isEmpty()) {
-			lblErrorEmail.setText("El email es requerido");
-			return false;
-		}
-		
-		if (txtEmail.getText().trim().length() > 30) {
-			lblErrorEmail.setText("Longitud maxíma alcanzada");
-			return false;
-		}
-		
-		if (!txtEmail.getText().contains("@")) {
-			lblErrorEmail.setText("Falta '@' en el email");
-			return false;
-		}
-		
+	public void resetMessages() {
 		lblErrorEmail.setText("");
-		
-		if (!txtEmail.getText().equals("juanitoalcachofa123@gmail.com")) {
-			throw new InvalidUserException("Usuario no registrado");
-		}
-
-		lblErrorEmail.setText("");
-		
-		return true;
-		
-	}
-	
-	private boolean validatePassword() throws InvalidPasswordException {
-		
-		String contrasena = String.valueOf(jpfContrasena.getPassword()).trim();
-		
-		if (contrasena.isEmpty()) {
-			lblErrorPassword.setText("La contraseña es requerida");
-			return false;
-		}
-		
-		if (contrasena.length() > 20) {
-			lblErrorPassword.setText("Longitud maxíma alcanzada");
-			return false;
-		}
-		
 		lblErrorPassword.setText("");
-		
-		if (!contrasena.equals("1234")) {
-			throw new InvalidPasswordException("Contraseña incorrecta");
-		}
-		
-		lblErrorPassword.setText("");
-		
-		return true;
-		
 	}
-	
 
+	public JTextField getTxtEmail() {
+		return txtEmail;
+	}
 
+	public void setTxtEmail(JTextField txtEmail) {
+		this.txtEmail = txtEmail;
+	}
+
+	public JPasswordField getJpfContrasena() {
+		return jpfContrasena;
+	}
+
+	public void setJpfContrasena(JPasswordField jpfContrasena) {
+		this.jpfContrasena = jpfContrasena;
+	}
+
+	public JLabel getLblErrorEmail() {
+		return lblErrorEmail;
+	}
+
+	public void setLblErrorEmail(JLabel lblErrorEmail) {
+		this.lblErrorEmail = lblErrorEmail;
+	}
+
+	public JLabel getLblErrorPassword() {
+		return lblErrorPassword;
+	}
+
+	public void setLblErrorPassword(JLabel lblErrorPassword) {
+		this.lblErrorPassword = lblErrorPassword;
+	}
+
+	public JButton getBtnIniciarSesion() {
+		return btnIniciarSesion;
+	}
+
+	public void setBtnIniciarSesion(JButton btnIniciarSesion) {
+		this.btnIniciarSesion = btnIniciarSesion;
+	}
+
+	public JButton getBtnRegister() {
+		return btnRegister;
+	}
+
+	public void setBtnRegister(JButton btnRegister) {
+		this.btnRegister = btnRegister;
+	}
+
+	public LoginWindow getWindow() {
+		return window;
+	}
+
+	public void setWindow(LoginWindow window) {
+		this.window = window;
+	}
 
 }
