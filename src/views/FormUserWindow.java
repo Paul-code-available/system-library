@@ -5,9 +5,11 @@ import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.text.Normalizer;
 
 public class FormUserWindow extends JFrame {
 
+    private FormUserView formUserView;
 
     public FormUserWindow() {
         setSize(500, 400);
@@ -16,8 +18,9 @@ public class FormUserWindow extends JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
 
-        FormUserView formularioUsuarios = new FormUserView(this);
-        add(formularioUsuarios);
+
+        formUserView = new FormUserView(this);
+        add(formUserView);
 
         setVisible(true);
 
@@ -28,6 +31,10 @@ public class FormUserWindow extends JFrame {
             }
         });
 
+    }
+
+    public FormUserView getFormUserView() {
+        return formUserView;
     }
 
     private void controlCerradoVentana(){
