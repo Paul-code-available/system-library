@@ -5,24 +5,26 @@ import java.awt.*;
 
 public class LoginWindow extends JFrame {
 	
+	private LoginView loginView;
+	
 	public LoginWindow() {
 		
-		setSize(350, 280);
+		setSize(350, 290);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		/*
-        Toolkit tk = Toolkit.getDefaultToolkit();
-        Image icono = tk.getImage("src/img/logoo.png");
-        setIconImage(icono);
-		*/
 		setResizable(false);
 
 		setLocationRelativeTo(null);
 		
-		LoginView panelito = new LoginView(this);
-		
+		loginView = new LoginView(this);
+		add(loginView);
+	
 		setVisible(true);
-		add(panelito);
+		
+	}
+	
+	public LoginView getLoginView() {
+		return loginView;
 	}
 	
 

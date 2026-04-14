@@ -33,6 +33,8 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import components.TextPrompt;
+import excepciones.InvalidPasswordException;
+import excepciones.InvalidUserException;
 import utils.AppFont;
 import utils.SwingUtils;
 
@@ -42,6 +44,8 @@ public class LoginView extends JPanel {
 	JPasswordField jpfContrasena;
 	JLabel lblErrorEmail;
 	JLabel lblErrorPassword;
+	JButton btnIniciarSesion;
+	JButton btnRegister;
 	
 	LoginWindow window;
 	
@@ -59,8 +63,7 @@ public class LoginView extends JPanel {
 		crearPanelCentro();
 		
 		crearPanelInferior();
-	
-		assignListeners();
+
 		
 	}
 	
@@ -112,8 +115,8 @@ public class LoginView extends JPanel {
 		
 		panelInferior.add(Box.createHorizontalGlue());
 		
-		JButton btnIniciarSesion = new JButton("Ingresar");
-		btnIniciarSesion.addActionListener(e -> handleLogin());
+		btnIniciarSesion = new JButton("Ingresar");
+		
 		btnIniciarSesion.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
 		panelInferior.add(btnIniciarSesion);
@@ -122,8 +125,8 @@ public class LoginView extends JPanel {
 		
 		panelInferior.add(Box.createHorizontalStrut(10));
 		
-		JButton btnRegister = new JButton("Registrate");
-		btnRegister.addActionListener(e -> handleRegistration());
+		btnRegister = new JButton("Registrate");
+		
 		btnRegister.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		panelInferior.add(btnRegister);
 		
@@ -137,118 +140,73 @@ public class LoginView extends JPanel {
 		
 	}
 	
-	public void handleLogin() {
-		if (validateLogin()) {
-			new mainWindow();
-			window.dispose();
-		}
-		
+	public void showEmailError(String message) {
+		lblErrorEmail.setText(message);
 	}
 	
-	public void handleRegistration() {
-		new FormUserWindow();
-		window.dispose();
+	public void showPasswordError(String message) {
+		lblErrorPassword.setText(message);
 	}
 	
-	
-	
-	private void assignListeners() {
-		
-		txtEmail.getDocument().addDocumentListener(new DocumentListener() {
-			
-			@Override
-			public void removeUpdate(DocumentEvent e) {
-				validateEmail();				
-			}
-			
-			@Override
-			public void insertUpdate(DocumentEvent e) {
-				 validateEmail();
-			}
-			
-			@Override
-			public void changedUpdate(DocumentEvent e) {
- 				validateEmail();
-			}
-			
-		});
-		
-		jpfContrasena.getDocument().addDocumentListener(new DocumentListener() {
-			
-			@Override
-			public void removeUpdate(DocumentEvent e) {
-				validatePassword();
-			}
-			
-			@Override
-			public void insertUpdate(DocumentEvent e) {
-				validatePassword();
-			}
-			
-			@Override
-			public void changedUpdate(DocumentEvent e) {
-				validatePassword();
-			}
-			
-		});
-		
-	}
-	
-	
-	
-	
-	private boolean validateLogin() {
-		
-		boolean valid = true;
-		
-		if (!validateEmail()) {
-			valid = false;
-		}
-		
-		if (!validatePassword()) {
-			valid = false;
-		}
-		
-		return valid;
-		
-	}
-	
-	private boolean validateEmail() {
-		
-		if (txtEmail.getText().trim().isEmpty()) {
-			lblErrorEmail.setText("El email es requerido");
-			return false;
-		}
-		
-		if (!txtEmail.getText().contains("@")) {
-			lblErrorEmail.setText("Falta '@' en el email");
-			return false;
-		}
-
+	public void resetMessages() {
 		lblErrorEmail.setText("");
-		
-		return true;
-		
-	}
-	
-	private boolean validatePassword() {
-		
-		String contrasena = String.valueOf(jpfContrasena.getPassword()).trim();
-		
-		if (contrasena.isEmpty()) {
-			lblErrorPassword.setText("La contraseña es requerida");
-			return false;
-		}
-		
-		// metodo que valida si la contraseña coicide
-		
 		lblErrorPassword.setText("");
-		
-		return true;
-		
 	}
-	
 
+	public JTextField getTxtEmail() {
+		return txtEmail;
+	}
 
+	public void setTxtEmail(JTextField txtEmail) {
+		this.txtEmail = txtEmail;
+	}
+
+	public JPasswordField getJpfContrasena() {
+		return jpfContrasena;
+	}
+
+	public void setJpfContrasena(JPasswordField jpfContrasena) {
+		this.jpfContrasena = jpfContrasena;
+	}
+
+	public JLabel getLblErrorEmail() {
+		return lblErrorEmail;
+	}
+
+	public void setLblErrorEmail(JLabel lblErrorEmail) {
+		this.lblErrorEmail = lblErrorEmail;
+	}
+
+	public JLabel getLblErrorPassword() {
+		return lblErrorPassword;
+	}
+
+	public void setLblErrorPassword(JLabel lblErrorPassword) {
+		this.lblErrorPassword = lblErrorPassword;
+	}
+
+	public JButton getBtnIniciarSesion() {
+		return btnIniciarSesion;
+	}
+
+	public void setBtnIniciarSesion(JButton btnIniciarSesion) {
+		this.btnIniciarSesion = btnIniciarSesion;
+	}
+
+	public JButton getBtnRegister() {
+		return btnRegister;
+	}
+
+	public void setBtnRegister(JButton btnRegister) {
+		this.btnRegister = btnRegister;
+	}
+
+	public LoginWindow getWindow() {
+		return window;
+	}
+
+	public void setWindow(LoginWindow window) {
+		this.window = window;
+	}
 
 }

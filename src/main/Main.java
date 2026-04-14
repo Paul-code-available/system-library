@@ -6,6 +6,7 @@ import com.formdev.flatlaf.FlatLightLaf;
 
 
 import controllers.RegisterController;
+import controllers.LoginController;
 import trash.LoginView;
 import views.FormBookWindow;
 import views.FormUserWindow;
@@ -19,6 +20,8 @@ public class Main {
 		FlatDarkLaf.setup();
 		
 		//LoginWindow ventanita = new LoginWindow();
+		LoginWindow ventanita = new LoginWindow();
+		new LoginController(ventanita.getLoginView());
 
         // FormBookWindow ventanita = new FormBookWindow();
 
