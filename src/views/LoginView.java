@@ -58,16 +58,24 @@ public class LoginView extends JPanel {
 		UIManager.put("TextComponent.arc", 15);
 		UIManager.put("Button.arc", 10);
 		
-		crearPanelSuperior();
-		
-		crearPanelCentro();
-		
-		crearPanelInferior();
-
+		initializeComponents();
 		
 	}
 	
-	public void crearPanelSuperior() {
+	public void initializeComponents() {
+		
+		crearHeader();
+		
+		createForm();
+		
+		createButtons();
+		
+		moveFocusComponents();
+		
+	}
+	
+	public void crearHeader() {
+		
 		JPanel panelSuperior = new JPanel();
 		panelSuperior.setLayout(new BoxLayout(panelSuperior, BoxLayout.Y_AXIS));
 		
@@ -77,10 +85,12 @@ public class LoginView extends JPanel {
 		panelSuperior.add(Box.createVerticalStrut(15));
 		
 		add(panelSuperior, BorderLayout.NORTH);
+		
 	}
 	
 	
-	public void crearPanelCentro() { 
+	public void createForm() { 
+		
 		JPanel panelCentro = new JPanel();
 		panelCentro.setLayout(new BoxLayout(panelCentro, BoxLayout.Y_AXIS));
 		panelCentro.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
@@ -104,12 +114,10 @@ public class LoginView extends JPanel {
 		
 		add(panelCentro, BorderLayout.CENTER);
 		
-		SwingUtils.moveFocus(txtEmail, "DOWN", "aPassword", jpfContrasena);
-		SwingUtils.moveFocus(jpfContrasena, "UP", "aEmail", txtEmail);
-		
 	}
 	
-	public void crearPanelInferior() {
+	public void createButtons() {
+		
 		JPanel panelInferior = new JPanel();
 		panelInferior.setLayout(new BoxLayout(panelInferior, BoxLayout.X_AXIS));
 		
@@ -132,6 +140,12 @@ public class LoginView extends JPanel {
 		
 		add(panelInferior, BorderLayout.SOUTH);
 		
+	}
+	
+	public void moveFocusComponents() {
+		
+		SwingUtils.moveFocus(txtEmail, "DOWN", "aPassword", jpfContrasena);
+		SwingUtils.moveFocus(jpfContrasena, "UP", "aEmail", txtEmail);
 		SwingUtils.moveFocus(jpfContrasena, "DOWN", "aIniciar", btnIniciarSesion);
 		SwingUtils.moveFocus(btnIniciarSesion, "UP", "aPassword", jpfContrasena);
 		SwingUtils.moveFocus(btnIniciarSesion, "RIGHT", "aRegistrar", btnRegister);
