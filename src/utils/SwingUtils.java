@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
+import javax.swing.text.JTextComponent;
 
 import components.TextPrompt;
 
@@ -80,6 +81,11 @@ public class SwingUtils {
 			}
 		});
 	}
+
+    public static void configurarComponente(int largo, int ancho, String prompt, JTextComponent tipoComponente){
+        tipoComponente.setMaximumSize(new Dimension(Integer.MAX_VALUE, ancho));
+        new TextPrompt(prompt, tipoComponente);
+    }
 
 
 }

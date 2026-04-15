@@ -2,15 +2,11 @@ package views;
 
 import javax.swing.*;
 import javax.swing.border.Border;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.*;
 
-import excepciones.InvalidRegisterEmailException;
-import excepciones.InvalidRegisterPasswordException;
 import utils.AppFont;
-import utils.SwingUtilsUser;
+import utils.SwingUtils;
 
 public class FormUserView extends JPanel {
 
@@ -151,7 +147,7 @@ public class FormUserView extends JPanel {
 
 
         txtNombre = new JTextField();
-        SwingUtilsUser.configurarComponente(0, 30, "Nombre(s)", txtNombre);
+        SwingUtils.configurarComponente(0, 30, "Nombre(s)", txtNombre);
         txtNombre.setAlignmentX(Component.LEFT_ALIGNMENT);
         panelVertical.add(txtNombre);
 
@@ -164,7 +160,7 @@ public class FormUserView extends JPanel {
 
 
         txtEmail = new JTextField();
-        SwingUtilsUser.configurarComponente(0, 30, "Email", txtEmail);
+        SwingUtils.configurarComponente(0, 30, "Email", txtEmail);
         txtEmail.setAlignmentX(Component.LEFT_ALIGNMENT);
         panelVertical.add(txtEmail);
 
@@ -183,7 +179,7 @@ public class FormUserView extends JPanel {
 
 
         jpfContrasena = new JPasswordField();
-        SwingUtilsUser.configurarComponente(350, 30, "Contraseña", jpfContrasena);
+        SwingUtils.configurarComponente(350, 30, "Contraseña", jpfContrasena);
         jpfContrasena.setAlignmentX(Component.LEFT_ALIGNMENT);
         panelVertical.add(jpfContrasena);
 
@@ -196,7 +192,7 @@ public class FormUserView extends JPanel {
 
 
         jpfConfirmarContrasena = new JPasswordField();
-        SwingUtilsUser.configurarComponente(350, 30, "Confirmar contraseña", jpfConfirmarContrasena);
+        SwingUtils.configurarComponente(350, 30, "Confirmar contraseña", jpfConfirmarContrasena);
         jpfConfirmarContrasena .setAlignmentX(Component.LEFT_ALIGNMENT);
         panelVertical.add(jpfConfirmarContrasena );
 
