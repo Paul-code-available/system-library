@@ -53,7 +53,7 @@ public class LoginController {
 	}
 	
 	public void handleRegistration() {
-		new FormUserWindow();
+		new RegisterController(new FormUserWindow().getFormUserView());
 		view.getWindow().dispose();
 	}
 	

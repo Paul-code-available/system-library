@@ -14,7 +14,7 @@ import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.text.JTextComponent;
 
-import components.TextPrompt;
+import views.components.TextPrompt;
 
 public class SwingUtils {
 

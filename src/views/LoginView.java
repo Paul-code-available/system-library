@@ -32,7 +32,7 @@ import javax.swing.border.Border;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import components.TextPrompt;
+import views.components.TextPrompt;
 import excepciones.InvalidPasswordException;
 import excepciones.InvalidUserException;
 import utils.AppFont;

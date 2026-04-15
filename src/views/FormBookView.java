@@ -25,12 +25,11 @@ import javax.swing.border.Border;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import components.TextPrompt;
+import views.components.TextPrompt;
 import utils.AppFont;
 import utils.SwingUtils;
 
 public class FormBookView extends JPanel {
-	
 	
 	JTextField txtNombre;
 	JTextField txtAutor;
