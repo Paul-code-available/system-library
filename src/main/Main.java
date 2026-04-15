@@ -7,7 +7,6 @@ import com.formdev.flatlaf.FlatLightLaf;
 
 import controllers.RegisterController;
 import controllers.LoginController;
-import trash.LoginView;
 import views.FormBookWindow;
 import views.FormUserWindow;
 import views.LoginWindow;
@@ -20,14 +19,14 @@ public class Main {
 		FlatDarkLaf.setup();
 		
 		//LoginWindow ventanita = new LoginWindow();
-		LoginWindow ventanita = new LoginWindow();
-		new LoginController(ventanita.getLoginView());
+		//LoginWindow ventanita = new LoginWindow();
+		//new LoginController(ventanita.getLoginView());
 
         // FormBookWindow ventanita = new FormBookWindow();
 
         // mainWindow ventana = new mainWindow();
-		// FormUserWindow ventana = new FormUserWindow();
-        // new RegisterController(ventana.getFormUserView());
+		FormUserWindow ventana = new FormUserWindow();
+        new RegisterController(ventana.getFormUserView());
 	}
 
 }
