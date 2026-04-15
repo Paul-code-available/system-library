@@ -104,6 +104,14 @@ public class FormUserView extends JPanel {
         return btnCancelar;
     }
 
+    public String getUserName(){
+        return txtNombre.getText();
+    }
+
+    public String getEmail(){
+        return txtEmail.getText();
+    }
+
     public void panelSuperior(){
         JPanel panelVerticalSuperior = new JPanel();
         panelVerticalSuperior.setLayout(new BoxLayout(panelVerticalSuperior, BoxLayout.Y_AXIS));
@@ -288,5 +296,6 @@ public class FormUserView extends JPanel {
             System.exit(0);
         }
     }
+
 
 }

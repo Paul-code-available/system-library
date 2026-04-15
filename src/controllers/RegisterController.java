@@ -2,6 +2,7 @@ package controllers;
 
 import excepciones.InvalidRegisterEmailException;
 import excepciones.InvalidRegisterPasswordException;
+import models.User;
 import views.FormUserView;
 import views.LoginWindow;
 import views.mainWindow;
@@ -41,34 +42,6 @@ public class RegisterController {
                 handleRegistration();
             }
         });
-
-        asignarListeners();
-
-    }
-
-    private void controlRegistro(){
-
-        try{
-            if(validarCredenciales()){
-                JOptionPane.showMessageDialog(view, "Se creo la cuenta", "Cuenta creada", JOptionPane.INFORMATION_MESSAGE);
-
-                new mainWindow();
-                view.getWindow().dispose();
-            }
-        }catch (InvalidRegisterEmailException ex){
-            view.getLblEmailRequerido().setText("Falta @ en el email");
-        }catch (InvalidRegisterPasswordException ex){
-            view.getLblConfirmarContrasena().setText("Las contraseñas deben coincidir");
-        }
-    }
-
-    //Metodo que crea y abre un nuevo Jframe
-    public void handleRegistration() {
-        new LoginWindow();
-        view.getWindow().dispose();
-    }
-
-    private void asignarListeners(){
 
         view.getTxtNombre().getDocument().addDocumentListener(new DocumentListener() {
             @Override
@@ -179,6 +152,36 @@ public class RegisterController {
             }
         });
 
+    }
+
+    private void controlRegistro(){
+
+        try{
+            if(validarCredenciales()){
+                JOptionPane.showMessageDialog(view, "Se creo la cuenta", "Cuenta creada", JOptionPane.INFORMATION_MESSAGE);
+
+                new mainWindow();
+                view.getWindow().dispose();
+
+                User user = new User(
+                        view.getUserName(),
+                        view.getEmail()
+                );
+
+                System.out.println(user);
+                System.out.println("Guardado");
+            }
+        }catch (InvalidRegisterEmailException ex){
+            view.getLblEmailRequerido().setText("Falta @ en el email");
+        }catch (InvalidRegisterPasswordException ex){
+            view.getLblConfirmarContrasena().setText("Las contraseñas deben coincidir");
+        }
+    }
+
+    //Metodo que crea y abre un nuevo Jframe
+    public void handleRegistration() {
+        new LoginController(new LoginWindow().getLoginView());
+        view.getWindow().dispose();
     }
 
     private boolean validarNombre(){
