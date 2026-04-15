@@ -25,11 +25,9 @@ public class Main {
 
         // FormBookWindow ventanita = new FormBookWindow();
 
-        FormUserWindow ventana = new FormUserWindow();
-
         // mainWindow ventana = new mainWindow();
-
-        new RegisterController(ventana.getFormUserView());
+		// FormUserWindow ventana = new FormUserWindow();
+        // new RegisterController(ventana.getFormUserView());
 	}
 
 }
