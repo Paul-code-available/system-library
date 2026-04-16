@@ -3,25 +3,22 @@ package controllers;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import excepciones.InvalidPasswordException;
-import excepciones.InvalidUserException;
+import exceptions.InvalidPasswordException;
+import exceptions.InvalidUserException;
 import models.User;
 import views.FormUserWindow;
 import views.LoginView;
-import views.mainWindow;
+import views.HomeWindow;
 
 public class LoginController {
 
 	private LoginView view;
-	User user;
 	
 	public LoginController(LoginView view) {
 		this.view = view;
-		this.user = new User();
 		
 		loginListeners();
-
-		// assignListeners(user);
+		
 	}
 	
 	private void loginListeners() {
@@ -34,13 +31,15 @@ public class LoginController {
 	
 	public void handleLogin() {
 		
-		user.setEmail(view.getTxtEmail().getText());
-		user.setPassword(new String(view.getJpfContrasena().getPassword()));
-		
+		User user = new User(
+			view.getTxtEmail().getText(), 
+			String.valueOf(view.getJpfContrasena().getPassword())
+		);
+			
 		try {
 			
 			if (validateLogin(user)) {
-				new mainWindow();
+				new HomeWindow();
 				view.getWindow().dispose();
 			}
 			
@@ -51,7 +50,7 @@ public class LoginController {
 		}
 		
 	}
-	
+
 	public void handleRegistration() {
 		new RegisterController(new FormUserWindow().getFormUserView());
 		view.getWindow().dispose();

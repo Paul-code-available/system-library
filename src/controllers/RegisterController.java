@@ -1,25 +1,32 @@
 package controllers;
 
-import excepciones.InvalidRegisterEmailException;
-import excepciones.InvalidRegisterPasswordException;
 import models.User;
+import repository.UserRepository;
 import views.FormUserView;
+import views.FormUserWindow;
 import views.LoginWindow;
-import views.mainWindow;
+import views.HomeWindow;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+
+import exceptions.InvalidRegisterEmailException;
+import exceptions.InvalidRegisterPasswordException;
+
 import java.awt.event.*;
+import java.io.IOException;
 
 public class RegisterController {
 
     private FormUserView view;
+    private UserRepository repository;
 
     public  RegisterController(FormUserView view){
         this.view = view;
+        
+        repository = new UserRepository();
         registrarListeners();
-
     }
 
 
@@ -157,25 +164,68 @@ public class RegisterController {
     private void controlRegistro(){
 
         try{
+        	
             if(validarCredenciales()){
-                JOptionPane.showMessageDialog(view, "Se creo la cuenta", "Cuenta creada", JOptionPane.INFORMATION_MESSAGE);
 
-                new mainWindow();
+                new HomeWindow();
                 view.getWindow().dispose();
 
                 User user = new User(
                         view.getUserName(),
                         view.getEmail()
                 );
+                
+                registerUser(user);
 
-                System.out.println(user);
-                System.out.println("Guardado");
+                new HomeController(new HomeWindow());
+                view.getWindow().dispose();
             }
+            
         }catch (InvalidRegisterEmailException ex){
             view.getLblEmailRequerido().setText("Falta @ en el email");
         }catch (InvalidRegisterPasswordException ex){
             view.getLblConfirmarContrasena().setText("Las contraseñas deben coincidir");
         }
+    }
+    
+    private void registerUser(User user) {
+    	
+    	try {
+    		
+			repository.save(user);
+			
+			JOptionPane.showConfirmDialog(view, "Usuario registrado");
+			
+		} catch (IOException ex) {
+			JOptionPane.showMessageDialog(view, ex.getMessage());
+		}
+    }
+    
+    private boolean validarCredenciales() throws InvalidRegisterEmailException, InvalidRegisterPasswordException {
+
+        boolean validar = true;
+
+        if (!validarNombre()){
+            validar = false;
+        }
+
+        if (!validarEmail()){
+            validar = false;
+        }
+
+        if (!validarContrasena()){
+            validar = false;
+        }
+
+        if (!validarConfirmarContrasena()){
+            validar = false;
+        }
+
+        if(!validarCheckTerminos()){
+            validar = false;
+        }
+
+        return validar;
     }
 
     //Metodo que crea y abre un nuevo Jframe
@@ -250,32 +300,5 @@ public class RegisterController {
         return true;
     }
 
-    private boolean validarCredenciales() throws InvalidRegisterEmailException, InvalidRegisterPasswordException {
-
-        boolean validar = true;
-
-        if (!validarNombre()){
-            validar = false;
-        }
-
-        if (!validarEmail()){
-            validar = false;
-        }
-
-        if (!validarContrasena()){
-            validar = false;
-        }
-
-        if (!validarConfirmarContrasena()){
-            validar = false;
-        }
-
-        if(!validarCheckTerminos()){
-            validar = false;
-        }
-
-        return validar;
-    }
-
-
+  
 }

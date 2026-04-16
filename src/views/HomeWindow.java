@@ -2,9 +2,9 @@ package views;
 
 import javax.swing.JFrame;
 
-public class mainWindow extends JFrame{
+public class HomeWindow extends JFrame{
 
-	public mainWindow() {
+	public HomeWindow() {
 		
 		setSize(500, 500);
 		
