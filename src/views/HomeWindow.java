@@ -1,21 +1,23 @@
 package views;
 
 import javax.swing.JFrame;
+import java.awt.*;
 
 public class HomeWindow extends JFrame{
 
-	public HomeWindow() {
-		
-		setSize(500, 500);
-		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		setResizable(false);
+    private HomeView homeView;
 
+	public HomeWindow() {
+
+        setSize(900, 700);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
+        setTitle("BookHouse");
+
+        homeView = new HomeView();
+        add(homeView);
 		
 		setVisible(true);
-		
 	}
 	
 }

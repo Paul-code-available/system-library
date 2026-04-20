@@ -20,14 +20,16 @@ public class Main {
 		
 		
 		
-		LoginWindow ventanita = new LoginWindow();
-		new LoginController(ventanita.getLoginView());
+		//LoginWindow ventanita = new LoginWindow();
+		//new LoginController(ventanita.getLoginView());
 
         // FormBookWindow ventanita = new FormBookWindow();
 
         // mainWindow ventana = new mainWindow();
 		//FormUserWindow ventana = new FormUserWindow();
         //new RegisterController(ventana.getFormUserView());
+
+        HomeWindow ventana = new HomeWindow();
 	}
 
 }
