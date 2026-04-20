@@ -8,10 +8,7 @@ import com.formdev.flatlaf.FlatLightLaf;
 import controllers.HomeController;
 import controllers.RegisterController;
 import controllers.LoginController;
-import views.FormBookWindow;
-import views.FormUserWindow;
-import views.LoginWindow;
-import views.HomeWindow;
+import views.*;
 
 public class Main {
 
@@ -30,12 +27,13 @@ public class Main {
 		*/
         // FormBookWindow ventanita = new FormBookWindow();
 
-        //HomeWindow homesito = new HomeWindow();
-        //new HomeController(homesito);
+        HomeWindow homesito = new HomeWindow();
+        new HomeController(homesito.getHomeView());
+
 		//FormUserWindow ventana = new FormUserWindow();
         //new RegisterController(ventana.getFormUserView());
 
-        HomeWindow ventana = new HomeWindow();
+
 	}
 
 }

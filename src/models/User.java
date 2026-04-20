@@ -48,11 +48,15 @@ public class User {
 	
 	public String toCsv() {
 		return name + "," +
-				email + ",";
+				email;
 	}
 	
 	public static User fromCsv(String userData) {
 		String data[] = userData.split(",");
+
+        if (data.length < 2){
+            return null;
+        }
 		
 		String name = data[0];
 		String email = data[1];

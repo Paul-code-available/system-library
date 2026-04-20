@@ -16,8 +16,8 @@ public class UsersView extends JPanel{
 	public UsersView() {
 		setLayout(new BorderLayout());
 		table = new JTable();
-		
-		add(new JScrollPane(table), BorderLayout.CENTER);
+
+        add(new JScrollPane(table), BorderLayout.CENTER);
 	}
 	
 	public void setTableModel(UserTableModel model) {

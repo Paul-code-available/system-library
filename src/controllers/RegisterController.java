@@ -2,10 +2,7 @@ package controllers;
 
 import models.User;
 import repository.UserRepository;
-import views.FormUserView;
-import views.FormUserWindow;
-import views.LoginWindow;
-import views.HomeWindow;
+import views.*;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -177,7 +174,7 @@ public class RegisterController {
                 
                 registerUser(user);
 
-                new HomeController(new HomeWindow());
+                new HomeController(new HomeView());
                 view.getWindow().dispose();
             }
             

@@ -1,5 +1,6 @@
 package views;
 
+import com.github.weisj.jsvg.nodes.Use;
 import models.User;
 import utils.AppFont;
 
@@ -15,6 +16,13 @@ public class HomeView extends JPanel{
     public static final String BOOKS = "BOOKS";
     public static final String BORROW = "BORROW";
     public static final String ACCOUNT = "ACCOUNT";
+
+    public JPanel homePanel;
+    public UsersView usersView;
+    public JPanel books;
+    public JPanel borrow;
+    public JPanel account;
+
 
     public JButton btnHome;
     public JButton btnAllUsers;
@@ -33,6 +41,7 @@ public class HomeView extends JPanel{
         setBorder(BorderFactory.createEmptyBorder(10, 10,10,10));
 
         panelIzquierdo();
+        crearVistas();
         setVisible(true);
     }
 
@@ -71,13 +80,23 @@ public class HomeView extends JPanel{
         cardLayout = new CardLayout();
         contenedor = new JPanel(cardLayout);
 
-        JPanel homePanel = new JPanel();
+        homePanel = new JPanel();
+        usersView = new UsersView();
+        books = new JPanel();
+        borrow = new JPanel();
+        account = new JPanel();
 
         contenedor.add(homePanel, HOME);
-        contenedor.add(, HOME);
-        contenedor.add(homePanel, HOME);
+        contenedor.add(usersView, USERS);
+        contenedor.add(books, BOOKS);
+        contenedor.add(borrow, BORROW);
+        contenedor.add(account, ACCOUNT);
 
+        add(contenedor, BorderLayout.CENTER);
+    }
 
+    public void mostrarVista(String view){
+        cardLayout.show(contenedor, view);
     }
 
 

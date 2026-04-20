@@ -1,5 +1,7 @@
 package views;
 
+import controllers.HomeController;
+
 import javax.swing.JFrame;
 import java.awt.*;
 
@@ -15,9 +17,14 @@ public class HomeWindow extends JFrame{
         setTitle("BookHouse");
 
         homeView = new HomeView();
+        new HomeController(homeView);
         add(homeView);
-		
-		setVisible(true);
+
+        setVisible(true);
 	}
+
+    public HomeView getHomeView(){
+        return homeView;
+    }
 	
 }

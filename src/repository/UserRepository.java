@@ -38,8 +38,9 @@ public class UserRepository {
 			
 			while((line = reader.readLine()) != null) {
 				User user = User.fromCsv(line);
-				
-				users.add(user);
+                if (user != null){
+                    users.add(user);
+                }
 			}
 			
 		}
