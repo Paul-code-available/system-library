@@ -20,8 +20,17 @@ public class User {
 		this.email = email;
 		this.password = password;
 	}
+	
 
-    public String getEmail() {
+    public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getEmail() {
 		return email;
 	}
 
