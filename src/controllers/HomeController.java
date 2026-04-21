@@ -24,6 +24,8 @@ public class HomeController {
         homeView.btnAllUsers.addActionListener(e -> mostrarUsuarios());
 
         homeView.btnHome.addActionListener(e -> homeView.mostrarVista(HomeView.HOME));
+        
+        
     }
 
     public void mostrarUsuarios(){
@@ -38,7 +40,6 @@ public class HomeController {
 
             homeView.mostrarVista(HomeView.USERS);
 
-            System.out.println("Hola");
         }catch (IOException ex){
             JOptionPane.showMessageDialog(homeView, ex.getMessage());
         }
