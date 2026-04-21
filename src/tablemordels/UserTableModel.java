@@ -28,6 +28,10 @@ public class UserTableModel extends AbstractTableModel{
 	public int getColumnCount() {
 		return columns.length;
 	}
+	
+	public String getColumnName(int column) {
+		return columns[column];
+	}
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
