@@ -27,11 +27,11 @@ public class Main {
 		*/
         // FormBookWindow ventanita = new FormBookWindow();
 
-        HomeWindow homesito = new HomeWindow();
-        new HomeController(homesito.getHomeView());
+        //HomeWindow homesito = new HomeWindow();
+        //new HomeController(homesito.getHomeView());
 
-		//FormUserWindow ventana = new FormUserWindow();
-        //new RegisterController(ventana.getFormUserView());
+		FormUserWindow ventana = new FormUserWindow();
+        new RegisterController(ventana.getFormUserView());
 
 
 	}
