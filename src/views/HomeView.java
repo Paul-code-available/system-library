@@ -27,11 +27,11 @@ public class HomeView extends JPanel{
 
 
     public JButton btnHome;
-    public JButton btnAllUsers;
-    public JButton btnAllBooks;
+    public JButton btnUsers;
+    public JButton btnBooks;
     public JButton btnBorrowRequests;
-    public JButton btnAccountRequests;
-    public JButton btnRole;
+    public JButton btnReports;
+    public JButton btnRoles;
     public JButton btnAccount;
 
     private CardLayout cardLayout;
@@ -59,14 +59,14 @@ public class HomeView extends JPanel{
         panelIzquierdoPrincipal.add(btnHome);
         panelIzquierdoPrincipal.add(Box.createVerticalStrut(10));
 
-        btnAllUsers = new JButton("Usuarios");
-        btnAllUsers.setFont(AppFont.large());
-        panelIzquierdoPrincipal.add(btnAllUsers);
+        btnUsers = new JButton("Usuarios");
+        btnUsers.setFont(AppFont.large());
+        panelIzquierdoPrincipal.add(btnUsers);
         panelIzquierdoPrincipal.add(Box.createVerticalStrut(10));
 
-        btnAllBooks = new JButton("Libros");
-        btnAllBooks.setFont(AppFont.large());
-        panelIzquierdoPrincipal.add(btnAllBooks);
+        btnBooks = new JButton("Libros");
+        btnBooks.setFont(AppFont.large());
+        panelIzquierdoPrincipal.add(btnBooks);
         panelIzquierdoPrincipal.add(Box.createVerticalStrut(10));
 
         btnBorrowRequests = new JButton("Préstamos");
@@ -74,14 +74,14 @@ public class HomeView extends JPanel{
         panelIzquierdoPrincipal.add(btnBorrowRequests);
         panelIzquierdoPrincipal.add(Box.createVerticalStrut(10));
 
-        btnAccountRequests = new JButton("Reportes");
-        btnAccountRequests.setFont(AppFont.large());
-        panelIzquierdoPrincipal.add(btnAccountRequests);
+        btnReports = new JButton("Reportes");
+        btnReports.setFont(AppFont.large());
+        panelIzquierdoPrincipal.add(btnReports);
         panelIzquierdoPrincipal.add(Box.createVerticalStrut(10));
         
-        btnRole = new JButton("Administración");
-        btnRole.setFont(AppFont.large());
-        panelIzquierdoPrincipal.add(btnRole);
+        btnRoles = new JButton("Administración");
+        btnRoles.setFont(AppFont.large());
+        panelIzquierdoPrincipal.add(btnRoles);
     }
 
     private void crearVistas(){
