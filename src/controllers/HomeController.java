@@ -2,7 +2,7 @@ package controllers;
 
 import models.User;
 import repository.UserRepository;
-import tablemordels.UserTableModel;
+import tablemodels.UserTableModel;
 import views.HomeView;
 import views.HomeWindow;
 
@@ -21,7 +21,7 @@ public class HomeController {
 	}
 
     public void registerListeners(){
-        homeView.btnAllUsers.addActionListener(e -> mostrarUsuarios());
+        homeView.btnUsers.addActionListener(e -> mostrarUsuarios());
 
         homeView.btnHome.addActionListener(e -> homeView.mostrarVista(HomeView.HOME));
         
@@ -29,6 +29,9 @@ public class HomeController {
     }
 
     public void mostrarUsuarios(){
+    	
+    	UserController controller = new UserController(homeView.usersView);
+    	
         UserRepository repository = new UserRepository();
 
         try{

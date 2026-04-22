@@ -15,20 +15,23 @@ public class HomeView extends JPanel{
     public static final String USERS = "USERS";
     public static final String BOOKS = "BOOKS";
     public static final String BORROW = "BORROW";
-    public static final String ACCOUNT = "ACCOUNT";
+    public static final String REPORTS = "REPORTS";
+    public static final String ADMINISTRATION = "ADMINISTRATION";
 
     public JPanel homePanel;
     public UsersView usersView;
     public JPanel books;
     public JPanel borrow;
-    public JPanel account;
+    public JPanel reports;
+    public JPanel administration;
 
 
     public JButton btnHome;
-    public JButton btnAllUsers;
-    public JButton btnAllBooks;
+    public JButton btnUsers;
+    public JButton btnBooks;
     public JButton btnBorrowRequests;
-    public JButton btnAccountRequests;
+    public JButton btnReports;
+    public JButton btnRoles;
     public JButton btnAccount;
 
     private CardLayout cardLayout;
@@ -51,29 +54,34 @@ public class HomeView extends JPanel{
         panelIzquierdoPrincipal.setLayout(new BoxLayout(panelIzquierdoPrincipal, BoxLayout.Y_AXIS));
         add(panelIzquierdoPrincipal, BorderLayout.WEST);
 
-        btnHome = new JButton("Home");
+        btnHome = new JButton("Inicio");
         btnHome.setFont(AppFont.large());
         panelIzquierdoPrincipal.add(btnHome);
         panelIzquierdoPrincipal.add(Box.createVerticalStrut(10));
 
-        btnAllUsers = new JButton("All Users");
-        btnAllUsers.setFont(AppFont.large());
-        panelIzquierdoPrincipal.add(btnAllUsers);
+        btnUsers = new JButton("Usuarios");
+        btnUsers.setFont(AppFont.large());
+        panelIzquierdoPrincipal.add(btnUsers);
         panelIzquierdoPrincipal.add(Box.createVerticalStrut(10));
 
-        btnAllBooks = new JButton("All Books");
-        btnAllBooks.setFont(AppFont.large());
-        panelIzquierdoPrincipal.add(btnAllBooks);
+        btnBooks = new JButton("Libros");
+        btnBooks.setFont(AppFont.large());
+        panelIzquierdoPrincipal.add(btnBooks);
         panelIzquierdoPrincipal.add(Box.createVerticalStrut(10));
 
-        btnBorrowRequests = new JButton("Borrow Requests");
+        btnBorrowRequests = new JButton("Préstamos");
         btnBorrowRequests.setFont(AppFont.large());
         panelIzquierdoPrincipal.add(btnBorrowRequests);
         panelIzquierdoPrincipal.add(Box.createVerticalStrut(10));
 
-        btnAccountRequests = new JButton("Account Requests");
-        btnAccountRequests.setFont(AppFont.large());
-        panelIzquierdoPrincipal.add(btnAccountRequests);
+        btnReports = new JButton("Reportes");
+        btnReports.setFont(AppFont.large());
+        panelIzquierdoPrincipal.add(btnReports);
+        panelIzquierdoPrincipal.add(Box.createVerticalStrut(10));
+        
+        btnRoles = new JButton("Administración");
+        btnRoles.setFont(AppFont.large());
+        panelIzquierdoPrincipal.add(btnRoles);
     }
 
     private void crearVistas(){
@@ -84,13 +92,15 @@ public class HomeView extends JPanel{
         usersView = new UsersView();
         books = new JPanel();
         borrow = new JPanel();
-        account = new JPanel();
+        reports = new JPanel();
+        administration = new JPanel();
 
         contenedor.add(homePanel, HOME);
         contenedor.add(usersView, USERS);
         contenedor.add(books, BOOKS);
         contenedor.add(borrow, BORROW);
-        contenedor.add(account, ACCOUNT);
+        contenedor.add(reports, REPORTS);
+        contenedor.add(administration, ADMINISTRATION);
 
         add(contenedor, BorderLayout.CENTER);
     }
