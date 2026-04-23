@@ -23,8 +23,9 @@ public class UserController {
 			*/
 	        //new UserFormDialog(ventana.getFormUserView());
 			
-			UserFormDialog dialogo = new UserFormDialog(null, null);
-			dialogo.setVisible(true);
+			FormUserWindow ventana = new FormUserWindow();
+			UserFormDialog dialogo = new UserFormDialog(ventana, null);
+		
 			
 	
 		});
