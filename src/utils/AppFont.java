@@ -37,7 +37,7 @@ public class AppFont {
 	}
 	
 	public static Font large() {
-		return base.deriveFont(16f);
+		return base.deriveFont(18f);
 	}
 	
 	public static Font medium() {

@@ -25,83 +25,91 @@ public class HomeController {
 	}
 
     public void registerListeners(){
-        homeView.btnUsers.addActionListener(e -> mostrarUsuarios());
+    	
+    	homeView.btnHome.addActionListener(e -> {
+    		homeView.mostrarVista(HomeView.HOME);
+    		
+    		resetearBotones();
+    		resetearTexto();
+    	
+    		homeView.btnHome.setBackground(Color.decode("#3673DF"));
+    		homeView.btnHome.setForeground(Color.decode("#F7F8FB"));
+    	
+    		
+    	});
+    	
+        homeView.btnUsers.addActionListener(e -> {
+        	mostrarUsuarios();
 
-        homeView.btnHome.addActionListener(e -> homeView.mostrarVista(HomeView.HOME));
-        
-        homeView.btnHome.addMouseListener(new MouseAdapter() {
-        	public void mouseEntered(MouseEvent e) {
-        		homeView.btnHome.setBackground(Color.decode("#3673DF"));
-        		homeView.btnHome.setForeground(Color.decode("#F7F8FB"));
-        	}
+        	resetearBotones();
+        	resetearTexto();
         	
-        	public void mouseExited(MouseEvent e) {
-        		homeView.btnHome.setBackground(Color.decode("#16374E"));
-        		homeView.btnHome.setForeground(Color.decode("#DFE1E0"));
-        	}
-		});
+        	homeView.btnUsers.setBackground(Color.decode("#3673DF"));
+        	homeView.btnUsers.setForeground(Color.decode("#F7F8FB"));
+        });
         
-        homeView.btnUsers.addMouseListener(new MouseAdapter() {
-        	public void mouseEntered(MouseEvent e) {
-        		homeView.btnUsers.setBackground(Color.decode("#3673DF"));
-        		homeView.btnUsers.setForeground(Color.decode("#F7F8FB"));
-        	}
+        homeView.btnBooks.addActionListener(e -> {
+        	homeView.mostrarVista(HomeView.BOOKS);
+
+        	resetearBotones();
+        	resetearTexto();
         	
-        	public void mouseExited(MouseEvent e) {
-        		homeView.btnUsers.setBackground(Color.decode("#16374E"));
-        		homeView.btnUsers.setForeground(Color.decode("#DFE1E0"));
-        	}
-		});
+        	homeView.btnBooks.setBackground(Color.decode("#3673DF"));
+        	homeView.btnBooks.setForeground(Color.decode("#F7F8FB"));
+        });
         
-        homeView.btnBooks.addMouseListener(new MouseAdapter() {
-        	public void mouseEntered(MouseEvent e) {
-        		homeView.btnBooks.setBackground(Color.decode("#3673DF"));
-        		homeView.btnBooks.setForeground(Color.decode("#F7F8FB"));
-        	}
+        homeView.btnBorrowRequests.addActionListener(e -> {
+        	homeView.mostrarVista(HomeView.BORROW);
+
+        	resetearBotones();
+        	resetearTexto();
         	
-        	public void mouseExited(MouseEvent e) {
-        		homeView.btnBooks.setBackground(Color.decode("#16374E"));
-        		homeView.btnBooks.setForeground(Color.decode("#DFE1E0"));
-        	}
-		});
+        	homeView.btnBorrowRequests.setBackground(Color.decode("#3673DF"));
+        	homeView.btnBorrowRequests.setForeground(Color.decode("#F7F8FB"));
+        });
         
-        homeView.btnBorrowRequests.addMouseListener(new MouseAdapter() {
-        	public void mouseEntered(MouseEvent e) {
-        		homeView.btnBorrowRequests.setBackground(Color.decode("#3673DF"));
-        		homeView.btnBorrowRequests.setForeground(Color.decode("#F7F8FB"));
-        	}
+        homeView.btnReports.addActionListener(e -> {
+        	homeView.mostrarVista(HomeView.REPORTS);
+
+        	resetearBotones();
+        	resetearTexto();
         	
-        	public void mouseExited(MouseEvent e) {
-        		homeView.btnBorrowRequests.setBackground(Color.decode("#16374E"));
-        		homeView.btnBorrowRequests.setForeground(Color.decode("#DFE1E0"));
-        	}
-		});
+        	homeView.btnReports.setBackground(Color.decode("#3673DF"));
+        	homeView.btnReports.setForeground(Color.decode("#F7F8FB"));
+        });
         
-        homeView.btnReports.addMouseListener(new MouseAdapter() {
-        	public void mouseEntered(MouseEvent e) {
-        		homeView.btnReports.setBackground(Color.decode("#3673DF"));
-        		homeView.btnReports.setForeground(Color.decode("#F7F8FB"));
-        	}
+        homeView.btnRoles.addActionListener(e -> {
+        	homeView.mostrarVista(HomeView.ADMINISTRATION);
+
+        	resetearBotones();
+        	resetearTexto();
         	
-        	public void mouseExited(MouseEvent e) {
-        		homeView.btnReports.setBackground(Color.decode("#16374E"));
-        		homeView.btnReports.setForeground(Color.decode("#DFE1E0"));
-        	}
-		});
+        	homeView.btnRoles.setBackground(Color.decode("#3673DF"));
+        	homeView.btnRoles.setForeground(Color.decode("#F7F8FB"));
+        });
         
-        homeView.btnRoles.addMouseListener(new MouseAdapter() {
-        	public void mouseEntered(MouseEvent e) {
-        		homeView.btnRoles.setBackground(Color.decode("#3673DF"));
-        		homeView.btnRoles.setForeground(Color.decode("#F7F8FB"));
-        	}
-        	
-        	public void mouseExited(MouseEvent e) {
-        		homeView.btnRoles.setBackground(Color.decode("#16374E"));
-        		homeView.btnRoles.setForeground(Color.decode("#DFE1E0"));
-        	}
-		});
-        
-        
+    }
+    
+    public void resetearBotones() {
+    	
+    	homeView.btnHome.setBackground(Color.decode("#16374E"));
+    	homeView.btnUsers.setBackground(Color.decode("#16374E"));
+		homeView.btnBooks.setBackground(Color.decode("#16374E"));
+		homeView.btnBorrowRequests.setBackground(Color.decode("#16374E"));
+		homeView.btnReports.setBackground(Color.decode("#16374E"));
+		homeView.btnRoles.setBackground(Color.decode("#16374E"));
+		
+    }
+    
+    public void resetearTexto() {
+    	
+    	homeView.btnHome.setForeground(Color.decode("#DFE1E0"));
+    	homeView.btnUsers.setForeground(Color.decode("#DFE1E0"));
+    	homeView.btnBooks.setForeground(Color.decode("#DFE1E0"));
+    	homeView.btnBorrowRequests.setForeground(Color.decode("#DFE1E0"));
+    	homeView.btnReports.setForeground(Color.decode("#DFE1E0"));
+    	homeView.btnRoles.setForeground(Color.decode("#DFE1E0"));
+  
     }
 
     public void mostrarUsuarios(){

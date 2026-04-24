@@ -23,10 +23,10 @@ public class HomeView extends JPanel{
 
     public InicioView inicioView;
     public UsersView usersView;
-    public JPanel books;
-    public JPanel borrow;
-    public JPanel reports;
-    public JPanel administration;
+    public BooksView booksView;
+    public BorrowView borrowView;
+    public ReportsView reportsView;
+    public AdministrationView admiView;
 
     public JButton btnHome;
     public JButton btnUsers;
@@ -34,7 +34,6 @@ public class HomeView extends JPanel{
     public JButton btnBorrowRequests;
     public JButton btnReports;
     public JButton btnRoles;
-    public JButton btnAccount;
 
     private CardLayout cardLayout;
     private JPanel contenedor;
@@ -70,37 +69,41 @@ public class HomeView extends JPanel{
         titulo.setBackground(Color.decode("#16374E"));
         titulo.setForeground(Color.decode("#F7F8FB"));
         titulo.setAlignmentX(Component.CENTER_ALIGNMENT);
-        
         //titulo.setIcon(SwingUtils.cargarIcono("/assets/img/libro-abierto.png", 32, 32));
         panelIzquierdoPrincipal.add(titulo);
         
-        panelIzquierdoPrincipal.add(Box.createVerticalStrut(10));
+        panelIzquierdoPrincipal.add(Box.createVerticalStrut(20));
 
         btnHome = SwingUtils.crearBtn("Inicio");
+        btnHome.setBackground(Color.decode("#3673DF"));
+        btnHome.setForeground(Color.decode("#F7F8FB"));
         //btnHome.setIcon(SwingUtils.cargarIcono("/assets/img/home (1).png", 22, 22));
-        
         panelIzquierdoPrincipal.add(btnHome);
+        
         panelIzquierdoPrincipal.add(Box.createVerticalStrut(10));
         
         btnUsers = SwingUtils.crearBtn("Usuarios");
         //btnUsers.setIcon(SwingUtils.cargarIcono("/assets/img/user.png", 18, 18));
-        
         panelIzquierdoPrincipal.add(btnUsers);
+        
         panelIzquierdoPrincipal.add(Box.createVerticalStrut(10));
 
         btnBooks = SwingUtils.crearBtn("Libros");
         //btnBooks.setIcon(SwingUtils.cargarIcono("/assets/img/book.png", 18, 18));
         panelIzquierdoPrincipal.add(btnBooks);
+        
         panelIzquierdoPrincipal.add(Box.createVerticalStrut(10));
 
         btnBorrowRequests = SwingUtils.crearBtn("Prestamos");
         //btnBorrowRequests.setIcon(SwingUtils.cargarIcono("/assets/img/two-arrows (1).png", 20, 20));
         panelIzquierdoPrincipal.add(btnBorrowRequests);
+        
         panelIzquierdoPrincipal.add(Box.createVerticalStrut(10));
        
         btnReports = SwingUtils.crearBtn("Reportes");
         //btnReports.setIcon(SwingUtils.cargarIcono("/assets/img/bar-chart.png", 22, 22));
         panelIzquierdoPrincipal.add(btnReports);
+        
         panelIzquierdoPrincipal.add(Box.createVerticalStrut(10));
         
         btnRoles = SwingUtils.crearBtn("Ajustes");
@@ -114,17 +117,19 @@ public class HomeView extends JPanel{
         
         inicioView = new InicioView();
         usersView = new UsersView();
-        books = new JPanel();
-        borrow = new JPanel();
-        reports = new JPanel();
-        administration = new JPanel();
+        booksView = new BooksView();
+        borrowView = new BorrowView();
+        reportsView = new ReportsView();
+        admiView = new AdministrationView();
 
+        
         contenedor.add(inicioView, HOME);
+        
         contenedor.add(usersView, USERS);
-        contenedor.add(books, BOOKS);
-        contenedor.add(borrow, BORROW);
-        contenedor.add(reports, REPORTS);
-        contenedor.add(administration, ADMINISTRATION);
+        contenedor.add(booksView, BOOKS);
+        contenedor.add(borrowView, BORROW);
+        contenedor.add(reportsView, REPORTS);
+        contenedor.add(admiView, ADMINISTRATION);
 
         add(contenedor, BorderLayout.CENTER);
     }

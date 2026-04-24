@@ -96,7 +96,7 @@ public class SwingUtils {
     	
     	JButton btn = new JButton(nombre);
     	
-    	btn.setFont(AppFont.subtitle());
+    	btn.setFont(AppFont.large());
         btn.setBackground(Color.decode("#16374E"));
         btn.setBorderPainted(false);
         btn.setForeground(Color.decode("#DFE1E0"));
