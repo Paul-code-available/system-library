@@ -2,6 +2,7 @@ package utils;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.TextField;
@@ -95,19 +96,19 @@ public class SwingUtils {
     	
     	JButton btn = new JButton(nombre);
     	
-    	btn.setFont(AppFont.large());
+    	btn.setFont(AppFont.subtitle());
         btn.setBackground(Color.decode("#16374E"));
         btn.setBorderPainted(false);
-        btn.setForeground(Color.decode("#F4F4FF"));
-        btn.setMaximumSize(new Dimension(200, 40));
-        btn.setPreferredSize(new Dimension(200, 40));
+        btn.setForeground(Color.decode("#DFE1E0"));
+        btn.setMaximumSize(new Dimension(160, 40));
+        btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btn.setAlignmentX(Component.CENTER_ALIGNMENT);
         btn.setHorizontalAlignment(SwingConstants.LEFT);
+        btn.setOpaque(true);
+        btn.setContentAreaFilled(true);
         
-        btn.setIconTextGap(10);
-        
-   
-        btn.setHorizontalTextPosition(SwingConstants.RIGHT);
+        //btn.setIconTextGap(10);
+        // btn.setHorizontalTextPosition(SwingConstants.LEFT);
           
         return btn;
     	
@@ -122,6 +123,9 @@ public class SwingUtils {
          
          return new ImageIcon(scaled);
     }
+    
+    
+
 
 
 }
