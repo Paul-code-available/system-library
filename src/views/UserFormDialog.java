@@ -78,11 +78,12 @@ public class UserFormDialog extends JDialog {
 	        JPanel pnlTitulo = new JPanel();
 	        panelVerticalSuperior.add(pnlTitulo);
 
-	        JLabel lblRegistrarse = new JLabel("Registrarse");
+	        JLabel lblRegistrarse = new JLabel("Registrar nuevo usuario");
 	        lblRegistrarse.setFont(AppFont.title());
 	        lblRegistrarse.setAlignmentX(Component.CENTER_ALIGNMENT);
 	        pnlTitulo.add(lblRegistrarse);
 
+            /*
 	        JPanel pnlMensajeInformacion = new JPanel();
 	        panelVerticalSuperior.add(pnlMensajeInformacion);
 
@@ -90,6 +91,8 @@ public class UserFormDialog extends JDialog {
 	        lblMensajeInformativo.setFont(AppFont.small());
 	        lblMensajeInformativo.setAlignmentX(Component.LEFT_ALIGNMENT);
 	        pnlMensajeInformacion.add(lblMensajeInformativo);
+
+             */
 
 	        add(panelVerticalSuperior, BorderLayout.NORTH);
 	    }

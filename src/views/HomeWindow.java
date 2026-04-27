@@ -14,7 +14,7 @@ public class HomeWindow extends JFrame{
         setSize(900, 700);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
-        setTitle("Casa Leeré");
+        setTitle("HomeBook");
 
         homeView = new HomeView();
         new HomeController(homeView);

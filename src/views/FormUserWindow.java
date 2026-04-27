@@ -14,7 +14,7 @@ public class FormUserWindow extends JFrame {
     public FormUserWindow() {
         setSize(500, 400);
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        setTitle("Registro de usuario");
+        setTitle("Registro de usuarios");
         setLocationRelativeTo(null);
         setResizable(false);
 
