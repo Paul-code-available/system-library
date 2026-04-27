@@ -14,10 +14,8 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		FlatDarkLaf.setup();
-		
-		
-		
+		FlatLightLaf.setup();
+	
 		//LoginWindow ventanita = new LoginWindow();
 		//new LoginController(ventanita.getLoginView());
 

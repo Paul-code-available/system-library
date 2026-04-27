@@ -4,30 +4,40 @@ import java.awt.Font;
 
 public class AppFont {
 
-	private static Font titles;
+	private static Font title;
+	private static Font subtitle;
 	private static Font base;
 	
 	static {
 		try {
-			titles = Font.createFont(
+			title = Font.createFont(
 					Font.TRUETYPE_FONT,
 					AppFont.class.getResourceAsStream("/fonts/Merriweather-VariableFont_opsz,wdth,wght.ttf"));
 			
 			base = Font.createFont(
 					Font.TRUETYPE_FONT,
 					AppFont.class.getResourceAsStream("/fonts/Inter_18pt-Regular.ttf"));
+			
+			subtitle = Font.createFont(
+					Font.TRUETYPE_FONT,
+					AppFont.class.getResourceAsStream("/fonts/Roboto-Medium.ttf"));
 		} catch (Exception e) {
-			titles = new Font("Times New Roman", Font.PLAIN, 14);
+			title = new Font("Times New Roman", Font.PLAIN, 14);
 			base = new Font("Arial", Font.PLAIN, 14);
+			subtitle = new Font("Arial", Font.PLAIN, 14);
 		}
 	}
 	
 	public static Font title() {
-		return titles.deriveFont(22f);
+		return title.deriveFont(36f);
+	}
+	
+	public static Font subtitle() {
+		return subtitle.deriveFont(18f);
 	}
 	
 	public static Font large() {
-		return base.deriveFont(16f);
+		return base.deriveFont(18f);
 	}
 	
 	public static Font medium() {
