@@ -68,11 +68,10 @@ public class UserFormDialog extends JDialog {
 	    public void crearHeader(){
 	        JPanel panel = new JPanel();
 	        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+	        panel.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
 
 	        jlbTitulo = SwingUtils.createLblTitle("Formulario");
 	        panel.add(jlbTitulo);
-	        
-	        panel.add(Box.createVerticalStrut(10));
 
 	        add(panel, BorderLayout.NORTH);
 	    }
@@ -105,6 +104,7 @@ public class UserFormDialog extends JDialog {
 	    	
 	        JPanel panel = new JPanel();
 	        panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+	        panel.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
 	        add(panel, BorderLayout.SOUTH);
 
 	        btnSave = new JButton("Guardar");
@@ -114,7 +114,7 @@ public class UserFormDialog extends JDialog {
 	        
 	        btnCancel = new JButton("Cancelar");
 	        panel.add(btnCancel);
-	        
+	    
 	        btnSave.addActionListener(e -> save());
 	        btnCancel.addActionListener(e -> dispose());
 	        

@@ -11,6 +11,7 @@ import models.User;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
 import java.util.List;
 
 public class UserController {
@@ -39,30 +40,43 @@ public class UserController {
 			openForm(model.getUserAt(row));
 			
 		});
-	}
-	
-	public void loadUsers() {
 		
-		try {
+		this.view.getBtnDelete().addActionListener(e -> {
+			int row = view.getSelectedRow();
 			
-			List<User> users = repo.getUsers();
-			
-			if (model == null) {
-				model = new UserTableModel(users);
-			} else {
-				model.setUsers(users);
+			if (row == -1) {
+				JOptionPane.showMessageDialog(view, "Selecciona un usuario");
+				return;
 			}
 			
-			view.setTableModel(model);
+			System.out.println("Se ejecuta borrar usuario");
+			borrarUsuario(model.getUserAt(row));
 			
-		} catch (Exception ex) {
-			JOptionPane.showMessageDialog(view, ex.getMessage());
+		});
+		
+	}
+	
+	public void borrarUsuario(User user) {
+		
+		user.setName("");
+		user.setEmail("");
+		user.setCelular("");
+		
+		int row = view.getSelectedRow();
+		try {
+			
+			repo.update(row, user);
+			
+		} catch (IOException e) {
+		
+			JOptionPane.showMessageDialog(view, e.getMessage());
+			
 		}
+		
 	}
 	
 	private void openForm(User user) {
-		System.out.println("se abrio el formulario");
-		Thread.currentThread().getStackTrace(); 
+	
 		UserFormDialog dialog = new UserFormDialog(null, user);
 		         
 		dialog.setVisible(true);
@@ -89,6 +103,25 @@ public class UserController {
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(view, e.getMessage());
 			}
+		}
+	}
+	
+	public void loadUsers() {
+		
+		try {
+			
+			List<User> users = repo.getUsers();
+			
+			if (model == null) {
+				model = new UserTableModel(users);
+			} else {
+				model.setUsers(users);
+			}
+			
+			view.setTableModel(model);
+			
+		} catch (Exception ex) {
+			JOptionPane.showMessageDialog(view, ex.getMessage());
 		}
 	}
 }
