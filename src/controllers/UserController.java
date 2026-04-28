@@ -7,8 +7,11 @@ import views.UsersView;
 
 import javax.swing.*;
 
+import models.User;
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.List;
 
 public class UserController {
 
@@ -19,42 +22,73 @@ public class UserController {
 	public UserController(UsersView view) {
 		this.view = view;
 		repo = new UserRepository();
+	
+		this.view.getBtnAdd().addActionListener(e -> {
+			openForm(null);
+			
+		});
 		
-		view.getBtnAdd().addActionListener(e -> abrirFormulario());
+		this.view.getBtnEdit().addActionListener(e -> {
+			int row = view.getSelectedRow();
+			
+			if (row == -1) {
+				JOptionPane.showMessageDialog(view, "Selecciona un usuario");
+				return;
+			}
+			
+			openForm(model.getUserAt(row));
+			
+		});
 	}
-
-    private void abrirFormulario(){
-        JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(view);
-
-        UserFormDialog dialogo = new UserFormDialog(null, null);
-        dialogo.setSize(500, 400);
-        dialogo.setTitle("Registro de usuarios");
-        dialogo.setLocationRelativeTo(parent);
-        dialogo.setResizable(false);
-        dialogo.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
-
-        dialogo.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                controlCerradoVentana(dialogo);
-            }
-        });
-
-        dialogo.getBtnRegistro().addActionListener(e -> guardarUsuario(dialogo));
-        dialogo.getBtnCancelar().addActionListener(e -> dialogo.dispose());
-
-        dialogo.setVisible(true);
-    }
-
-    private void guardarUsuario(UserFormDialog dialogo) {
-
-    }
-
-    private void controlCerradoVentana(UserFormDialog dialogo){
-        int opcion = JOptionPane.showConfirmDialog(dialogo, "Seguro que deseas cerrar la ventana? Se perderán todos los datos");
-
-        if (opcion == JOptionPane.YES_OPTION){
-            dialogo.dispose();
-        }
-    }
+	
+	public void loadUsers() {
+		
+		try {
+			
+			List<User> users = repo.getUsers();
+			
+			if (model == null) {
+				model = new UserTableModel(users);
+			} else {
+				model.setUsers(users);
+			}
+			
+			view.setTableModel(model);
+			
+		} catch (Exception ex) {
+			JOptionPane.showMessageDialog(view, ex.getMessage());
+		}
+	}
+	
+	private void openForm(User user) {
+		System.out.println("se abrio el formulario");
+		Thread.currentThread().getStackTrace(); 
+		UserFormDialog dialog = new UserFormDialog(null, user);
+		         
+		dialog.setVisible(true);
+		
+		if (dialog.isSaved()) {
+			
+			User savedUser = dialog.getUser();
+			
+			try {
+				
+				if (user == null) {
+					
+					repo.save(savedUser);
+					
+				} else {
+					
+					int row = view.getSelectedRow();
+					repo.update(row, savedUser);
+				
+				}
+				
+				loadUsers();
+				
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(view, e.getMessage());
+			}
+		}
+	}
 }

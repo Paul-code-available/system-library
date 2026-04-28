@@ -50,7 +50,6 @@ public class HomeView extends JPanel{
         crearVistas();
         setVisible(true);
         
-       
     }
 
 
