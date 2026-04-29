@@ -54,24 +54,16 @@ public class UsersView extends JPanel{
 		return btnEdit;
 	}
 
-	public void setBtnEdit(JButton btnEdit) {
-		this.btnEdit = btnEdit;
-	}
-
 	public JButton getBtnAdd() {
 		return btnAdd;
-	}
-
-	public void setBtnAdd(JButton btnAdd) {
-		this.btnAdd = btnAdd;
 	}
 
 	public JButton getBtnDelete() {
 		return btnDelete;
 	}
-
-	public void setBtnDelete(JButton btnDelete) {
-		this.btnDelete = btnDelete;
-	}	
+	
+	public int getSelectedRow() {
+    	return table.getSelectedRow();
+    }
 
 }

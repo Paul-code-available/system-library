@@ -96,7 +96,6 @@ public class LoginView extends JPanel {
 		panelCentro.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
 		
 		txtEmail = SwingUtils.crearJtfText("Email");
-		
 		panelCentro.add(txtEmail);
 		
 		lblErrorEmail = SwingUtils.createLblMessageError();

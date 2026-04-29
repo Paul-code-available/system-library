@@ -17,9 +17,11 @@ import java.util.List;
 public class HomeController {
 
     private HomeView homeView;
+    private UserController userController;
 
 	public HomeController(HomeView homeView) {
 		this.homeView = homeView;
+		
         registerListeners();
 
 	}
@@ -34,7 +36,6 @@ public class HomeController {
     	
     		homeView.btnHome.setBackground(Color.decode("#3673DF"));
     		homeView.btnHome.setForeground(Color.decode("#F7F8FB"));
-    	
     		
     	});
     	
@@ -114,22 +115,15 @@ public class HomeController {
 
     public void mostrarUsuarios(){
     	
-    	UserController controller = new UserController(homeView.usersView);
+    	if (userController == null) {
+			userController = new UserController(homeView.usersView);
+		}
     	
-        UserRepository repository = new UserRepository();
+    	userController.loadUsers();
+    	
+    	homeView.mostrarVista(homeView.USERS);
 
-        try{
-            List<User> users = repository.getUsers();
-
-            UserTableModel model = new UserTableModel(users);
-
-            homeView.usersView.setTableModel(model);
-
-            homeView.mostrarVista(HomeView.USERS);
-
-        }catch (IOException ex){
-            JOptionPane.showMessageDialog(homeView, ex.getMessage());
-        }
     }
-	
+   
+
 }

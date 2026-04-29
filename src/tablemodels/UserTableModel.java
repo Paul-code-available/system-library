@@ -12,7 +12,8 @@ public class UserTableModel extends AbstractTableModel{
 	
 	private final String[] columns = {
 		"Nombre",
-		"Email"
+		"Email",
+		"Celular"
 	};
 	
 	public UserTableModel(List<User> users) {
@@ -43,6 +44,8 @@ public class UserTableModel extends AbstractTableModel{
 			return user.getName();
 		case 1:
 			return user.getEmail();
+		case 2:
+			return user.getCelular();
 		}
 		
 		return null;
