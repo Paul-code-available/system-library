@@ -53,8 +53,14 @@ public class UserController {
 			borrarUsuario(model.getUserAt(row));
 			
 		});
+
+        //this.view.getBtnPdf().addActionListener(e -> {});
 		
 	}
+
+    public void generatePdf(){
+
+    }
 	
 	public void borrarUsuario(User user) {
 		
