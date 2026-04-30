@@ -34,6 +34,7 @@ public class UserFormDialog extends JDialog {
 	    private JTextField txtNombre;
 	    private JTextField txtEmail;
 	    private JTextField txtNumero;
+        private JTextField txtRol;
 	    
 	    private JButton btnSave;
 	    private JButton btnCancel;
@@ -49,7 +50,6 @@ public class UserFormDialog extends JDialog {
 	    	setTitle(user == null ? "Agregar usuario" : "Editar usuario");
 
 	        setLayout(new BorderLayout());
-	        // setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
 	
 	        setSize(340, 340);                          
 			setLocationRelativeTo(parent);
@@ -94,8 +94,13 @@ public class UserFormDialog extends JDialog {
 	        
 	        txtNumero = SwingUtils.crearJtfText("Numero");
 	        panel.add(txtNumero);
-	        
-	        panel.add(Box.createVerticalStrut(10));
+
+            panel.add(Box.createVerticalStrut(10));
+
+            txtRol = SwingUtils.crearJtfText("Rol");
+            panel.add(txtRol);
+
+            panel.add(Box.createVerticalStrut(10));
 
 	        add(panel, BorderLayout.CENTER);
 	    }
@@ -123,11 +128,11 @@ public class UserFormDialog extends JDialog {
 	    }
 	    
 	    public void loadData() {
-	    	
 	    	if (user != null) {
 				txtNombre.setText(user.getName());
 				txtEmail.setText(user.getEmail());
 				txtNumero.setText(user.getCelular());
+                txtRol.setText(user.getRol());
 			}
 	    }
 	    
@@ -136,13 +141,15 @@ public class UserFormDialog extends JDialog {
 	    	String name = txtNombre.getText();
 	    	String email = txtEmail.getText();
 	    	String celular = txtNumero.getText();
+            String rol = txtRol.getText();
 
 	        if(user == null) {
-	        	user = new User(name, email, celular);
+	        	user = new User(name, email, celular, rol);
 	        } else {
 	        	user.setName(name);
 	        	user.setEmail(email);
 	        	user.setCelular(celular);
+                user.setRol(rol);
 	        }
 	        
 	        saved = true;

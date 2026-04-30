@@ -6,6 +6,7 @@ public class User {
 	private String email;
 	private String password;
 	private String celular;
+    private String rol;
 
     public User(){
     }
@@ -14,17 +15,12 @@ public class User {
 		this.name = name;
         this.email = email;
 	}
-	/*
-	public User(String name, String email, String password) {
-		this.name = name;
-		this.email = email;
-		this.password = password;
-	}
-	*/
-	public User(String name, String email, String celular) {
+
+	public User(String name, String email, String celular, String rol) {
 		this.name = name;
 		this.email = email;
 		this.celular = celular;
+        this.rol = rol;
 	}
 
     public String getName() {
@@ -58,26 +54,13 @@ public class User {
 	public void setCelular(String celular) {
 		this.celular = celular;
 	}
-	
-	public String toCsv() {
-		return name + "," +
-				email + "," +
-				celular;
-	}
-	
-	public static User fromCsv(String userData) {
-		String data[] = userData.split(",");
 
-        if (data.length < 3){
-            return null;
-        }
-		
-		String name = data[0];
-		String email = data[1];
-		String celular = data[2];
-		
-		return new User(name, email, celular);
-	}
-	
-	
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
+
 }

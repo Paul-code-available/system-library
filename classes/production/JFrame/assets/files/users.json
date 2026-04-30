@@ -2,10 +2,12 @@
   "name" : "Ivan",
   "email" : "ivan@gmail.com",
   "password" : null,
-  "celular" : "3434234324"
+  "celular" : "3434234324",
+  "rol" : "Admin"
 }, {
   "name" : "Paul",
   "email" : "paul@gmail.com",
   "password" : null,
-  "celular" : "63472374342"
+  "celular" : "63472374342",
+  "rol" : "Usuario"
 } ]

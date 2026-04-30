@@ -3,8 +3,10 @@ package views;
 import java.awt.*;
 import java.io.File;
 import java.net.CookieHandler;
+import java.util.Locale;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
 
@@ -141,9 +143,26 @@ public class UsersView extends JPanel{
 
         chooser.setSelectedFile(new File("reporte-usuarios"));
 
-        chooser.showDialog(this, "Exportar PDF usuarios");
+        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY); //solo permite seleccionar archivos, no carpetas
+        chooser.setAcceptAllFileFilterUsed(false);
 
-        return null;
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Documentos PDF", "pdf");
+        chooser.addChoosableFileFilter(filter);
+        chooser.setFileFilter(filter);
+
+        int option = chooser.showDialog(this, "Exportar PDF de usuarios");
+
+        if (option != JFileChooser.APPROVE_OPTION){
+            return null;
+        }
+
+        File file = chooser.getSelectedFile();
+
+        if (!file.getName().toLowerCase().endsWith(".pdf")){
+            file = new File(file.getAbsolutePath() + ".pdf");
+        }
+
+        return file;
     }
 	
 	public JTable getTable() {
