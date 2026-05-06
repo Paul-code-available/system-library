@@ -3,7 +3,7 @@
   "email" : "",
   "password" : null,
   "celular" : "",
-  "rol" : "Admin"
+  "rol" : ""
 }, {
   "name" : "Paul",
   "email" : "paul@gmail.com",
