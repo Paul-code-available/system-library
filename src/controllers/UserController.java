@@ -30,6 +30,11 @@ public class UserController {
 		repo = new UserRepository();
         pdfExporter = new PDFExporter();
 	
+		listeners();
+
+	}
+
+	public void listeners() {
 		this.view.getBtnAdd().addActionListener(e -> {
 			openForm(null);
 			
@@ -58,6 +63,8 @@ public class UserController {
 			System.out.println("Se ejecuta borrar usuario");
 			borrarUsuario(model.getUserAt(row));
 			
+
+
 		});
 
         this.view.getBtnPdf().addActionListener(e -> generatePdf());
@@ -94,6 +101,8 @@ public class UserController {
 		try {
 			
 			repo.update(row, user);
+			repo.delete(row);
+			loadUsers();
 
 		} catch (IOException e) {
 		
