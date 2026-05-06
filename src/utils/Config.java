@@ -11,7 +11,7 @@ public class Config {
 	private static final Properties properties = new Properties();
 	
 	static {
-		
+		load();
 	}
 	
 	public static void load() {
