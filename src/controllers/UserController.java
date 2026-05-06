@@ -94,7 +94,7 @@ public class UserController {
 		try {
 			
 			repo.update(row, user);
-			
+
 		} catch (IOException e) {
 		
 			JOptionPane.showMessageDialog(view, e.getMessage());
