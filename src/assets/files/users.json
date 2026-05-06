@@ -1,9 +1,9 @@
 [ {
-  "name" : "Ivan",
-  "email" : "ivan@gmail.com",
+  "name" : "",
+  "email" : "",
   "password" : null,
-  "celular" : "3434234324",
-  "rol" : "Admin"
+  "celular" : "",
+  "rol" : ""
 }, {
   "name" : "Paul",
   "email" : "paul@gmail.com",

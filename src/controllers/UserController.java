@@ -88,6 +88,7 @@ public class UserController {
 		user.setName("");
 		user.setEmail("");
 		user.setCelular("");
+        user.setRol("");
 		
 		int row = view.getSelectedRow();
 		try {
