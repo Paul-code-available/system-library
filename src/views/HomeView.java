@@ -19,28 +19,31 @@ public class HomeView extends JPanel{
     public static final String BOOKS = "BOOKS";
     public static final String BORROW = "BORROW";
     public static final String REPORTS = "REPORTS";
-    public static final String ADMINISTRATION = "ADMINISTRATION";
+    public static final String ACCOUNT = "ACCOUNT";
 
     public InicioView inicioView;
     public UsersView usersView;
     public BooksView booksView;
     public BorrowView borrowView;
     public ReportsView reportsView;
-    public AdministrationView admiView;
+    public AccountView accountView;
 
     public JButton btnHome;
     public JButton btnUsers;
     public JButton btnBooks;
-    public JButton btnBorrowRequests;
+    public JButton btnBorrow;
     public JButton btnReports;
-    public JButton btnRoles;
+    public JButton btnAccount;
 
     private CardLayout cardLayout;
     private JPanel contenedor;
+    
+    private HomeWindow window;
 
     //public UsersView usersPanel;
 
     public HomeView(){
+    	//this.window = window;
         setLayout(new BorderLayout());
         
         UIManager.put("TextComponent.arc", 15);
@@ -93,9 +96,9 @@ public class HomeView extends JPanel{
         
         panelIzquierdoPrincipal.add(Box.createVerticalStrut(10));
 
-        btnBorrowRequests = SwingUtils.crearBtn("Prestamos");
+        btnBorrow = SwingUtils.crearBtn("Prestamos");
         //btnBorrowRequests.setIcon(SwingUtils.cargarIcono("/assets/img/two-arrows (1).png", 20, 20));
-        panelIzquierdoPrincipal.add(btnBorrowRequests);
+        panelIzquierdoPrincipal.add(btnBorrow);
         
         panelIzquierdoPrincipal.add(Box.createVerticalStrut(10));
        
@@ -105,9 +108,9 @@ public class HomeView extends JPanel{
         
         panelIzquierdoPrincipal.add(Box.createVerticalStrut(10));
         
-        btnRoles = SwingUtils.crearBtn("Ajustes");
+        btnAccount = SwingUtils.crearBtn("Cuenta");
         //btnRoles.setIcon(SwingUtils.cargarIcono("/assets/img/settings.png", 22, 22));
-        panelIzquierdoPrincipal.add(btnRoles);
+        panelIzquierdoPrincipal.add(btnAccount);
     }
 
     private void crearVistas(){
@@ -119,7 +122,7 @@ public class HomeView extends JPanel{
         booksView = new BooksView();
         borrowView = new BorrowView();
         reportsView = new ReportsView();
-        admiView = new AdministrationView();
+        accountView = new AccountView();
 
         
         contenedor.add(inicioView, HOME);
@@ -128,7 +131,7 @@ public class HomeView extends JPanel{
         contenedor.add(booksView, BOOKS);
         contenedor.add(borrowView, BORROW);
         contenedor.add(reportsView, REPORTS);
-        contenedor.add(admiView, ADMINISTRATION);
+        contenedor.add(accountView, ACCOUNT);
 
         add(contenedor, BorderLayout.CENTER);
     }
@@ -136,6 +139,14 @@ public class HomeView extends JPanel{
     public void mostrarVista(String view){
         cardLayout.show(contenedor, view);
     }
+    
+    public HomeWindow getWindow() {
+		return window;
+	}
+    
+    public void setWindow(HomeWindow window) {
+		this.window = window;
+	}
 
 
 }

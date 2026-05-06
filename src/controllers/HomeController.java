@@ -3,14 +3,19 @@ package controllers;
 import models.User;
 import repository.UserRepository;
 import tablemodels.UserTableModel;
+import utils.Config;
 import views.HomeView;
 import views.HomeWindow;
 
 import javax.swing.*;
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.util.List;
 
@@ -22,12 +27,21 @@ public class HomeController {
 	public HomeController(HomeView homeView) {
 		this.homeView = homeView;
 		
+		//loadWindowPreferences();
         registerListeners();
 
 	}
 
-    public void registerListeners(){
-    	
+    public void registerListeners() {
+    	/*
+    	homeView.getWindow().addWindowListener(new WindowAdapter() {
+    			
+    		public void windowClosing(WindowEvent e) {
+    			//saveWindowPreferences();
+    		}
+    		
+    	});
+    	*/
     	homeView.btnHome.addActionListener(e -> {
     		homeView.mostrarVista(HomeView.HOME);
     		
@@ -59,14 +73,14 @@ public class HomeController {
         	homeView.btnBooks.setForeground(Color.decode("#F7F8FB"));
         });
         
-        homeView.btnBorrowRequests.addActionListener(e -> {
+        homeView.btnBorrow.addActionListener(e -> {
         	homeView.mostrarVista(HomeView.BORROW);
 
         	resetearBotones();
         	resetearTexto();
         	
-        	homeView.btnBorrowRequests.setBackground(Color.decode("#3673DF"));
-        	homeView.btnBorrowRequests.setForeground(Color.decode("#F7F8FB"));
+        	homeView.btnBorrow.setBackground(Color.decode("#3673DF"));
+        	homeView.btnBorrow.setForeground(Color.decode("#F7F8FB"));
         });
         
         homeView.btnReports.addActionListener(e -> {
@@ -79,14 +93,14 @@ public class HomeController {
         	homeView.btnReports.setForeground(Color.decode("#F7F8FB"));
         });
         
-        homeView.btnRoles.addActionListener(e -> {
-        	homeView.mostrarVista(HomeView.ADMINISTRATION);
+        homeView.btnAccount.addActionListener(e -> {
+        	homeView.mostrarVista(HomeView.ACCOUNT);
 
         	resetearBotones();
         	resetearTexto();
         	
-        	homeView.btnRoles.setBackground(Color.decode("#3673DF"));
-        	homeView.btnRoles.setForeground(Color.decode("#F7F8FB"));
+        	homeView.btnAccount.setBackground(Color.decode("#3673DF"));
+        	homeView.btnAccount.setForeground(Color.decode("#F7F8FB"));
         });
         
     }
@@ -96,9 +110,9 @@ public class HomeController {
     	homeView.btnHome.setBackground(Color.decode("#16374E"));
     	homeView.btnUsers.setBackground(Color.decode("#16374E"));
 		homeView.btnBooks.setBackground(Color.decode("#16374E"));
-		homeView.btnBorrowRequests.setBackground(Color.decode("#16374E"));
+		homeView.btnBorrow.setBackground(Color.decode("#16374E"));
 		homeView.btnReports.setBackground(Color.decode("#16374E"));
-		homeView.btnRoles.setBackground(Color.decode("#16374E"));
+		homeView.btnAccount.setBackground(Color.decode("#16374E"));
 		
     }
     
@@ -107,9 +121,9 @@ public class HomeController {
     	homeView.btnHome.setForeground(Color.decode("#DFE1E0"));
     	homeView.btnUsers.setForeground(Color.decode("#DFE1E0"));
     	homeView.btnBooks.setForeground(Color.decode("#DFE1E0"));
-    	homeView.btnBorrowRequests.setForeground(Color.decode("#DFE1E0"));
+    	homeView.btnBorrow.setForeground(Color.decode("#DFE1E0"));
     	homeView.btnReports.setForeground(Color.decode("#DFE1E0"));
-    	homeView.btnRoles.setForeground(Color.decode("#DFE1E0"));
+    	homeView.btnAccount.setForeground(Color.decode("#DFE1E0"));
   
     }
 
@@ -124,6 +138,39 @@ public class HomeController {
     	homeView.mostrarVista(homeView.USERS);
 
     }
+    
+    /*
+    
+    private void saveWindowPreferences() {
+    	Dimension size = homeView.getSize();
+    	Point point = homeView.getLocation();
+    	
+    	Config.set("registration.window.width", String.valueOf(size.width));
+    	Config.set("registration.window.height", String.valueOf(size.height));
+		Config.set("registration.window.x", String.valueOf(point.x));
+		Config.set("registration.window.y", String.valueOf(point.y));
+    }
+    
+    private void loadWindowPreferences() {
+    	int width = Integer.parseInt(Config.get("registration.window.width", "500"));
+		
+		int height = Integer.parseInt(Config.get("registration.window.height", "500"));
+		
+		String xValue = Config.get("registration.window.x", "");
+		
+		String yValue = Config.get("registration.window.y", "");
+		
+		if(!xValue.isBlank() && !yValue.isBlank()) {
+			//homeView.getWindow().setWindowLocation(Integer.parseInt(xValue), Integer.parseInt(yValue));
+		}else {
+			homeView.getWindow().setLocationRelativeTo(null);
+		}
+		
+		homeView.getWindow().setWindowSize(width, height);
+	}
+	
+	*/
+    
    
 
 }

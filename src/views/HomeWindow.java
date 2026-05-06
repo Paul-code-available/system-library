@@ -25,5 +25,10 @@ public class HomeWindow extends JFrame{
     public HomeView getHomeView(){
         return homeView;
     }
+
+	public void setWindowSize(int width, int height) {
+		setWindowSize(width, height);
+		
+	}
 	
 }
