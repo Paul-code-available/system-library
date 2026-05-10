@@ -174,7 +174,7 @@ public class RegisterController {
                 
                 registerUser(user);
 
-                new HomeController(new HomeView());
+                new HomeController(new HomeView(new HomeWindow()));
                 view.getWindow().dispose();
             }
             

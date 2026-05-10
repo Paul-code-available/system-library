@@ -12,7 +12,7 @@ public class ThemeManager {
 	
 	public static void applySavedTheme() {
 		String theme = Config.get("ui.theme", "light");
-		
+		apply(theme);
 	}
 	
 	public static void apply(String theme) {

@@ -27,21 +27,21 @@ public class HomeController {
 	public HomeController(HomeView homeView) {
 		this.homeView = homeView;
 		
-		//loadWindowPreferences();
+		loadWindowPreferences();
         registerListeners();
 
 	}
 
     public void registerListeners() {
-    	/*
+    	
     	homeView.getWindow().addWindowListener(new WindowAdapter() {
     			
     		public void windowClosing(WindowEvent e) {
-    			//saveWindowPreferences();
+    		saveWindowPreferences();
     		}
     		
     	});
-    	*/
+    	
     	homeView.btnHome.addActionListener(e -> {
     		homeView.mostrarVista(HomeView.HOME);
     		
@@ -138,39 +138,33 @@ public class HomeController {
     	homeView.mostrarVista(homeView.USERS);
 
     }
-    
-    /*
-    
+
     private void saveWindowPreferences() {
-    	Dimension size = homeView.getSize();
-    	Point point = homeView.getLocation();
+    	Dimension size = homeView.getWindow().getSize();
+    	Point point = homeView.getWindow().getLocation();
     	
-    	Config.set("registration.window.width", String.valueOf(size.width));
-    	Config.set("registration.window.height", String.valueOf(size.height));
-		Config.set("registration.window.x", String.valueOf(point.x));
-		Config.set("registration.window.y", String.valueOf(point.y));
+    	Config.set("home.window.width", String.valueOf(size.width));
+    	Config.set("home.window.height", String.valueOf(size.height));
+		Config.set("home.window.x", String.valueOf(point.x));
+		Config.set("home.window.y", String.valueOf(point.y));
     }
     
     private void loadWindowPreferences() {
-    	int width = Integer.parseInt(Config.get("registration.window.width", "500"));
+    	int width = Integer.parseInt(Config.get("home.window.width", "900"));
 		
-		int height = Integer.parseInt(Config.get("registration.window.height", "500"));
+		int height = Integer.parseInt(Config.get("home.window.height", "700"));
 		
-		String xValue = Config.get("registration.window.x", "");
+		String xValue = Config.get("home.window.x", "");
 		
-		String yValue = Config.get("registration.window.y", "");
+		String yValue = Config.get("home.window.y", "");
 		
 		if(!xValue.isBlank() && !yValue.isBlank()) {
-			//homeView.getWindow().setWindowLocation(Integer.parseInt(xValue), Integer.parseInt(yValue));
+			homeView.getWindow().setWindowLocation(Integer.parseInt(xValue), Integer.parseInt(yValue));
 		}else {
 			homeView.getWindow().setLocationRelativeTo(null);
 		}
 		
 		homeView.getWindow().setWindowSize(width, height);
 	}
-	
-	*/
-    
-   
 
 }

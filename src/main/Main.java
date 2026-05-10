@@ -7,6 +7,7 @@ import com.formdev.flatlaf.FlatLightLaf;
 
 import controllers.HomeController;
 import controllers.RegisterController;
+import utils.ThemeManager;
 import controllers.LoginController;
 import views.*;
 
@@ -14,7 +15,12 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		FlatLightLaf.setup();
+		//FlatLightLaf.setup();
+		
+		UIManager.put("Text.Component.arc", 10);
+        UIManager.put("Button.arc", 10);
+		
+		ThemeManager.applySavedTheme();
 
 	
 		//LoginWindow ventanita = new LoginWindow();
