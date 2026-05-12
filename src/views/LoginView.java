@@ -28,14 +28,7 @@ import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
-import javax.swing.border.Border;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 
-import exceptions.InvalidPasswordException;
-import exceptions.InvalidUserException;
-import views.components.TextPrompt;
-import utils.AppFont;
 import utils.SwingUtils;
 
 public class LoginView extends JPanel {
