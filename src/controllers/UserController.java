@@ -103,6 +103,8 @@ public class UserController {
 			repo.update(row, user);
 			repo.delete(row);
 			loadUsers();
+			
+			JOptionPane.showMessageDialog(view, "Usuario borrado");
 
 		} catch (IOException e) {
 		

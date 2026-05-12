@@ -3,7 +3,7 @@ package controllers;
 import models.User;
 import repository.UserRepository;
 import tablemodels.UserTableModel;
-import utils.Config;
+import config.Config;
 import views.HomeView;
 import views.HomeWindow;
 

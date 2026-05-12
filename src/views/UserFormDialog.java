@@ -232,7 +232,7 @@ public class UserFormDialog extends JDialog {
 				showErrorName("Longitud maxima excedida");
 			}
 	    	
-	    	if (user.getName().trim().length() <= 4) {
+	    	if (user.getName().trim().length() < 4) {
 				showErrorName("Longitud minima es de 4 caracteres");
 			}
 	    	
@@ -280,8 +280,6 @@ public class UserFormDialog extends JDialog {
 					showErrorCel("Solo puedes ingresar numeros");
 				}
 			}
-	    	
-	    	// validar que sean numeros
 	    	
 	    	// verificar duplicados
 	    	

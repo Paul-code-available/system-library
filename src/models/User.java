@@ -7,16 +7,31 @@ public class User {
 	private String password;
 	private String celular;
     private String rol;
+    private int id;
 
     public User(){
     }
-
-	public User(String name, String email) {
+    
+    public User(String email, String password) {
+		this.email = email;
+        this.password = password;
+	}
+	
+	public User(int id, String name, String password) {
+		this.id = id;
 		this.name = name;
-        this.email = email;
+        this.password = password;
 	}
 
 	public User(String name, String email, String celular, String rol) {
+		this.name = name;
+		this.email = email;
+		this.celular = celular;
+        this.rol = rol;
+	}
+	
+	public User(int id, String name, String email, String celular, String rol) {
+		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.celular = celular;
@@ -62,5 +77,13 @@ public class User {
     public void setRol(String rol) {
         this.rol = rol;
     }
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 }

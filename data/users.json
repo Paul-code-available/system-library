@@ -1,7 +1,13 @@
 [ {
-  "name" : "paul alejandro",
-  "email" : "paul@",
+  "name" : "Paul Sanchez",
+  "email" : "paul@gmail.com",
   "password" : null,
   "celular" : "6151556681",
-  "rol" : "usuario"
+  "rol" : "Usuario"
+}, {
+  "name" : "Alejandro Solis",
+  "email" : "ale@gmail.com",
+  "password" : null,
+  "celular" : "6151115104",
+  "rol" : "Usuario"
 } ]
