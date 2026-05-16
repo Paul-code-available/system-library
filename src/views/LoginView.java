@@ -34,7 +34,7 @@ import utils.SwingUtils;
 public class LoginView extends JPanel {
 	
 	JTextField txtEmail;
-	JPasswordField jpfContrasena;
+	JPasswordField passwordField;
 	JLabel lblErrorEmail;
 	JLabel lblErrorPassword;
 	JButton btnIniciarSesion;
@@ -96,8 +96,8 @@ public class LoginView extends JPanel {
 		
 		panelCentro.add(Box.createVerticalStrut(10));
 		
-		jpfContrasena = SwingUtils.createJpfPassword("Contraseña"); 
-		panelCentro.add(jpfContrasena);
+		passwordField = SwingUtils.createJpfPassword("Contraseña"); 
+		panelCentro.add(passwordField);
 		
 		lblErrorPassword = SwingUtils.createLblMessageError();
 		panelCentro.add(lblErrorPassword);
@@ -136,13 +136,13 @@ public class LoginView extends JPanel {
 	
 	public void moveFocusComponents() {
 		
-		SwingUtils.moveFocus(txtEmail, "DOWN", "aPassword", jpfContrasena);
-		SwingUtils.moveFocus(jpfContrasena, "UP", "aEmail", txtEmail);
-		SwingUtils.moveFocus(jpfContrasena, "DOWN", "aIniciar", btnIniciarSesion);
-		SwingUtils.moveFocus(btnIniciarSesion, "UP", "aPassword", jpfContrasena);
+		SwingUtils.moveFocus(txtEmail, "DOWN", "aPassword", passwordField);
+		SwingUtils.moveFocus(passwordField, "UP", "aEmail", txtEmail);
+		SwingUtils.moveFocus(passwordField, "DOWN", "aIniciar", btnIniciarSesion);
+		SwingUtils.moveFocus(btnIniciarSesion, "UP", "aPassword", passwordField);
 		SwingUtils.moveFocus(btnIniciarSesion, "RIGHT", "aRegistrar", btnRegister);
 		SwingUtils.moveFocus(btnRegister, "LEFT", "aIniciar", btnIniciarSesion);
-		SwingUtils.moveFocus(btnRegister, "UP", "aPassword", jpfContrasena);
+		SwingUtils.moveFocus(btnRegister, "UP", "aPassword", passwordField);
 		
 	}
 	
@@ -159,44 +159,16 @@ public class LoginView extends JPanel {
 		lblErrorPassword.setText("");
 	}
 
-	public JTextField getTxtEmail() {
-		return txtEmail;
+	public String getEmail() {
+		return txtEmail.getText();
 	}
 
-	public void setTxtEmail(JTextField txtEmail) {
-		this.txtEmail = txtEmail;
+	public String getPassword() {
+		return String.valueOf(passwordField.getPassword());
 	}
-
-	public JPasswordField getJpfContrasena() {
-		return jpfContrasena;
-	}
-
-	public void setJpfContrasena(JPasswordField jpfContrasena) {
-		this.jpfContrasena = jpfContrasena;
-	}
-
-	public JLabel getLblErrorEmail() {
-		return lblErrorEmail;
-	}
-
-	public void setLblErrorEmail(JLabel lblErrorEmail) {
-		this.lblErrorEmail = lblErrorEmail;
-	}
-
-	public JLabel getLblErrorPassword() {
-		return lblErrorPassword;
-	}
-
-	public void setLblErrorPassword(JLabel lblErrorPassword) {
-		this.lblErrorPassword = lblErrorPassword;
-	}
-
-	public JButton getBtnIniciarSesion() {
-		return btnIniciarSesion;
-	}
-
-	public void setBtnIniciarSesion(JButton btnIniciarSesion) {
-		this.btnIniciarSesion = btnIniciarSesion;
+	
+	public JPasswordField getPasswordField() {
+		return passwordField;
 	}
 
 	public JButton getBtnRegister() {
@@ -207,12 +179,18 @@ public class LoginView extends JPanel {
 		this.btnRegister = btnRegister;
 	}
 
+	public JButton getBtnIniciarSesion() {
+		return btnIniciarSesion;
+	}
+
+	public void setBtnIniciarSesion(JButton btnIniciarSesion) {
+		this.btnIniciarSesion = btnIniciarSesion;
+	}
+
 	public LoginWindow getWindow() {
 		return window;
 	}
 
-	public void setWindow(LoginWindow window) {
-		this.window = window;
-	}
+	
 
 }

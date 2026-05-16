@@ -14,7 +14,7 @@ public class UserTableModel extends AbstractTableModel{
 		"Nombre",
 		"Email",
 		"Celular",
-        "Rol"
+        "Role"
 	};
 	
 	public UserTableModel(List<User> users) {
@@ -46,9 +46,9 @@ public class UserTableModel extends AbstractTableModel{
 		case 1:
 			return user.getEmail();
 		case 2:
-			return user.getCelular();
+			return user.getPhone();
         case 3:
-            return user.getRol();
+            return user.getRole();
         }
 
 		return null;
@@ -62,5 +62,22 @@ public class UserTableModel extends AbstractTableModel{
 		this.users = users;
 		fireTableDataChanged();
 	}
+	
+	public void removeRow(int row) {
+		users.remove(row);
+		fireTableRowsDeleted(row, row);
+	}
+	
+	public void addRow(User user) {
+		int row = users.size();
+		users.add(user);
+		fireTableRowsDeleted(row, row);
+	}
+	
+	public void updateRow(int row, User user) {
+		users.set(row, user);
+		fireTableRowsUpdated(row, row);
+	}
+
 
 }

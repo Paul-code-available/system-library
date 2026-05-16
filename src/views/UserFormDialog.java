@@ -147,8 +147,8 @@ public class UserFormDialog extends JDialog {
 	    	if (user != null) {
 				txtNombre.setText(user.getName());
 				txtEmail.setText(user.getEmail());
-				txtNumero.setText(user.getCelular());
-                txtRol.setText(user.getRol());
+				txtNumero.setText(user.getPhone());
+                txtRol.setText(user.getRole());
 			}
 	    }
 	    
@@ -164,8 +164,8 @@ public class UserFormDialog extends JDialog {
 	        } else {
 	        	user.setName(name);
 	        	user.setEmail(email);
-	        	user.setCelular(celular);
-                user.setRol(rol);
+	        	user.setPhone(celular);
+                user.setRole(rol);
 	        }
 	        
 	        saved = true;
@@ -264,17 +264,17 @@ public class UserFormDialog extends JDialog {
 	    
 	    public boolean validateCel(User user) {
 	    	
-	    	if (user.getCelular().trim().isBlank()) {
+	    	if (user.getPhone().trim().isBlank()) {
 				showErrorCel("El celular es requerido");
 			}
 	    	
-	    	if (user.getCelular().trim().length() != 10) {
+	    	if (user.getPhone().trim().length() != 10) {
 				showErrorCel("El número debe contener 10 digitos");
 			}
 	    	
-	    	for (int i = 0; i < user.getCelular().length(); i++) {
+	    	for (int i = 0; i < user.getPhone().length(); i++) {
 				
-	    		char c = user.getCelular().charAt(i);
+	    		char c = user.getPhone().charAt(i);
 	    		
 	    		if (!Character.isDigit(c)) {
 					showErrorCel("Solo puedes ingresar numeros");
@@ -290,7 +290,7 @@ public class UserFormDialog extends JDialog {
 	    	
 	    	// preferiblemente en un ENUM
 	    	
-	    	if (user.getRol().trim().isBlank()) {
+	    	if (user.getRole().trim().isBlank()) {
 				showErrorRol("El rol es requerido");
 			}
 	    	
