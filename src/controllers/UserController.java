@@ -53,16 +53,12 @@ public class UserController {
 		});
 		
 		this.view.getBtnDelete().addActionListener(e -> {
-			int row = view.getSelectedRow();
 			
-			if (row == -1) {
-				JOptionPane.showMessageDialog(view, "Selecciona un usuario");
-				return;
+			boolean deleted = repo.delete(model.getUserAt(view.getSelectedRow()).getId());
+			if(deleted) {
+				
+				model.removeRow(view.getSelectedRow());
 			}
-			
-			System.out.println("Se ejecuta borrar usuario");
-			borrarUsuario(model.getUserAt(row));
-			
 
 
 		});
@@ -90,30 +86,6 @@ public class UserController {
         }
     }
 	
-	public void borrarUsuario(User user) {
-		
-		user.setName("");
-		user.setEmail("");
-		user.setCelular("");
-        user.setRol("");
-		
-		int row = view.getSelectedRow();
-		try {
-			
-			repo.update(row, user);
-			repo.delete(row);
-			loadUsers();
-			
-			JOptionPane.showMessageDialog(view, "Usuario borrado");
-
-		} catch (IOException e) {
-		
-			JOptionPane.showMessageDialog(view, e.getMessage());
-			
-		}
-		
-	}
-	
 	private void openForm(User user) {
 	
 		UserFormDialog dialog = new UserFormDialog(null, user);
@@ -127,17 +99,18 @@ public class UserController {
 			try {
 				
 				if (user == null) {
-					
 					repo.save(savedUser);
-					
+					model.addRow(savedUser);
 				} else {
 					
 					int row = view.getSelectedRow();
-					repo.update(row, savedUser);
+					boolean updated = repo.update(row, savedUser);
 				
+					if (updated) {
+						model.updateRow(row, savedUser);
+					}
+					
 				}
-				
-				loadUsers();
 				
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(view, e.getMessage());

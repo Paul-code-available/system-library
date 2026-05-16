@@ -102,10 +102,10 @@ public class PDFExporter {
                         .add(new Paragraph(u.getEmail())));
 
                 table.addCell(new Cell().setTextAlignment(TextAlignment.CENTER)
-                        .add(new Paragraph(u.getCelular())));
+                        .add(new Paragraph(u.getPhone())));
 
                 table.addCell(new Cell().setTextAlignment(TextAlignment.CENTER)
-                        .add(new Paragraph(u.getRol())));
+                        .add(new Paragraph(u.getRole())));
 
                 indice++;
             }

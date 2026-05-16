@@ -8,6 +8,7 @@ import exceptions.InvalidPasswordException;
 import exceptions.InvalidUserException;
 import models.User;
 import repository.LoginRepository;
+import utils.Session;
 import views.FormUserWindow;
 import views.HomeView;
 import views.LoginView;
@@ -36,19 +37,28 @@ public class LoginController {
 	
 	public void handleLogin() {
 		
-		if (!validateLogin(new User(view.getTxtEmail().getText(), String.valueOf(view.getJpfContrasena().getPassword())))) {
+		if (!validateLogin(new User(view.getEmail(), view.getPassword()))) {
 			return;
 		}
 		
-		User user = repository.login(view.getTxtEmail().getText(), String.valueOf(view.getJpfContrasena().getPassword()));
+		
+		System.out.println(view.getPassword());
+		User user = repository.login(view.getEmail(), view.getPassword());
 		
 		if (user == null) {
 			view.showPasswordError("Verifica los datos ingresados");
 			return;
 		}
 		
-		JOptionPane.showMessageDialog(view.getWindow(), "Se inició sesión");
-		new HomeController(new HomeWindow().getHomeView());
+		
+		Session.login(user);
+		
+		if (Session.getRole().equalsIgnoreCase("admin")) {
+			JOptionPane.showMessageDialog(view.getWindow(), "Se inició sesión");
+			new HomeController(new HomeWindow().getHomeView());
+		} else {
+			JOptionPane.showMessageDialog(view.getWindow(), "No eres admin");
+		}
 		
 		view.getWindow().dispose();
 		
@@ -168,8 +178,7 @@ public class LoginController {
 	}
 	
 	private boolean validatePassword(User user) {
-		
-		System.out.println(user.getPassword());
+
 		if (user.getPassword().trim().isEmpty()) {
 			view.showPasswordError("La contraseña es requerida");
 			return false;

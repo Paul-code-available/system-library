@@ -22,18 +22,14 @@ public class Main {
 		
 		ThemeManager.applySavedTheme();
 
-	
-		LoginWindow ventanita = new LoginWindow();
-		new LoginController(ventanita.getLoginView());
-
 		/*
 		LoginWindow ventanita = new LoginWindow();
 		new LoginController(ventanita.getLoginView());
 		*/
-		/*
+		
         HomeWindow homesito = new HomeWindow();
         new HomeController(homesito.getHomeView());
-		*/
+		
 		/*
 		FormUserWindow ventana = new FormUserWindow();
         new RegisterController(ventana.getFormUserView());
