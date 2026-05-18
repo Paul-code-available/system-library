@@ -1,9 +1,6 @@
 package views;
 
-import controllers.HomeController;
-
 import javax.swing.JFrame;
-import java.awt.*;
 
 public class HomeWindow extends JFrame{
 

@@ -1,16 +1,9 @@
 package views;
 
-
-import models.User;
 import utils.AppFont;
 import utils.SwingUtils;
-
-import javax.print.attribute.standard.JobPrioritySupported;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.security.PublicKey;
 
 public class HomeView extends JPanel{
 

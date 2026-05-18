@@ -1,23 +1,8 @@
 package controllers;
 
-import models.User;
-import repository.UserRepository;
-import tablemodels.UserTableModel;
-import utils.Config;
 import views.HomeView;
-import views.HomeWindow;
-
 import javax.swing.*;
-
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Point;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.io.IOException;
-import java.util.List;
 
 public class HomeController {
 
