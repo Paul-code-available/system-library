@@ -5,22 +5,37 @@ public class User {
 	private String name;
 	private String email;
 	private String password;
-	private String celular;
-    private String rol;
+	private String phone;
+    private String role;
+    private int id;
 
     public User(){
     }
-
-	public User(String name, String email) {
+    
+    public User(String email, String password) {
+		this.email = email;
+        this.password = password;
+	}
+	
+	public User(int id, String name, String password) {
+		this.id = id;
 		this.name = name;
-        this.email = email;
+        this.password = password;
 	}
 
-	public User(String name, String email, String celular, String rol) {
+	public User(String name, String email, String celular, String role) {
 		this.name = name;
 		this.email = email;
-		this.celular = celular;
-        this.rol = rol;
+		this.phone = celular;
+        this.role = role;
+	}
+	
+	public User(int id, String name, String email, String celular, String role) {
+		this.id = id;
+		this.name = name;
+		this.email = email;
+		this.phone = celular;
+        this.role = role;
 	}
 
     public String getName() {
@@ -47,20 +62,28 @@ public class User {
 		this.password = password;
 	}
 
-	public String getCelular() {
-		return celular;
+	public String getPhone() {
+		return phone;
 	}
 	
-	public void setCelular(String celular) {
-		this.celular = celular;
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
-    public String getRol() {
-        return rol;
+    public String getRole() {
+        return role;
     }
 
-    public void setRol(String rol) {
-        this.rol = rol;
+    public void setRole(String rol) {
+        this.role = rol;
     }
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 }

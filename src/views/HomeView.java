@@ -35,8 +35,8 @@ public class HomeView extends JPanel{
 
     //public UsersView usersPanel;
 
-    public HomeView(){
-    	//this.window = window;
+    public HomeView(HomeWindow window){
+    	this.window = window;
         setLayout(new BorderLayout());
         
         UIManager.put("TextComponent.arc", 15);

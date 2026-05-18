@@ -13,7 +13,7 @@ public class HomeWindow extends JFrame{
 		setLocationRelativeTo(null);
         setTitle("Casa Leeré");
 
-        homeView = new HomeView();
+        homeView = new HomeView(this);
         add(homeView);
 
         setVisible(true);
@@ -23,9 +23,12 @@ public class HomeWindow extends JFrame{
         return homeView;
     }
 
-	public void setWindowSize(int width, int height) {
-		setWindowSize(width, height);
-		
+    public void setWindowSize(int width, int height) {
+		setSize(width, height);
+	}
+	
+	public void setWindowLocation(int x, int y) {
+		setLocation(x, y);
 	}
 	
 }

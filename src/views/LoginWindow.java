@@ -9,7 +9,7 @@ public class LoginWindow extends JFrame {
 	
 	public LoginWindow() {
 		
-		setSize(350, 290);
+		setSize(350, 320);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		setResizable(false);

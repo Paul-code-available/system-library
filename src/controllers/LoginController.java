@@ -1,20 +1,26 @@
 package controllers;
 
+import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import exceptions.InvalidPasswordException;
 import exceptions.InvalidUserException;
 import models.User;
+import repository.LoginRepository;
+import utils.Session;
 import views.FormUserWindow;
+import views.HomeView;
 import views.LoginView;
 import views.HomeWindow;
 
 public class LoginController {
 
 	private LoginView view;
+	private LoginRepository repository;
 	
 	public LoginController(LoginView view) {
+		repository = new LoginRepository();
 		this.view = view;
 		
 		loginListeners();
@@ -31,23 +37,30 @@ public class LoginController {
 	
 	public void handleLogin() {
 		
-		User user = new User(
-			view.getTxtEmail().getText(), 
-			String.valueOf(view.getJpfContrasena().getPassword())
-		);
-			
-		try {
-			
-			if (validateLogin(user)) {
-				new HomeWindow();
-				view.getWindow().dispose();
-			}
-			
-		} catch (InvalidUserException e2) {
-			view.showEmailError("Verifica el correo");
-		} catch (InvalidPasswordException e1) {
-			view.showPasswordError("Verifica la contraseña");
+		if (!validateLogin(new User(view.getEmail(), view.getPassword()))) {
+			return;
 		}
+		
+		
+		System.out.println(view.getPassword());
+		User user = repository.login(view.getEmail(), view.getPassword());
+		
+		if (user == null) {
+			view.showPasswordError("Verifica los datos ingresados");
+			return;
+		}
+		
+		
+		Session.login(user);
+		
+		if (Session.getRole().equalsIgnoreCase("admin")) {
+			JOptionPane.showMessageDialog(view.getWindow(), "Se inició sesión");
+			new HomeController(new HomeWindow().getHomeView());
+		} else {
+			JOptionPane.showMessageDialog(view.getWindow(), "No eres admin");
+		}
+		
+		view.getWindow().dispose();
 		
 	}
 
@@ -125,7 +138,7 @@ public class LoginController {
 	*/
 	
 	
-	private boolean validateLogin(User user) throws InvalidUserException, InvalidPasswordException {
+	private boolean validateLogin(User user) {
 		
 		view.resetMessages();
 		
@@ -143,7 +156,7 @@ public class LoginController {
 		
 	}
 	
-	private boolean validateEmail(User user) throws InvalidUserException {
+	private boolean validateEmail(User user) {
 		
 		if (user.getEmail().trim().isEmpty()) {
 			view.showEmailError("El email es requerido");
@@ -160,30 +173,15 @@ public class LoginController {
 			return false;
 		}
 		
-		
-		if (!user.getEmail().trim().isEmpty() && !user.getEmail().equals("juanitoalcachofa123@gmail.com")) {
-			throw new InvalidUserException("Usuario no registrado");
-		}
-		
 		return true;
 		
 	}
 	
-	private boolean validatePassword(User user) throws InvalidPasswordException {
-		
+	private boolean validatePassword(User user) {
+
 		if (user.getPassword().trim().isEmpty()) {
 			view.showPasswordError("La contraseña es requerida");
 			return false;
-		}
-		
-		if (user.getPassword().trim().length() > 20) {
-			view.showPasswordError("Longitud maxíma alcanzada");
-			return false;
-		}
-
-		
-	if (!user.getPassword().trim().isEmpty() && !user.getPassword().trim().equals("1234")) {
-			throw new InvalidPasswordException("Contraseña incorrecta");
 		}
 		
 		return true;
