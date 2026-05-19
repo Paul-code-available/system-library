@@ -45,7 +45,6 @@ public class HomeView extends JPanel{
         panelIzquierdo();
         crearVistas();
         setVisible(true);
-        
     }
 
 
@@ -119,7 +118,6 @@ public class HomeView extends JPanel{
 
         
         contenedor.add(inicioView, HOME);
-        
         contenedor.add(usersView, USERS);
         contenedor.add(booksView, BOOKS);
         contenedor.add(borrowView, BORROW);

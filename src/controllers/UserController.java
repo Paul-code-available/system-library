@@ -1,6 +1,5 @@
 package controllers;
 
-import com.itextpdf.kernel.pdf.PdfDocument;
 import repository.UserRepository;
 import services.PDFExporter;
 import tablemodels.UserTableModel;
