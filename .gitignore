@@ -4,3 +4,4 @@
 *.class
 .idea/
 *.iml
+src/config/database.properties
