@@ -82,17 +82,7 @@ public class HomeController {
         	homeView.btnBorrow.setBackground(Color.decode("#3673DF"));
         	homeView.btnBorrow.setForeground(Color.decode("#F7F8FB"));
         });
-        
-        homeView.btnReports.addActionListener(e -> {
-        	homeView.mostrarVista(HomeView.REPORTS);
-
-        	resetearBotones();
-        	resetearTexto();
-        	
-        	homeView.btnReports.setBackground(Color.decode("#3673DF"));
-        	homeView.btnReports.setForeground(Color.decode("#F7F8FB"));
-        });
-        
+       
         homeView.btnAccount.addActionListener(e -> {
         	homeView.mostrarVista(HomeView.ACCOUNT);
 
@@ -111,7 +101,6 @@ public class HomeController {
     	homeView.btnUsers.setBackground(Color.decode("#16374E"));
 		homeView.btnBooks.setBackground(Color.decode("#16374E"));
 		homeView.btnBorrow.setBackground(Color.decode("#16374E"));
-		homeView.btnReports.setBackground(Color.decode("#16374E"));
 		homeView.btnAccount.setBackground(Color.decode("#16374E"));
 		
     }
@@ -122,7 +111,6 @@ public class HomeController {
     	homeView.btnUsers.setForeground(Color.decode("#DFE1E0"));
     	homeView.btnBooks.setForeground(Color.decode("#DFE1E0"));
     	homeView.btnBorrow.setForeground(Color.decode("#DFE1E0"));
-    	homeView.btnReports.setForeground(Color.decode("#DFE1E0"));
     	homeView.btnAccount.setForeground(Color.decode("#DFE1E0"));
   
     }

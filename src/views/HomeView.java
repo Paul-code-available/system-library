@@ -18,21 +18,18 @@ public class HomeView extends JPanel{
     public static final String USERS = "USERS";
     public static final String BOOKS = "BOOKS";
     public static final String BORROW = "BORROW";
-    public static final String REPORTS = "REPORTS";
     public static final String ACCOUNT = "ACCOUNT";
 
     public InicioView inicioView;
     public UsersView usersView;
     public BooksView booksView;
     public BorrowView borrowView;
-    public ReportsView reportsView;
     public AccountView accountView;
 
     public JButton btnHome;
     public JButton btnUsers;
     public JButton btnBooks;
     public JButton btnBorrow;
-    public JButton btnReports;
     public JButton btnAccount;
 
     private CardLayout cardLayout;
@@ -58,7 +55,7 @@ public class HomeView extends JPanel{
 
     public void panelIzquierdo(){
         JPanel panelIzquierdoPrincipal = new JPanel();
-        panelIzquierdoPrincipal.setPreferredSize(new Dimension(180, 0));
+        panelIzquierdoPrincipal.setPreferredSize(new Dimension(200, 0));
         panelIzquierdoPrincipal.setLayout(new BoxLayout(panelIzquierdoPrincipal, BoxLayout.Y_AXIS));
         panelIzquierdoPrincipal.setBackground(Color.decode("#16374E"));
         add(panelIzquierdoPrincipal, BorderLayout.WEST);
@@ -101,12 +98,6 @@ public class HomeView extends JPanel{
         panelIzquierdoPrincipal.add(btnBorrow);
         
         panelIzquierdoPrincipal.add(Box.createVerticalStrut(10));
-       
-        btnReports = SwingUtils.crearBtn("Reportes");
-        //btnReports.setIcon(SwingUtils.cargarIcono("/assets/img/bar-chart.png", 22, 22));
-        panelIzquierdoPrincipal.add(btnReports);
-        
-        panelIzquierdoPrincipal.add(Box.createVerticalStrut(10));
         
         btnAccount = SwingUtils.crearBtn("Cuenta");
         //btnRoles.setIcon(SwingUtils.cargarIcono("/assets/img/settings.png", 22, 22));
@@ -121,7 +112,6 @@ public class HomeView extends JPanel{
         usersView = new UsersView();
         booksView = new BooksView();
         borrowView = new BorrowView();
-        reportsView = new ReportsView();
         accountView = new AccountView();
 
         
@@ -130,7 +120,6 @@ public class HomeView extends JPanel{
         contenedor.add(usersView, USERS);
         contenedor.add(booksView, BOOKS);
         contenedor.add(borrowView, BORROW);
-        contenedor.add(reportsView, REPORTS);
         contenedor.add(accountView, ACCOUNT);
 
         add(contenedor, BorderLayout.CENTER);
