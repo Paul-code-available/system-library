@@ -57,7 +57,7 @@ public class HomeView extends JPanel{
         JPanel panelIzquierdoPrincipal = new JPanel();
         panelIzquierdoPrincipal.setPreferredSize(new Dimension(200, 0));
         panelIzquierdoPrincipal.setLayout(new BoxLayout(panelIzquierdoPrincipal, BoxLayout.Y_AXIS));
-        panelIzquierdoPrincipal.setBackground(Color.decode("#16374E"));
+        panelIzquierdoPrincipal.setBackground(Color.decode("#090C18"));
         add(panelIzquierdoPrincipal, BorderLayout.WEST);
      
         panelIzquierdoPrincipal.add(Box.createVerticalStrut(10));

@@ -24,6 +24,7 @@ public class RoundedImageLabel extends JPanel {
         image = icon.getImage();
 
         setPreferredSize(new Dimension(160, 210));
+        setMaximumSize(new Dimension(160, 210));
         setOpaque(false);
     }
 

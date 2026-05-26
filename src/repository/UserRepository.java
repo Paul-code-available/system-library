@@ -9,6 +9,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -23,10 +25,39 @@ public class UserRepository {
 	
 	public void save(User user) throws IOException {
 		// falta conenctarlo a base de datos
+		/*
         List<User> users = getUsers();
         users.add(user);
-    
+    	*/
+		
+		String sql = "INSERT INTO users (name, email, password, phone, role)"
+				+ "VALUES (?, ?, ?, ?, ?)";
+		
+		System.out.println(sql);
+		
+		try (Connection connection = DatabaseConnection.getConnection();
+			 PreparedStatement pst = connection.prepareStatement(sql)) {
+			
+			pst.setString(1, user.getName());
+			pst.setString(2, user.getEmail());
+			pst.setString(3, user.getPassword());
+			pst.setString(4, user.getPhone());
+			pst.setString(5, user.getRole());
+			
+			pst.executeUpdate();
+			
+			JOptionPane.showMessageDialog(null, "Usuario agregado correctamente");
+			
+			
+		} catch (SQLException ex) {
+			
+			ex.printStackTrace();
+		}
+		
+		
 	}
+	
+	
 	
 	public List<User> getUsers() throws IOException{
         

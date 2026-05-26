@@ -26,27 +26,31 @@ public class BooksView extends JPanel {
 	
 	public BooksView() {
 		setLayout(new GridBagLayout());
-		setBorder(BorderFactory.createEmptyBorder(20,100,20,50));
+		setBackground(Color.decode("#0F1524"));
+
 		mainPanel();
 	}
 	
 	public void mainPanel() {
 		GridBagConstraints gbc = new GridBagConstraints();
 		
-	    gbc.insets = new Insets(10, 10, 10, 60);
+	    gbc.insets = new Insets(10, 10, 10, 20);
 	    
 	    gbc.gridx = 0;
 	    gbc.gridy = 0;
 	    
-	    JLabel numberOfBooks = new JLabel("Numero de libros (8)");
+	    JLabel numberOfBooks = new JLabel("Libros registrados 8");
+	    numberOfBooks.setForeground(Color.decode("#FFFFFF"));
 	    numberOfBooks.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+	   
 	    
 	    add(numberOfBooks, gbc);
 	    
 	    gbc.gridx = 3;
 		gbc.gridy = 0;
 		    
-		createNewBook = SwingUtils.crearBtn("Crear nuevo libro");
+		createNewBook = SwingUtils.crearBtn("Crear libro");
+	
 		createNewBook.setBackground(Color.decode("#3673DF"));
 		createNewBook.setForeground(Color.decode("#F7F8FB"));
 		    
@@ -136,7 +140,7 @@ public class BooksView extends JPanel {
 	    gbc.gridy = 2;
 
 	    Book book5 = new Book(
-	       	    "The Pragmatic Programmer",
+	       	    "The Pragmatic Progra...",
 	       	    "Andrew Hunt & David Thomas",
 	       	    "Programación",
 	       	    352,

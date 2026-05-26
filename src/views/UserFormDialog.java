@@ -35,6 +35,7 @@ public class UserFormDialog extends JDialog {
 		private JLabel jlbTitulo;
 	    private JTextField txtNombre;
 	    private JTextField txtEmail;
+	    private JPasswordField txtPassword;
 	    private JTextField txtNumero;
         private JTextField txtRol;
         
@@ -58,7 +59,7 @@ public class UserFormDialog extends JDialog {
 
 	        setLayout(new BorderLayout());
 	
-	        setSize(340, 380);                          
+	        setSize(340, 420);                          
 			setLocationRelativeTo(parent);
 
 	        crearHeader();
@@ -99,6 +100,11 @@ public class UserFormDialog extends JDialog {
 	        
 	        jlbErrorEmail = SwingUtils.createLblMessageError();
 	        panel.add(jlbErrorEmail);
+	        
+	        panel.add(Box.createVerticalStrut(10));
+	        
+	        txtPassword = SwingUtils.createJpfPassword("Contraseña"); 
+			panel.add(txtPassword);
 	        
 	        panel.add(Box.createVerticalStrut(10));
 	        
@@ -156,14 +162,16 @@ public class UserFormDialog extends JDialog {
 	    	
 	    	String name = txtNombre.getText();
 	    	String email = txtEmail.getText();
+	    	String password = getPassword();
 	    	String celular = txtNumero.getText();
             String rol = txtRol.getText();
 
 	        if(user == null) {
-	        	user = new User(name, email, celular, rol);
+	        	user = new User(name, email, password, celular, rol);
 	        } else {
 	        	user.setName(name);
 	        	user.setEmail(email);
+	        	user.setPassword(password);
 	        	user.setPhone(celular);
                 user.setRole(rol);
 	        }
@@ -328,6 +336,15 @@ public class UserFormDialog extends JDialog {
 	    	return user;
 	    }
 
+	    public String getPassword() {
+			return String.valueOf(txtPassword.getPassword());
+		}
+
+		public void setTxtPassword(JPasswordField txtPassword) {
+			this.txtPassword = txtPassword;
+		}
+
+	    
 	   
 
 
