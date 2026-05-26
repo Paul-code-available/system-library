@@ -75,7 +75,7 @@ public class HomeController {
         
         homeView.btnBorrow.addActionListener(e -> {
         	homeView.mostrarVista(HomeView.BORROW);
-
+        	
         	resetearBotones();
         	resetearTexto();
         	
@@ -85,7 +85,7 @@ public class HomeController {
        
         homeView.btnAccount.addActionListener(e -> {
         	homeView.mostrarVista(HomeView.ACCOUNT);
-
+        	
         	resetearBotones();
         	resetearTexto();
         	
@@ -95,13 +95,14 @@ public class HomeController {
         
     }
     
+    
     public void resetearBotones() {
     	
-    	homeView.btnHome.setBackground(Color.decode("#16374E"));
-    	homeView.btnUsers.setBackground(Color.decode("#16374E"));
-		homeView.btnBooks.setBackground(Color.decode("#16374E"));
-		homeView.btnBorrow.setBackground(Color.decode("#16374E"));
-		homeView.btnAccount.setBackground(Color.decode("#16374E"));
+    	homeView.btnHome.setBackground(Color.decode("#141D30"));
+    	homeView.btnUsers.setBackground(Color.decode("#141D30"));
+		homeView.btnBooks.setBackground(Color.decode("#141D30"));
+		homeView.btnBorrow.setBackground(Color.decode("#141D30"));
+		homeView.btnAccount.setBackground(Color.decode("#141D30"));
 		
     }
     
@@ -114,7 +115,7 @@ public class HomeController {
     	homeView.btnAccount.setForeground(Color.decode("#DFE1E0"));
   
     }
-
+	
     public void mostrarUsuarios(){
     	
     	if (userController == null) {
