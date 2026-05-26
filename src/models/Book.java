@@ -2,6 +2,8 @@ package models;
 
 import javax.swing.ImageIcon;
 
+import utils.RoundedImageLabel;
+
 public class Book {
 	
 	private String title;
@@ -16,6 +18,8 @@ public class Book {
 
 	private String isbn;
 	private String coverPath;
+	
+	private RoundedImageLabel roundedImageLabel;
 	
 	private String publisher;
 	private String description;
@@ -33,6 +37,23 @@ public class Book {
 		this.totalBooks = totalBooks;
 		this.isbn = isbn;
 		this.coverPath = coverPath;
+		this.publisher = publisher;
+		this.description = description;
+	}
+
+	public Book(String title, String author, String category, int pages, int publishYear, String language,
+			int availableBooks, int totalBooks, String isbn, RoundedImageLabel roundedImageLabel, String publisher,
+			String description) {
+		this.title = title;
+		this.author = author;
+		this.category = category;
+		this.pages = pages;
+		this.publishYear = publishYear;
+		this.language = language;
+		this.availableBooks = availableBooks;
+		this.totalBooks = totalBooks;
+		this.isbn = isbn;
+		this.roundedImageLabel = roundedImageLabel;
 		this.publisher = publisher;
 		this.description = description;
 	}

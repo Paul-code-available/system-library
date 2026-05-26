@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import models.Book;
+import utils.RoundedImageLabel;
 
 public class BookPanel extends JPanel {
 
@@ -19,34 +20,23 @@ public class BookPanel extends JPanel {
 		this.book = book;
 		
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		
-		ImageIcon icon = new ImageIcon(
-				getClass().getResource(book.getCoverPath())
-		);
-		
-		Image scaled = icon.getImage().getScaledInstance(
-			    160,
-			    210,
-			    Image.SCALE_SMOOTH
-		);
-		
-		JLabel cover = new JLabel(new ImageIcon(scaled));
-		cover.setAlignmentX(CENTER_ALIGNMENT);
-		
-		add(cover);
+	
+		RoundedImageLabel roundedImage = new RoundedImageLabel(book.getCoverPath());
+		roundedImage.setAlignmentX(LEFT_ALIGNMENT);
+		add(roundedImage);
 		
 		JLabel title = new JLabel(book.getTitle());
-		title.setAlignmentX(CENTER_ALIGNMENT);
+		title.setAlignmentX(LEFT_ALIGNMENT);
 		
 		add(title);
 		
 		JLabel author = new JLabel(book.getAuthor());
-		author.setAlignmentX(CENTER_ALIGNMENT);
+		author.setAlignmentX(LEFT_ALIGNMENT);
 		
 		add(author);
 		
 		JLabel category = new JLabel(book.getCategory());
-		category.setAlignmentX(CENTER_ALIGNMENT);
+		category.setAlignmentX(LEFT_ALIGNMENT);
 		
 		add(category);
 	}
