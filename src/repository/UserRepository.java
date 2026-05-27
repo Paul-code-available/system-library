@@ -22,8 +22,11 @@ import java.io.File;
 import models.User;
 
 public class UserRepository {
-	
-	public void save(User user) throws IOException {
+
+    public UserRepository() {
+    }
+
+    public void save(User user) throws IOException {
 		// falta conenctarlo a base de datos
 		/*
         List<User> users = getUsers();
@@ -71,7 +74,7 @@ public class UserRepository {
 			while (rs.next()) {
 				
 				User user = new User(
-					rs.getInt("id"),
+					rs.getInt("id_user"),
 					rs.getString("name"),
 					rs.getString("email"),
 					rs.getString("phone"),
@@ -91,7 +94,7 @@ public class UserRepository {
 	
 	public boolean delete(int id) {
 		
-		String sql = "DELETE FROM users WHERE id = ?";
+		String sql = "DELETE FROM users WHERE id_user = ?";
 		
 		try (Connection connection = DatabaseConnection.getConnection();
 			 PreparedStatement pst = connection.prepareStatement(sql)) {
@@ -115,7 +118,7 @@ public class UserRepository {
 		
 		String sql = "UPDATE users SET name = ?, email = ?, "
 				+ "phone = ?, role = ? "
-				+ "WHERE id = ?";
+				+ "WHERE id_user = ?";
 		
 		try (Connection connection = DatabaseConnection.getConnection();
 			 PreparedStatement pst = connection.prepareStatement(sql)) {
@@ -137,7 +140,21 @@ public class UserRepository {
 		}
 		
 		return false;
-		
 	}
-	
+
+    public int count(){
+        String sql = "SELECT COUNT(*) FROM users";
+
+        try(Connection connection = DatabaseConnection.getConnection();
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(sql)){
+
+            if(rs.next()){
+                return rs.getInt(1);
+            }
+        }catch (SQLException ex){
+            ex.printStackTrace();
+        }
+        return 0;
+    }
 }

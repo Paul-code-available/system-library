@@ -1,5 +1,7 @@
 package views;
 
+import repository.UserRepository;
+
 import javax.swing.JFrame;
 
 public class HomeWindow extends JFrame{
@@ -13,7 +15,8 @@ public class HomeWindow extends JFrame{
 		setLocationRelativeTo(null);
         setTitle("Casa Leeré");
 
-        homeView = new HomeView(this);
+        UserRepository userRepository = new UserRepository();
+        homeView = new HomeView(userRepository,this);
         add(homeView);
 
         setVisible(true);
