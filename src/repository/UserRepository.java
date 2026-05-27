@@ -57,7 +57,7 @@ public class UserRepository {
 	
 	public boolean delete(int id) {
 		
-		String sql = "DELETE FROM users WHERE id = ?";
+		String sql = "DELETE FROM users WHERE id_user = ?";
 		
 		try (Connection connection = DatabaseConnection.getConnection();
 			 PreparedStatement pst = connection.prepareStatement(sql)) {
@@ -81,7 +81,7 @@ public class UserRepository {
 		
 		String sql = "UPDATE users SET name = ?, email = ?, "
 				+ "phone = ?, role = ? "
-				+ "WHERE id = ?";
+				+ "WHERE id_user = ?";
 		
 		try (Connection connection = DatabaseConnection.getConnection();
 			 PreparedStatement pst = connection.prepareStatement(sql)) {
