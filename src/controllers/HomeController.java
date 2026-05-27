@@ -75,27 +75,17 @@ public class HomeController {
         
         homeView.btnBorrow.addActionListener(e -> {
         	homeView.mostrarVista(HomeView.BORROW);
-
+        	
         	resetearBotones();
         	resetearTexto();
         	
         	homeView.btnBorrow.setBackground(Color.decode("#3673DF"));
         	homeView.btnBorrow.setForeground(Color.decode("#F7F8FB"));
         });
-        
-        homeView.btnReports.addActionListener(e -> {
-        	homeView.mostrarVista(HomeView.REPORTS);
-
-        	resetearBotones();
-        	resetearTexto();
-        	
-        	homeView.btnReports.setBackground(Color.decode("#3673DF"));
-        	homeView.btnReports.setForeground(Color.decode("#F7F8FB"));
-        });
-        
+       
         homeView.btnAccount.addActionListener(e -> {
         	homeView.mostrarVista(HomeView.ACCOUNT);
-
+        	
         	resetearBotones();
         	resetearTexto();
         	
@@ -105,14 +95,14 @@ public class HomeController {
         
     }
     
+    
     public void resetearBotones() {
     	
-    	homeView.btnHome.setBackground(Color.decode("#16374E"));
-    	homeView.btnUsers.setBackground(Color.decode("#16374E"));
-		homeView.btnBooks.setBackground(Color.decode("#16374E"));
-		homeView.btnBorrow.setBackground(Color.decode("#16374E"));
-		homeView.btnReports.setBackground(Color.decode("#16374E"));
-		homeView.btnAccount.setBackground(Color.decode("#16374E"));
+    	homeView.btnHome.setBackground(Color.decode("#141D30"));
+    	homeView.btnUsers.setBackground(Color.decode("#141D30"));
+		homeView.btnBooks.setBackground(Color.decode("#141D30"));
+		homeView.btnBorrow.setBackground(Color.decode("#141D30"));
+		homeView.btnAccount.setBackground(Color.decode("#141D30"));
 		
     }
     
@@ -122,11 +112,10 @@ public class HomeController {
     	homeView.btnUsers.setForeground(Color.decode("#DFE1E0"));
     	homeView.btnBooks.setForeground(Color.decode("#DFE1E0"));
     	homeView.btnBorrow.setForeground(Color.decode("#DFE1E0"));
-    	homeView.btnReports.setForeground(Color.decode("#DFE1E0"));
     	homeView.btnAccount.setForeground(Color.decode("#DFE1E0"));
   
     }
-
+	
     public void mostrarUsuarios(){
     	
     	if (userController == null) {

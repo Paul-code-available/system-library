@@ -93,6 +93,9 @@ public class UserController {
 		
 		if (dialog.isSaved()) {
 			
+			System.out.println(dialog.getUser());
+			
+			
 			User savedUser = dialog.getUser();
 			
 			try {

@@ -92,10 +92,10 @@ public class SwingUtils {
     	JButton btn = new JButton(nombre);
     	
     	btn.setFont(AppFont.large());
-        btn.setBackground(Color.decode("#16374E"));
+        btn.setBackground(Color.decode("#141D30"));
         btn.setBorderPainted(false);
         btn.setForeground(Color.decode("#DFE1E0"));
-        btn.setMaximumSize(new Dimension(160, 40));
+        btn.setMaximumSize(new Dimension(180, 40));
         btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btn.setAlignmentX(Component.CENTER_ALIGNMENT);
         btn.setHorizontalAlignment(SwingConstants.LEFT);

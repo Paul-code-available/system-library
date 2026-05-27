@@ -29,7 +29,7 @@ public class AppFont {
 	}
 	
 	public static Font title() {
-		return title.deriveFont(36f);
+		return title.deriveFont(28f);
 	}
 	
 	public static Font subtitle() {
