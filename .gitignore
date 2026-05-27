@@ -4,3 +4,5 @@
 *.class
 .idea/
 *.iml
+classes
+app.properties
