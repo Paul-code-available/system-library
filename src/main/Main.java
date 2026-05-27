@@ -34,6 +34,7 @@ public class Main {
 		FormUserWindow ventana = new FormUserWindow();
         new RegisterController(ventana.getFormUserView());
 		*/
+        
 
 	}
 

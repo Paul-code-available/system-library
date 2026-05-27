@@ -7,6 +7,9 @@ import utils.SwingUtils;
 
 import javax.print.attribute.standard.JobPrioritySupported;
 import javax.swing.*;
+
+import controllers.BookController;
+
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -114,6 +117,8 @@ public class HomeView extends JPanel{
         borrowView = new BorrowView();
         accountView = new AccountView();
 
+        
+    
         
         contenedor.add(inicioView, HOME);
         

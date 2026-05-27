@@ -22,7 +22,7 @@ import utils.SwingUtils;
 
 public class BooksView extends JPanel {
 	
-	JButton createNewBook;
+	private JButton createNewBook;
 	
 	public BooksView() {
 		setLayout(new GridBagLayout());
@@ -80,7 +80,7 @@ public class BooksView extends JPanel {
 	    gbc.gridy = 1;
 
 	    Book book2 = new Book(
-	        	"Harry Potter and...",
+	        	"Harry Potter and the Philosopher's Stone",
 	            "J.K. Rowling",
 	       	    "Fantasía",
 	       	    309,
@@ -140,7 +140,7 @@ public class BooksView extends JPanel {
 	    gbc.gridy = 2;
 
 	    Book book5 = new Book(
-	       	    "The Pragmatic Progra...",
+	       	    "The Pragmatic Programmer",
 	       	    "Andrew Hunt & David Thomas",
 	       	    "Programación",
 	       	    352,
@@ -218,6 +218,15 @@ public class BooksView extends JPanel {
 		
 	}
 
+	public JButton getCreateNewBook() {
+		return createNewBook;
+	}
+
+	public void setCreateNewBook(JButton createNewBook) {
+		this.createNewBook = createNewBook;
+	}
+
+	
 
 	
 	

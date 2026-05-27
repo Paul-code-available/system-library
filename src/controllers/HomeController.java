@@ -23,6 +23,7 @@ public class HomeController {
 
     private HomeView homeView;
     private UserController userController;
+    private BookController bookController;
 
 	public HomeController(HomeView homeView) {
 		this.homeView = homeView;
@@ -65,6 +66,8 @@ public class HomeController {
         
         homeView.btnBooks.addActionListener(e -> {
         	homeView.mostrarVista(HomeView.BOOKS);
+        	
+        	createBook();
 
         	resetearBotones();
         	resetearTexto();
@@ -126,6 +129,17 @@ public class HomeController {
     	
     	homeView.mostrarVista(homeView.USERS);
 
+    }
+    
+    public void createBook() {
+    	
+    	System.out.println("hola");
+    	
+    	if (bookController == null) {
+    		bookController = new BookController(homeView.booksView);
+			
+		}
+    	
     }
 
     private void saveWindowPreferences() {

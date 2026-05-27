@@ -28,7 +28,9 @@ public class SwingUtils {
 		
 		JTextField jtf = new JTextField();
 		jtf.setMaximumSize(new Dimension(Integer.MAX_VALUE, 30));
-		jtf.setAlignmentX(Component.LEFT_ALIGNMENT);
+		jtf.setBackground(Color.decode("#141D30"));
+		
+		
 		TextPrompt promptNombre = new TextPrompt(prompt, jtf);
 		
 		return jtf;
