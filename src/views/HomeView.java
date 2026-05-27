@@ -4,6 +4,7 @@ import utils.AppFont;
 import utils.SwingUtils;
 import javax.swing.*;
 import java.awt.*;
+import repository.UserRepository;
 
 public class HomeView extends JPanel{
 
@@ -13,6 +14,7 @@ public class HomeView extends JPanel{
     public static final String BORROW = "BORROW";
     public static final String REPORTS = "REPORTS";
     public static final String ACCOUNT = "ACCOUNT";
+    private final UserRepository userRepository;
 
     public InicioView inicioView;
     public UsersView usersView;
@@ -35,8 +37,9 @@ public class HomeView extends JPanel{
 
     //public UsersView usersPanel;
 
-    public HomeView(HomeWindow window){
-    	this.window = window;
+    public HomeView(UserRepository userRepository, HomeWindow window){
+        this.userRepository = userRepository;
+        this.window = window;
         setLayout(new BorderLayout());
         
         UIManager.put("TextComponent.arc", 15);
@@ -109,7 +112,7 @@ public class HomeView extends JPanel{
         cardLayout = new CardLayout();
         contenedor = new JPanel(cardLayout);
         
-        inicioView = new InicioView();
+        inicioView = new InicioView(userRepository);
         usersView = new UsersView();
         booksView = new BooksView();
         borrowView = new BorrowView();
