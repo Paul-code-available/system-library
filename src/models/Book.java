@@ -19,11 +19,13 @@ public class Book {
 	private String isbn;
 	private String coverPath;
 	
-	private RoundedImageLabel roundedImageLabel;
-	
 	private String publisher;
 	private String description;
-
+	
+	public Book() {
+		
+	}
+	
 	public Book(String title, String author, String category, int pages, int publishYear, String language,
                 int availableBooks, int totalBooks, String isbn, String coverPath, String publisher, String description) {
 		
@@ -73,6 +75,7 @@ public class Book {
 		this.publisher = publisher;
 		this.description = description;
 	}
+
 
 
     public String getTitle() {

@@ -14,14 +14,19 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -29,30 +34,46 @@ import views.components.TextPrompt;
 import utils.AppFont;
 import utils.SwingUtils;
 
-public class FormBookView extends JPanel {
+public class FormBookView extends JDialog {
 	
-	JTextField txtNombre;
+	JTextField txtTitle;
 	JTextField txtAutor;
-	JTextField txtEditorial;
-	JTextField txtAnio;
-	JTextField txtGenero;
-	JTextField txtIdioma;
-	JTextField txtNumPaginas;
+	JTextField txtCategory;
+	JTextField txtPages;
+	JTextField txtPublishYear;
+	JTextField txtLanguage;
+	JTextField txtAvailableBooks;
+	JTextField txtTotalBooks;
+	JTextField txtIsbn;
+	JTextField txtCoverPath;
+	JTextField txtPublisher;
+	JTextArea txtDescription;
+	
 	JButton btnAgregar;
 	JButton btnCancelar;
 	
-	JLabel lblErrorNombre;
+	JLabel lblErrorTitle;
 	JLabel lblErrorAutor;
-	JLabel lblErrorEditorial;
-	JLabel lblErrorAnio;
-	JLabel lblErrorNumPaginas;
+	JLabel lblErrorCategory;
+	JLabel lblErrorPages;
+	JLabel lblErrorAvailableBooks;
 	
+	JPanel mainPanel;
 	
-	public FormBookView() {
+	public FormBookView(JFrame parent) {
+		super(parent);
+				
+		setSize(360, 740);
+
+		setLocationRelativeTo(parent);
 		
-		setLayout(new BorderLayout());
+		mainPanel = new JPanel();
+		mainPanel.setLayout(new BorderLayout());
+		mainPanel.setBorder(new EmptyBorder(20, 10, 20, 10));
+		mainPanel.setBackground(Color.decode("#0F1524"));
+
+		add(mainPanel);
 		
-		setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
 		UIManager.put("TextComponent.arc", 15);
 		UIManager.put("Button.arc", 10);
 	
@@ -69,13 +90,15 @@ public class FormBookView extends JPanel {
 	public void panelSuperior() {
 		JPanel panelSuperior = new JPanel();
 		panelSuperior.setLayout(new BoxLayout(panelSuperior, BoxLayout.Y_AXIS));
+		panelSuperior.setBackground(Color.decode("#0F1524"));
 	
 		JLabel lblTitulo = new JLabel("Nuevo Libro");
+		
 		lblTitulo.setFont(AppFont.title());
 		lblTitulo.setAlignmentX(Component.CENTER_ALIGNMENT);
 		panelSuperior.add(lblTitulo);
 		
-		add(panelSuperior, BorderLayout.NORTH);
+		mainPanel.add(panelSuperior, BorderLayout.NORTH);
 		
 	}
 	
@@ -83,14 +106,16 @@ public class FormBookView extends JPanel {
 		
 		JPanel panelCentro = new JPanel();
 		panelCentro.setLayout(new BoxLayout(panelCentro, BoxLayout.Y_AXIS));
-		panelCentro.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
+		panelCentro.setBorder(BorderFactory.createEmptyBorder(20, 40, 20, 40));
+		panelCentro.setBackground(Color.decode("#0F1524"));
 		
-		txtNombre = SwingUtils.crearJtfText("Nombre");
-		panelCentro.add(txtNombre);
+		txtTitle = SwingUtils.crearJtfText("Titulo");
+
+		panelCentro.add(txtTitle);
 		panelCentro.add(Box.createVerticalStrut(10));
 		
-		lblErrorNombre = SwingUtils.createLblMessageError();
-		panelCentro.add(lblErrorNombre);
+		lblErrorTitle = SwingUtils.createLblMessageError();
+		panelCentro.add(lblErrorTitle);
 		
 		txtAutor = SwingUtils.crearJtfText("Autor");
 		panelCentro.add(txtAutor);
@@ -100,58 +125,97 @@ public class FormBookView extends JPanel {
 		lblErrorAutor = SwingUtils.createLblMessageError();
 		panelCentro.add(lblErrorAutor);
 		
-		txtEditorial = SwingUtils.crearJtfText("Editorial");
-		panelCentro.add(txtEditorial);
+		txtCategory = SwingUtils.crearJtfText("Categoria");
+		panelCentro.add(txtCategory);
 		
 		panelCentro.add(Box.createVerticalStrut(10));
 		
-		lblErrorEditorial = SwingUtils.createLblMessageError();
-		panelCentro.add(lblErrorEditorial);
+		lblErrorCategory = SwingUtils.createLblMessageError();
+		panelCentro.add(lblErrorCategory);
 		
-		txtAnio = SwingUtils.crearJtfText("Año de publicación");
-		panelCentro.add(txtAnio);
+		txtPages = SwingUtils.crearJtfText("Número de paginas");
+		panelCentro.add(txtPages);
 		
-		panelCentro.add(Box.createVerticalStrut(10));
-		
-		lblErrorAnio = SwingUtils.createLblMessageError();
-		panelCentro.add(lblErrorAnio);
-		
-		txtGenero = SwingUtils.crearJtfText("Género");
-		panelCentro.add(txtGenero);
+		lblErrorPages = SwingUtils.createLblMessageError();
+		panelCentro.add(lblErrorPages);
 		
 		panelCentro.add(Box.createVerticalStrut(10));
 		
-		txtIdioma = SwingUtils.crearJtfText("Idioma");
-		panelCentro.add(txtIdioma);
+		txtPublishYear = SwingUtils.crearJtfText("Año de publicación");
+		panelCentro.add(txtPublishYear);
 		
 		panelCentro.add(Box.createVerticalStrut(10));
 		
-		txtNumPaginas = SwingUtils.crearJtfText("Número de páginas");
-		panelCentro.add(txtNumPaginas);	
+		txtLanguage = SwingUtils.crearJtfText("Lenguaje");
+		panelCentro.add(txtLanguage);
 		
-		lblErrorNumPaginas = SwingUtils.createLblMessageError();
-		panelCentro.add(lblErrorNumPaginas);
+		panelCentro.add(Box.createVerticalStrut(10));
 		
-		add(panelCentro, BorderLayout.CENTER);
 		
-		SwingUtils.moveFocus(txtNombre, "DOWN", "aAutor", txtAutor);
-		SwingUtils.moveFocus(txtAutor, "UP", "aNombre", txtNombre);
-		SwingUtils.moveFocus(txtAutor, "DOWN", "aEditorial", txtEditorial);
-		SwingUtils.moveFocus(txtEditorial, "UP", "aAutor", txtAutor);
-		SwingUtils.moveFocus(txtEditorial, "DOWN", "aAño", txtAnio);
-		SwingUtils.moveFocus(txtAnio, "UP", "aEditorial", txtEditorial);
-		SwingUtils.moveFocus(txtAnio, "DOWN", "aGenero", txtGenero);
-		SwingUtils.moveFocus(txtGenero, "UP", "aAño", txtAnio);
-		SwingUtils.moveFocus(txtGenero, "DOWN", "aIdioma", txtIdioma);
-		SwingUtils.moveFocus(txtIdioma, "UP", "aGenero", txtGenero);
-		SwingUtils.moveFocus(txtIdioma, "DOWN", "aNPaginas", txtNumPaginas);
-		SwingUtils.moveFocus(txtNumPaginas, "UP", "aIdioma", txtIdioma);
+		
+		txtAvailableBooks = SwingUtils.crearJtfText("Libros disponibles");
+		panelCentro.add(txtAvailableBooks);	
+		
+		lblErrorAvailableBooks = SwingUtils.createLblMessageError();
+		panelCentro.add(lblErrorAvailableBooks);
+		
+		panelCentro.add(Box.createVerticalStrut(10));
+		
+		txtTotalBooks = SwingUtils.crearJtfText("Total de libros");
+		panelCentro.add(txtTotalBooks);
+		
+		panelCentro.add(Box.createVerticalStrut(10));
+		
+		txtIsbn = SwingUtils.crearJtfText("Código isbn");
+		panelCentro.add(txtIsbn);
+		
+		panelCentro.add(Box.createVerticalStrut(10));
+		
+		txtCoverPath = SwingUtils.crearJtfText("Dirección portada");
+		panelCentro.add(txtCoverPath);
+		
+		panelCentro.add(Box.createVerticalStrut(10));
+		
+		txtPublisher = SwingUtils.crearJtfText("Publisher");
+		panelCentro.add(txtPublisher);
+		
+		panelCentro.add(Box.createVerticalStrut(10));
+		
+		txtDescription = new JTextArea();
+		txtDescription.setLineWrap(true);
+		txtDescription.setWrapStyleWord(true);
+		txtDescription.setBackground(Color.decode("#141D30"));
+		
+		TextPrompt promptNombre = new TextPrompt("Descripción", txtDescription);
+
+		JScrollPane scroll = new JScrollPane(txtDescription);
+		scroll.setMaximumSize(new Dimension(Integer.MAX_VALUE, 100));
+		
+		
+		panelCentro.add(scroll);
+		
+		mainPanel.add(panelCentro, BorderLayout.CENTER);
+		
+		SwingUtils.moveFocus(txtTitle, "DOWN", "aAutor", txtAutor);
+		SwingUtils.moveFocus(txtAutor, "UP", "aNombre", txtTitle);
+		SwingUtils.moveFocus(txtAutor, "DOWN", "aEditorial", txtCategory);
+		SwingUtils.moveFocus(txtCategory, "UP", "aAutor", txtAutor);
+		SwingUtils.moveFocus(txtCategory, "DOWN", "aAño", txtPages);
+		SwingUtils.moveFocus(txtPages, "UP", "aEditorial", txtCategory);
+		SwingUtils.moveFocus(txtPages, "DOWN", "aGenero", txtPublishYear);
+		SwingUtils.moveFocus(txtPublishYear, "UP", "aAño", txtPages);
+		SwingUtils.moveFocus(txtPublishYear, "DOWN", "aIdioma", txtLanguage);
+		SwingUtils.moveFocus(txtLanguage, "UP", "aGenero", txtPublishYear);
+		SwingUtils.moveFocus(txtLanguage, "DOWN", "aNPaginas", txtAvailableBooks);
+		SwingUtils.moveFocus(txtAvailableBooks, "UP", "aIdioma", txtLanguage);
 		
 	}
 	
 	public void panelInferior() {
 		JPanel panelInferior = new JPanel();
 		panelInferior.setLayout(new BoxLayout(panelInferior, BoxLayout.X_AXIS));
+		panelInferior.setBorder(new EmptyBorder(10, 10, 10, 10));
+		panelInferior.setBackground(Color.decode("#0F1524"));
 		
 		panelInferior.add(Box.createHorizontalGlue());
 		
@@ -163,18 +227,18 @@ public class FormBookView extends JPanel {
 		btnCancelar = new JButton("Cancelar");
 		panelInferior.add(btnCancelar);
 		
-		add(panelInferior, BorderLayout.SOUTH);
+		mainPanel.add(panelInferior, BorderLayout.SOUTH);
 		
-		SwingUtils.moveFocus(txtNumPaginas, "DOWN", "aRegistrar", btnAgregar);
-		SwingUtils.moveFocus(btnAgregar, "UP", "aNPaginas", txtNumPaginas);
+		SwingUtils.moveFocus(txtAvailableBooks, "DOWN", "aRegistrar", btnAgregar);
+		SwingUtils.moveFocus(btnAgregar, "UP", "aNPaginas", txtAvailableBooks);
 		SwingUtils.moveFocus(btnAgregar, "RIGHT", "aCancelar", btnCancelar);
 		SwingUtils.moveFocus(btnCancelar, "LEFT", "aRegistar", btnAgregar);
-		SwingUtils.moveFocus(btnCancelar, "UP", "aNPaginas", txtNumPaginas);
+		SwingUtils.moveFocus(btnCancelar, "UP", "aNPaginas", txtAvailableBooks);
 		
 	}
 	
 	public void assingListeners() {
-		txtNombre.getDocument().addDocumentListener(new DocumentListener() {
+		txtTitle.getDocument().addDocumentListener(new DocumentListener() {
 			
 			@Override
 			public void removeUpdate(DocumentEvent e) {
@@ -230,27 +294,27 @@ public class FormBookView extends JPanel {
 	}
 	
 	public boolean validarNombre() {
-		if (txtNombre.getText().isBlank()) {
-			lblErrorNombre.setText("El nombre es requerido");
+		if (txtTitle.getText().isBlank()) {
+			lblErrorTitle.setText("El nombre es requerido");
 			return false;
 		}
 		
-		if (txtNombre.getText().trim().length() < 2) {
-			lblErrorNombre.setText("El limite minimo es de 2 caracteres");
+		if (txtTitle.getText().trim().length() < 2) {
+			lblErrorTitle.setText("El limite minimo es de 2 caracteres");
 			return false;
 		}
 		
-		if (txtNombre.getText().trim().length() > 70) {
-			lblErrorNombre.setText("El limite maximo es de 70 caracteres");
+		if (txtTitle.getText().trim().length() > 70) {
+			lblErrorTitle.setText("El limite maximo es de 70 caracteres");
 			return false;
 		}
 		
-		if (!(txtNombre.getText().matches("^[^!$%#&]*$"))) {
-			lblErrorNombre.setText("Caracteres invalidos: ^!$%#");
+		if (!(txtTitle.getText().matches("^[^!$%#&]*$"))) {
+			lblErrorTitle.setText("Caracteres invalidos: ^!$%#");
 			return false;
 		}
 		
-		lblErrorNombre.setText("");
+		lblErrorTitle.setText("");
 		
 		return true;
 		
@@ -258,7 +322,7 @@ public class FormBookView extends JPanel {
 	
 	public boolean validarAutor() {
 		if (txtAutor.getText().isBlank()) {
-			lblErrorNombre.setText("El autor es requerido");
+			lblErrorTitle.setText("El autor es requerido");
 			return false;
 		}
 		
@@ -267,13 +331,13 @@ public class FormBookView extends JPanel {
 			return false;
 		}
 		
-		if (txtNombre.getText().trim().length() < 2) {
-			lblErrorNombre.setText("El limite minimo es de 3 caracteres");
+		if (txtTitle.getText().trim().length() < 2) {
+			lblErrorTitle.setText("El limite minimo es de 3 caracteres");
 			return false;
 		}
 		
-		if (txtNombre.getText().trim().length() > 70) {
-			lblErrorNombre.setText("El limite maximo es de 50 caracteres");
+		if (txtTitle.getText().trim().length() > 70) {
+			lblErrorTitle.setText("El limite maximo es de 50 caracteres");
 			return false;
 		}
 		

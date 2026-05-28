@@ -6,6 +6,9 @@ import repository.PrestamoRepository;
 import utils.AppFont;
 import utils.SwingUtils;
 import javax.swing.*;
+
+import controllers.BookController;
+
 import java.awt.*;
 import repository.UserRepository;
 
@@ -116,6 +119,8 @@ public class HomeView extends JPanel{
         borrowView = new BorrowView();
         accountView = new AccountView();
 
+        
+    
         
         contenedor.add(inicioView, HOME);
         contenedor.add(usersView, USERS);

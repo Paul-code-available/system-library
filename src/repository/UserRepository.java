@@ -16,21 +16,11 @@ import config.DatabaseConnection;
 import models.User;
 
 public class UserRepository {
-
-    public UserRepository() {
-    }
-
-    public void save(User user) throws IOException {
-		// falta conenctarlo a base de datos
-		/*
-        List<User> users = getUsers();
-        users.add(user);
-    	*/
+	
+	public void save(User user) throws IOException {
 		
 		String sql = "INSERT INTO users (name, email, password, phone, role)"
 				+ "VALUES (?, ?, ?, ?, ?)";
-		
-		System.out.println(sql);
 		
 		try (Connection connection = DatabaseConnection.getConnection();
 			 PreparedStatement pst = connection.prepareStatement(sql)) {
@@ -49,12 +39,8 @@ public class UserRepository {
 		} catch (SQLException ex) {
 			
 			ex.printStackTrace();
-		}
-		
-		
+		}	
 	}
-	
-	
 	
 	public List<User> getUsers() throws IOException{
         

@@ -21,8 +21,6 @@ public class UsersView extends JPanel{
 	private JButton btnDelete;
     private JButton btnPdf;
 
-
-	
 	public UsersView() {
 		setLayout(new BorderLayout());
 		table = new JTable();

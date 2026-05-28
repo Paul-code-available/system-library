@@ -1,6 +1,8 @@
 package controllers;
 
+import models.Borrow;
 import models.User;
+import repository.BorrowRepository;
 import repository.UserRepository;
 import tablemodels.UserTableModel;
 import config.Config;
@@ -25,6 +27,8 @@ public class HomeController {
     private HomeView homeView;
     private UserController userController;
     private InicioView inicioView;
+    private BookController bookController;
+    private BorrowController borrowController;
 
 	public HomeController(HomeView homeView) {
 		this.homeView = homeView;
@@ -67,6 +71,8 @@ public class HomeController {
         
         homeView.btnBooks.addActionListener(e -> {
         	homeView.mostrarVista(HomeView.BOOKS);
+        	
+        	createBook();
 
         	resetearBotones();
         	resetearTexto();
@@ -76,7 +82,7 @@ public class HomeController {
         });
         
         homeView.btnBorrow.addActionListener(e -> {
-        	homeView.mostrarVista(HomeView.BORROW);
+        	showBorrows();
         	
         	resetearBotones();
         	resetearTexto();
@@ -129,6 +135,27 @@ public class HomeController {
     	homeView.mostrarVista(homeView.USERS);
 
     }
+    
+    public void showBorrows() {
+    	if (borrowController == null) {
+			borrowController = new BorrowController(homeView.borrowView);
+		}
+    	
+    	borrowController.loadBorrows();
+    	
+    	homeView.mostrarVista(homeView.BORROW);
+    }
+    
+    public void createBook() {
+    	
+    	if (bookController == null) {
+    		bookController = new BookController(homeView.booksView);
+			
+		}
+    	
+    }
+    
+   
 
     private void saveWindowPreferences() {
     	Dimension size = homeView.getWindow().getSize();
