@@ -1,11 +1,6 @@
 package utils;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Cursor;
-import java.awt.Dimension;
-import java.awt.Image;
-import java.awt.TextField;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
@@ -125,7 +120,21 @@ public class SwingUtils {
          
          return new ImageIcon(scaled);
     }
-    
+
+    public static GridBagConstraints crearGBC(int pisicionx, int posiciony, double weightx, int margenx, int margeny, int fill, int anchor){
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = pisicionx;
+        gbc.gridy = posiciony;
+        gbc.weightx = weightx;
+        gbc.ipadx = margenx;
+        gbc.ipady = margeny;
+        gbc.fill = fill;
+        gbc.anchor = anchor;
+        gbc.insets = new Insets(3, 3, 3, 3);
+
+        return gbc;
+    }
     
 
 

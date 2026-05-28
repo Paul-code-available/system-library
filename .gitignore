@@ -4,5 +4,6 @@
 *.class
 .idea/
 *.iml
-classes
+src/config/database.properties
 app.properties
+classes

@@ -1,19 +1,16 @@
 package views;
 
-
-import models.User;
+import models.Prestamo;
+import repository.LibroRepository;
+import repository.PrestamoRepository;
 import utils.AppFont;
 import utils.SwingUtils;
-
-import javax.print.attribute.standard.JobPrioritySupported;
 import javax.swing.*;
 
 import controllers.BookController;
 
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.security.PublicKey;
+import repository.UserRepository;
 
 public class HomeView extends JPanel{
 
@@ -22,6 +19,9 @@ public class HomeView extends JPanel{
     public static final String BOOKS = "BOOKS";
     public static final String BORROW = "BORROW";
     public static final String ACCOUNT = "ACCOUNT";
+    private final UserRepository userRepository;
+    private final LibroRepository libroRepository;
+    private final PrestamoRepository prestamoRepository;
 
     public InicioView inicioView;
     public UsersView usersView;
@@ -42,8 +42,11 @@ public class HomeView extends JPanel{
 
     //public UsersView usersPanel;
 
-    public HomeView(HomeWindow window){
-    	this.window = window;
+    public HomeView(UserRepository userRepository, LibroRepository libroRepository, PrestamoRepository prestamoRepository, HomeWindow window){
+        this.userRepository = userRepository;
+        this.libroRepository = libroRepository;
+        this.prestamoRepository = prestamoRepository;
+        this.window = window;
         setLayout(new BorderLayout());
         
         UIManager.put("TextComponent.arc", 15);
@@ -52,7 +55,6 @@ public class HomeView extends JPanel{
         panelIzquierdo();
         crearVistas();
         setVisible(true);
-        
     }
 
 
@@ -111,7 +113,7 @@ public class HomeView extends JPanel{
         cardLayout = new CardLayout();
         contenedor = new JPanel(cardLayout);
         
-        inicioView = new InicioView();
+        inicioView = new InicioView(userRepository, libroRepository, prestamoRepository);
         usersView = new UsersView();
         booksView = new BooksView();
         borrowView = new BorrowView();
@@ -121,7 +123,6 @@ public class HomeView extends JPanel{
     
         
         contenedor.add(inicioView, HOME);
-        
         contenedor.add(usersView, USERS);
         contenedor.add(booksView, BOOKS);
         contenedor.add(borrowView, BORROW);

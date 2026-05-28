@@ -8,6 +8,7 @@ import tablemodels.UserTableModel;
 import config.Config;
 import views.HomeView;
 import views.HomeWindow;
+import views.InicioView;
 
 import javax.swing.*;
 
@@ -25,19 +26,20 @@ public class HomeController {
 
     private HomeView homeView;
     private UserController userController;
+    private InicioView inicioView;
     private BookController bookController;
     private BorrowController borrowController;
 
 	public HomeController(HomeView homeView) {
 		this.homeView = homeView;
-		
+		this.inicioView = homeView.inicioView;
 		loadWindowPreferences();
         registerListeners();
 
 	}
 
     public void registerListeners() {
-    	
+
     	homeView.getWindow().addWindowListener(new WindowAdapter() {
     			
     		public void windowClosing(WindowEvent e) {
@@ -45,7 +47,7 @@ public class HomeController {
     		}
     		
     	});
-    	
+
     	homeView.btnHome.addActionListener(e -> {
     		homeView.mostrarVista(HomeView.HOME);
     		
@@ -125,7 +127,7 @@ public class HomeController {
     public void mostrarUsuarios(){
     	
     	if (userController == null) {
-			userController = new UserController(homeView.usersView);
+			userController = new UserController(homeView.usersView, inicioView);
 		}
     	
     	userController.loadUsers();

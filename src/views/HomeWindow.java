@@ -1,9 +1,11 @@
 package views;
 
-import controllers.HomeController;
+import models.Prestamo;
+import repository.LibroRepository;
+import repository.PrestamoRepository;
+import repository.UserRepository;
 
 import javax.swing.JFrame;
-import java.awt.*;
 
 public class HomeWindow extends JFrame{
 
@@ -16,7 +18,10 @@ public class HomeWindow extends JFrame{
 		setLocationRelativeTo(null);
         setTitle("Casa Leeré");
 
-        homeView = new HomeView(this);
+        UserRepository userRepository = new UserRepository();
+        LibroRepository libroRepository = new LibroRepository();
+        PrestamoRepository prestamoRepository = new PrestamoRepository();
+        homeView = new HomeView(userRepository, libroRepository, prestamoRepository, this);
         add(homeView);
 
         setVisible(true);

@@ -1,9 +1,9 @@
 package controllers;
 
-import com.itextpdf.kernel.pdf.PdfDocument;
 import repository.UserRepository;
 import services.PDFExporter;
 import tablemodels.UserTableModel;
+import views.InicioView;
 import views.UserFormDialog;
 import views.UsersView;
 
@@ -24,14 +24,16 @@ public class UserController {
 	private UserRepository repo;
 	private UserTableModel model;
     private PDFExporter pdfExporter;
+    private InicioView inicioView;
 	
-	public UserController(UsersView view) {
+	public UserController(UsersView view, InicioView inicioView) {
 		this.view = view;
+        this.inicioView = inicioView;
 		repo = new UserRepository();
         pdfExporter = new PDFExporter();
 	
 		listeners();
-
+        loadUsers();
 	}
 
 	public void listeners() {
@@ -53,14 +55,25 @@ public class UserController {
 		});
 		
 		this.view.getBtnDelete().addActionListener(e -> {
-			
-			boolean deleted = repo.delete(model.getUserAt(view.getSelectedRow()).getId());
-			if(deleted) {
-				
-				model.removeRow(view.getSelectedRow());
-			}
 
+            int row = view.getSelectedRow();
 
+            if (row == -1){
+                JOptionPane.showMessageDialog(view, "Selecciona un usuario");
+                return;
+            }
+
+            int confirm = JOptionPane.showConfirmDialog(view,
+                    "¿Estás seguro de eliminar este usuario?",
+                    "Confirmar", JOptionPane.YES_NO_OPTION);
+
+            if (confirm == JOptionPane.YES_OPTION) {
+                boolean deleted = repo.delete(model.getUserAt(row).getId());
+                if (deleted) {
+                    model.removeRow(row);
+                    inicioView.refresh();
+                }
+            }
 		});
 
         this.view.getBtnPdf().addActionListener(e -> generatePdf());
@@ -104,13 +117,13 @@ public class UserController {
 				if (user == null) {
 					repo.save(savedUser);
 					model.addRow(savedUser);
+                    inicioView.refresh();
 				} else {
-					
-					int row = view.getSelectedRow();
-					boolean updated = repo.update(row, savedUser);
-				
+                    boolean updated = repo.update(savedUser);
 					if (updated) {
+                        int row = view.getSelectedRow();
 						model.updateRow(row, savedUser);
+                        inicioView.refresh();
 					}
 					
 				}
