@@ -1,5 +1,8 @@
 package views;
 
+import models.Prestamo;
+import repository.LibroRepository;
+import repository.PrestamoRepository;
 import repository.UserRepository;
 
 import javax.swing.JFrame;
@@ -16,7 +19,9 @@ public class HomeWindow extends JFrame{
         setTitle("Casa Leeré");
 
         UserRepository userRepository = new UserRepository();
-        homeView = new HomeView(userRepository,this);
+        LibroRepository libroRepository = new LibroRepository();
+        PrestamoRepository prestamoRepository = new PrestamoRepository();
+        homeView = new HomeView(userRepository, libroRepository, prestamoRepository, this);
         add(homeView);
 
         setVisible(true);

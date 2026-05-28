@@ -7,11 +7,11 @@ public class Prestamo {
     private String fechaDevolucion;
     private String estado;
     private User user;
-    private Libro libro;
+    private Book libro;
 
     public Prestamo() {}
 
-    public Prestamo(int idPrestamo, String fechaPrestamo, String fechaDevolucion, String estado, User user, Libro libro) {
+    public Prestamo(int idPrestamo, String fechaPrestamo, String fechaDevolucion, String estado, User user, Book libro) {
         this.idPrestamo = idPrestamo;
         this.fechaPrestamo = fechaPrestamo;
         this.fechaDevolucion = fechaDevolucion;
@@ -35,6 +35,6 @@ public class Prestamo {
     public User getUser() { return user; }
     public void setUser(User user) { this.user = user; }
 
-    public Libro getLibro() { return libro; }
-    public void setLibro(Libro libro) { this.libro = libro; }
+    public Book getLibro() { return libro; }
+    public void setLibro(Book libro) { this.libro = libro; }
 }

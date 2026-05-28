@@ -6,6 +6,7 @@ import tablemodels.UserTableModel;
 import config.Config;
 import views.HomeView;
 import views.HomeWindow;
+import views.InicioView;
 
 import javax.swing.*;
 
@@ -23,10 +24,11 @@ public class HomeController {
 
     private HomeView homeView;
     private UserController userController;
+    private InicioView inicioView;
 
 	public HomeController(HomeView homeView) {
 		this.homeView = homeView;
-		
+		this.inicioView = homeView.inicioView;
 		loadWindowPreferences();
         registerListeners();
 
@@ -119,7 +121,7 @@ public class HomeController {
     public void mostrarUsuarios(){
     	
     	if (userController == null) {
-			userController = new UserController(homeView.usersView);
+			userController = new UserController(homeView.usersView, inicioView);
 		}
     	
     	userController.loadUsers();

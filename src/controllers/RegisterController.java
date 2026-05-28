@@ -1,6 +1,9 @@
 package controllers;
 
+import models.Prestamo;
 import models.User;
+import repository.LibroRepository;
+import repository.PrestamoRepository;
 import repository.UserRepository;
 import views.*;
 
@@ -18,6 +21,8 @@ public class RegisterController {
 
     private FormUserView view;
     private UserRepository repository;
+    private PrestamoRepository prestamoRepository;
+    private LibroRepository libroRepository;
 
     public  RegisterController(FormUserView view){
         this.view = view;
@@ -175,7 +180,7 @@ public class RegisterController {
                 registerUser(user);
 
                 HomeWindow homeWindow = new HomeWindow();
-                new HomeController(new HomeView(repository, homeWindow));
+                new HomeController(new HomeView(repository, libroRepository, prestamoRepository, homeWindow));
 
                 view.getWindow().dispose();
             }

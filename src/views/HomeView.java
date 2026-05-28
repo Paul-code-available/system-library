@@ -1,5 +1,8 @@
 package views;
 
+import models.Prestamo;
+import repository.LibroRepository;
+import repository.PrestamoRepository;
 import utils.AppFont;
 import utils.SwingUtils;
 import javax.swing.*;
@@ -14,6 +17,8 @@ public class HomeView extends JPanel{
     public static final String BORROW = "BORROW";
     public static final String ACCOUNT = "ACCOUNT";
     private final UserRepository userRepository;
+    private final LibroRepository libroRepository;
+    private final PrestamoRepository prestamoRepository;
 
     public InicioView inicioView;
     public UsersView usersView;
@@ -34,8 +39,10 @@ public class HomeView extends JPanel{
 
     //public UsersView usersPanel;
 
-    public HomeView(UserRepository userRepository, HomeWindow window){
+    public HomeView(UserRepository userRepository, LibroRepository libroRepository, PrestamoRepository prestamoRepository, HomeWindow window){
         this.userRepository = userRepository;
+        this.libroRepository = libroRepository;
+        this.prestamoRepository = prestamoRepository;
         this.window = window;
         setLayout(new BorderLayout());
         
@@ -103,7 +110,7 @@ public class HomeView extends JPanel{
         cardLayout = new CardLayout();
         contenedor = new JPanel(cardLayout);
         
-        inicioView = new InicioView(userRepository);
+        inicioView = new InicioView(userRepository, libroRepository, prestamoRepository);
         usersView = new UsersView();
         booksView = new BooksView();
         borrowView = new BorrowView();

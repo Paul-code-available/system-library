@@ -1,14 +1,14 @@
 package models;
 
-import javax.swing.ImageIcon;
-
 import utils.RoundedImageLabel;
 
 public class Book {
-	
+
+    private int idLibro;
 	private String title;
 	private String author;
-	private String category;
+	private Categoria category;
+    private String categoria;
 	private int pages;
 	private int publishYear;
 
@@ -23,13 +23,13 @@ public class Book {
 	
 	private String publisher;
 	private String description;
-	
+
 	public Book(String title, String author, String category, int pages, int publishYear, String language,
-			int availableBooks, int totalBooks, String isbn, String coverPath, String publisher, String description) {
+                int availableBooks, int totalBooks, String isbn, String coverPath, String publisher, String description) {
 		
 		this.title = title;
 		this.author = author;
-		this.category = category;
+		this.categoria = category;
 		this.pages = pages;
 		this.publishYear = publishYear;
 		this.language = language;
@@ -41,9 +41,25 @@ public class Book {
 		this.description = description;
 	}
 
-	public Book(String title, String author, String category, int pages, int publishYear, String language,
-			int availableBooks, int totalBooks, String isbn, RoundedImageLabel roundedImageLabel, String publisher,
-			String description) {
+    public Book(int idLibro, String title, String author, Categoria category, int pages, int publishYear, String language, int availableBooks, int totalBooks, String isbn, String coverPath, String publisher, String description) {
+        this.idLibro = idLibro;
+        this.title = title;
+        this.author = author;
+        this.category = category;
+        this.pages = pages;
+        this.publishYear = publishYear;
+        this.language = language;
+        this.availableBooks = availableBooks;
+        this.totalBooks = totalBooks;
+        this.isbn = isbn;
+        this.coverPath = coverPath;
+        this.publisher = publisher;
+        this.description = description;
+    }
+
+    public Book(String title, String author, Categoria category, int pages, int publishYear, String language,
+                int availableBooks, int totalBooks, String isbn, RoundedImageLabel roundedImageLabel, String publisher,
+                String description) {
 		this.title = title;
 		this.author = author;
 		this.category = category;
@@ -58,7 +74,8 @@ public class Book {
 		this.description = description;
 	}
 
-	public String getTitle() {
+
+    public String getTitle() {
 		return title;
 	}
 
@@ -75,14 +92,14 @@ public class Book {
 	}
 
 	public String getCategory() {
-		return category;
+		return categoria;
 	}
 
 	public void setCategory(String category) {
-		this.category = category;
+		this.categoria = category;
 	}
 
-	public int getPages() {
+    public int getPages() {
 		return pages;
 	}
 
@@ -154,4 +171,11 @@ public class Book {
 		this.description = description;
 	}
 
+    public int getIdLibro() {
+        return idLibro;
+    }
+
+    public void setIdLibro(int idLibro) {
+        this.idLibro = idLibro;
+    }
 }

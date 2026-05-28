@@ -11,13 +11,7 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-
 import config.DatabaseConnection;
-
-import java.io.File;
 
 import models.User;
 
@@ -114,7 +108,7 @@ public class UserRepository {
 		
 	}
 	
-	public boolean update(int index, User updatedUser) throws IOException {
+	public boolean update(User updatedUser) throws IOException {
 		
 		String sql = "UPDATE users SET name = ?, email = ?, "
 				+ "phone = ?, role = ? "

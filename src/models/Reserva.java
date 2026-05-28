@@ -7,11 +7,11 @@ public class Reserva {
     private String fechaExpiracion;
     private String estado;
     private User user;
-    private Libro libro;
+    private Book libro;
 
     public Reserva() {}
 
-    public Reserva(int idReserva, String fechaReserva, String fechaExpiracion, String estado, User user, Libro libro) {
+    public Reserva(int idReserva, String fechaReserva, String fechaExpiracion, String estado, User user, Book libro) {
         this.idReserva = idReserva;
         this.fechaReserva = fechaReserva;
         this.fechaExpiracion = fechaExpiracion;
@@ -35,6 +35,6 @@ public class Reserva {
     public User getUser() { return user; }
     public void setUser(User user) { this.user = user; }
 
-    public Libro getLibro() { return libro; }
-    public void setLibro(Libro libro) { this.libro = libro; }
+    public Book getLibro() { return libro; }
+    public void setLibro(Book libro) { this.libro = libro; }
 }

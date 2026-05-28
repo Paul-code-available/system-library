@@ -1,61 +1,84 @@
 package repository;
 
-import com.sun.jdi.event.StepEvent;
 import config.DatabaseConnection;
+import models.Book;
 import models.Categoria;
-import models.Libro;
 
-import java.net.ConnectException;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class LibroRepository {
 
-    Libro libro;
+    Book libro;
 
     public LibroRepository(){
-
     }
 
-    public void save(){
+    public boolean save(Book libro){
 
-        String sql = "INSERT INTO libro (id_libro, nombre, ano_publicacion, categoria_id) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO libro (title, publish_year, categoria_id, pages," +
+                "language, available_books, total_books, isbn, cover_path," +
+                "publisher, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement pst = connection.prepareStatement(sql)
         ){
-            pst.setInt(1, libro.getIdLibro());
-            pst.setString(2, libro.getNombre());
-            pst.setString(3, libro.getAnoPublicacion());
-            pst.setInt(4, libro.getCategoria().getIdCategoria());
 
-            pst.executeUpdate();
+            pst.setString(1, libro.getTitle());
+            pst.setInt(2, libro.getPublishYear());
+            //pst.setInt(3, libro.getCategory().getIdCategoria);
+            pst.setInt(4, libro.getPages());
+            pst.setString(5, libro.getLanguage());
+            pst.setInt(6, libro.getAvailableBooks());
+            pst.setInt(7, libro.getTotalBooks());
+            pst.setString(8, libro.getIsbn());
+            pst.setString(9, libro.getCoverPath());
+            pst.setString(10, libro.getPublisher());
+            pst.setString(11, libro.getDescription());
+
+            return pst.executeUpdate() > 0;
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-
+        return false;
     }
 
-    public List<Libro> getLibros(){
+    public List<Book> getLibros(){
 
-        List<Libro> libros = new ArrayList<>();
+        List<Book> libros = new ArrayList<>();
+        String sql = "select l.*, c.id_categoria, c.nombre, c.descripcion from libro as l" +
+                "join categoria as c on l.categoria_id = c.id_categoria;";
 
         try(Connection connection = DatabaseConnection.getConnection();
             Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT * FROM libro")
+            ResultSet rs = statement.executeQuery(sql);
         ){
             while(rs.next()){
 
-                Categoria categoria = new Categoria();
-                categoria.setIdCategoria(rs.getInt("categoria_id"));
+                Categoria categoria = new Categoria(
+                        rs.getInt("categoria_id"),
+                        rs.getString("nombre_categoria"),
+                        rs.getString("desc_categoria")
+                );
 
-                Libro libro = new Libro(
+                Book libro = new Book(
                         rs.getInt("id_libro"),
-                        rs.getString("nombre"),
-                        rs.getString("ano_publicacion"),
-                        categoria
+                        rs.getString("title"),
+                        rs.getString("autor"),
+                        categoria,
+                        rs.getInt("pages"),
+                        rs.getInt("publish_year"),
+                        rs.getString("language"),
+                        rs.getInt("available_books"),
+                        rs.getInt("total_books"),
+                        rs.getString("isbn"),
+                        rs.getString("cover_path"),
+                        rs.getString("publisher"),
+                        rs.getString("description")
                 );
                 libros.add(libro);
             }
@@ -67,7 +90,7 @@ public class LibroRepository {
 
     public boolean delete(int id){
 
-        String sql = "DELETE FROM libros WHERE id_libro = ?";//consulta slq
+        String sql = "DELETE FROM libro WHERE id_libro = ?";//consulta slq
 
         try(Connection connection = DatabaseConnection.getConnection();//establece connection con base de datos
             PreparedStatement pst = connection.prepareStatement(sql);//permite rellenar los ? despues, ademas evita inyeccion sql
@@ -81,9 +104,163 @@ public class LibroRepository {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+        return false;
+    }
+
+    public boolean update(Book libro){
+        String sql = "UPDATE libro SET title = ?, publish_year = ?, categoria_id = ?," +
+                "pages = ?, language = ?, available_books = ?, total_books = ?," +
+                "isbn = ?, cover_path = ?, publisher = ?, description = ?, autor = ?" +
+                "WHERE id_libro = ?";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement pst = connection.prepareStatement(sql)) {
+
+            pst.setString(1, libro.getTitle());
+            pst.setInt(2, libro.getPublishYear());
+            //pst.setInt(3, libro.getCategory().getIdCategoria());
+            pst.setInt(4, libro.getPages());
+            pst.setString(5, libro.getLanguage());
+            pst.setInt(6, libro.getAvailableBooks());
+            pst.setInt(7, libro.getTotalBooks());
+            pst.setString(8, libro.getIsbn());
+            pst.setString(9, libro.getCoverPath());
+            pst.setString(10, libro.getPublisher());
+            pst.setString(11, libro.getDescription());
+            pst.setString(12, libro.getAuthor());
+            pst.setInt(13, libro.getIdLibro());
+
+            return pst.executeUpdate() > 0;
+
+        }catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean actualizarAvailability(int idLibro, int availableBooks) {
+        String sql = "UPDATE libro SET available_books = ? WHERE id_libro = ?";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement pst = connection.prepareStatement(sql)) {
+
+            pst.setInt(1, availableBooks);
+            pst.setInt(2, idLibro);
+            return pst.executeUpdate() > 0;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
 
         return false;
     }
 
+    public int count() {
+        String sql = "SELECT COUNT(*) FROM libro";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             Statement st = connection.createStatement();
+             ResultSet rs = st.executeQuery(sql)) {
+
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return 0;
+    }
+
+    public int countTotalCopias() {
+        String sql = "SELECT SUM(total_books) FROM libro";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             Statement st = connection.createStatement();
+             ResultSet rs = st.executeQuery(sql)) {
+
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return 0;
+    }
+
+    public int contarCopiasDisponibles() {
+        String sql = "SELECT SUM(available_books) FROM libro";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             Statement st = connection.createStatement();
+             ResultSet rs = st.executeQuery(sql)) {
+
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return 0;
+    }
+
+    public int totalCopiasPrestadas() {
+        String sql = "SELECT SUM(total_books - available_books) FROM libro";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             Statement st = connection.createStatement();
+             ResultSet rs = st.executeQuery(sql))
+        {
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException ex){
+            ex.printStackTrace();
+        }
+        return 0;
+    }
+
+    public Map<String, Integer> totalLibrosCategoria() {
+        Map<String, Integer> result = new LinkedHashMap<>();
+
+        String sql = "SELECT c.nombre, COUNT(l.id_libro) AS total " +
+                "FROM libro l " +
+                "JOIN categoria c ON l.categoria_id = c.id_categoria " +
+                "GROUP BY c.nombre ORDER BY total DESC";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             Statement st = connection.createStatement();
+             ResultSet rs = st.executeQuery(sql))
+        {
+            while (rs.next()){
+                result.put(rs.getString("nombre"), rs.getInt("total"));
+            }
+        } catch (SQLException ex){
+            ex.printStackTrace();
+        }
+        return result;
+    }
+
+    public Map<Integer, Integer> totalLibrosYear() {
+        Map<Integer, Integer> result = new LinkedHashMap<>();
+
+        String sql = "SELECT publish_year, COUNT(*) AS total FROM libro " +
+                "GROUP BY publish_year ORDER BY publish_year DESC";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             Statement st = connection.createStatement();
+             ResultSet rs = st.executeQuery(sql)){
+
+            while (rs.next()) {
+                result.put(rs.getInt("publish_year"), rs.getInt("total"));
+            }
+        } catch (SQLException ex){
+            ex.printStackTrace();
+        }
+        return result;
+    }
 
 }
