@@ -6,6 +6,8 @@ import utils.RoundedImageLabel;
 
 public class Book {
 	
+	private int id;
+	
 	private String title;
 	private String author;
 	private String category;
@@ -21,6 +23,10 @@ public class Book {
 	
 	private String publisher;
 	private String description;
+	
+	public Book() {
+		
+	}
 	
 	public Book(String title, String author, String category, int pages, int publishYear, String language,
 			int availableBooks, int totalBooks, String isbn, String coverPath, String publisher, String description) {
@@ -136,5 +142,15 @@ public class Book {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	
 
 }

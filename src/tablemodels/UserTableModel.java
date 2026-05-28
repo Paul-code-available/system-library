@@ -71,7 +71,7 @@ public class UserTableModel extends AbstractTableModel{
 	public void addRow(User user) {
 		int row = users.size();
 		users.add(user);
-		fireTableRowsDeleted(row, row);
+		fireTableRowsInserted(row, row);
 	}
 	
 	public void updateRow(int row, User user) {

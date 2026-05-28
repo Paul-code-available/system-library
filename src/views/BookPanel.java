@@ -10,13 +10,18 @@ import java.awt.Image;
 import java.awt.RenderingHints;
 
 import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import models.Book;
+import utils.AppFont;
 import utils.RoundedImageLabel;
+import utils.SwingUtils;
 
 public class BookPanel extends JPanel {
 
@@ -27,10 +32,7 @@ public class BookPanel extends JPanel {
 		
 		setOpaque(false);
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		
-	
-		setPreferredSize(new Dimension(170, 270));
-		
+		setPreferredSize(new Dimension(170, 300));
 		
 		setBorder(
 				BorderFactory.createEmptyBorder(
@@ -42,8 +44,10 @@ public class BookPanel extends JPanel {
 		roundedImage.setAlignmentX(LEFT_ALIGNMENT);
 		add(roundedImage);
 		
+		add(Box.createVerticalStrut(10));
+		
 		JLabel title = new JLabel(book.getTitle());
-		title.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+		title.setFont(new Font("Segoe UI", Font.BOLD, 14));
 		title.setForeground(Color.decode("#FFFFFF"));
 		title.setAlignmentX(LEFT_ALIGNMENT);
 		
@@ -61,7 +65,19 @@ public class BookPanel extends JPanel {
 		
 		add(category);
 		
-	
+		add(Box.createVerticalStrut(10));
+		
+		
+		JButton watchBook = SwingUtils.crearBtn("Ver libro");
+		watchBook.setBackground(Color.decode("#3673DF"));
+		watchBook.setForeground(Color.decode("#F7F8FB"));
+		watchBook.setFont(AppFont.medium());
+		watchBook.setAlignmentX(LEFT_ALIGNMENT);
+		watchBook.setHorizontalAlignment(SwingConstants.CENTER);
+		watchBook.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
+		
+		add(watchBook);
+
 	}
 	
 	protected void paintComponent(Graphics g) {
