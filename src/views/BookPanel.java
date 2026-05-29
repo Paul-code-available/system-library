@@ -8,15 +8,18 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.RenderingHints;
+import java.awt.Window;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 
 import models.Book;
 import utils.AppFont;
@@ -26,9 +29,11 @@ import utils.SwingUtils;
 public class BookPanel extends JPanel {
 
 	private Book book;
+	private BooksView view;
 
-	public BookPanel(Book book) {
-		this.book = book;
+	public BookPanel(Book book, BooksView view) {
+	    this.book = book;
+	    this.view = view;
 		
 		setOpaque(false);
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -40,8 +45,15 @@ public class BookPanel extends JPanel {
 				)
 		);
 	
-		RoundedImageLabel roundedImage = new RoundedImageLabel(book.getCoverPath());
+		String cover = book.getCoverPath();
+
+		if (cover == null || cover.isEmpty()) {
+		    cover = "/assets/img/default.png";
+		}
+
+		RoundedImageLabel roundedImage = new RoundedImageLabel(cover);
 		roundedImage.setAlignmentX(LEFT_ALIGNMENT);
+
 		add(roundedImage);
 		
 		add(Box.createVerticalStrut(10));
@@ -59,7 +71,7 @@ public class BookPanel extends JPanel {
 		
 		add(author);
 		
-		JLabel category = new JLabel(book.getCategory());
+		JLabel category = new JLabel(book.getCategory().getNombre());
 		category.setForeground(Color.decode("#FFFFFF"));
 		category.setAlignmentX(LEFT_ALIGNMENT);
 		
@@ -75,6 +87,13 @@ public class BookPanel extends JPanel {
 		watchBook.setAlignmentX(LEFT_ALIGNMENT);
 		watchBook.setHorizontalAlignment(SwingConstants.CENTER);
 		watchBook.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
+		
+		watchBook.addActionListener(e -> {
+
+			Window parent = SwingUtilities.getWindowAncestor(this);
+
+			new BookDetailView((JFrame) parent, book, view).setVisible(true);
+		});
 		
 		add(watchBook);
 

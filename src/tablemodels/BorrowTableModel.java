@@ -5,10 +5,11 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 import models.Borrow;
+import models.Prestamo;
 
 public class BorrowTableModel extends AbstractTableModel {
 	
-	private List<Borrow> borrows;
+	private List<Prestamo> borrows;
 	
 	private final String[] colums = {
 		"Usuario",
@@ -17,7 +18,7 @@ public class BorrowTableModel extends AbstractTableModel {
 		"Estado"
 	};
 	
-	public BorrowTableModel(List<Borrow> borrows) {
+	public BorrowTableModel(List<Prestamo> borrows) {
 		this.borrows = borrows;
 	}
 
@@ -38,20 +39,20 @@ public class BorrowTableModel extends AbstractTableModel {
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		
-		Borrow borrow = borrows.get(rowIndex);
+		Prestamo borrow = borrows.get(rowIndex);
 		
 		switch (columnIndex) {
 		case 0:
 			return borrow.getUser().getName();
 		
 		case 1:
-			return borrow.getBook().getTitle();
+			return borrow.getLibro().getTitle();
 		
 		case 2:
-			return borrow.getLoanDate();
+			return borrow.getFechaPrestamo();
 			
 		case 3:
-			return borrow.getStatus();
+			return borrow.getEstado();
 	
 		}
 		
@@ -59,11 +60,11 @@ public class BorrowTableModel extends AbstractTableModel {
 		
 	}
 	
-	public Borrow getBorrowAt(int row) {
+	public Prestamo getBorrowAt(int row) {
 		return borrows.get(row);
 	}
 	
-	public void setBorrows(List<Borrow> borrows) {
+	public void setBorrows(List<Prestamo> borrows) {
 		this.borrows = borrows;
 		fireTableDataChanged();
 	}
@@ -73,13 +74,13 @@ public class BorrowTableModel extends AbstractTableModel {
 		fireTableRowsDeleted(row, row);
 	}
 	
-	public void addRow(Borrow borrow) {
+	public void addRow(Prestamo borrow) {
 		int row = borrows.size();
 		borrows.add(borrow);
 		fireTableRowsInserted(row, row);
 	}
 	
-	public void updateRow(int row, Borrow borrow) {
+	public void updateRow(int row, Prestamo borrow) {
 		borrows.set(row, borrow);
 		fireTableRowsUpdated(row, row);
 	}

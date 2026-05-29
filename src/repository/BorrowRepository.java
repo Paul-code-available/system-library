@@ -27,7 +27,7 @@ public class BorrowRepository {
 			 PreparedStatement pst = connection.prepareStatement(sql)) {
 			
 			pst.setInt(1, borrow.getUser().getId());
-			pst.setInt(2, borrow.getBook().getId());
+			pst.setInt(2, borrow.getBook().getIdLibro());
 			pst.setDate(3, Date.valueOf(borrow.getLoanDate()));
 			pst.setDate(4, Date.valueOf(borrow.getReturnDate()));
 			pst.setString(5, borrow.getStatus());
@@ -90,10 +90,10 @@ public class BorrowRepository {
 							);
 			Book book = new Book();
 			
-			book.setId(rs.getInt("book_id"));
+			book.setIdLibro(rs.getInt("book_id"));
 			book.setTitle(rs.getString("title"));
 			book.setAuthor(rs.getString("author"));
-			book.setCategory(rs.getString("category"));
+			//book.setCategory(rs.getString("category"));
 							
 			Borrow borrow = new Borrow();
 			

@@ -14,6 +14,11 @@ public class Categoria {
         this.nombre = nombre;
         this.descripcion = descripcion;
     }
+    
+    @Override
+    public String toString() {
+        return nombre;
+    }
 
     public int getIdCategoria() { return idCategoria; }
 

@@ -17,15 +17,32 @@ public class RoundedImageLabel extends JPanel {
 
     public RoundedImageLabel(String path) {
 
-        ImageIcon icon = new ImageIcon(
-                getClass().getResource(path)
-        );
+        // si path viene null o vacío
+        if (path == null || path.isBlank()) {
+            path = "/assets/img/default.png";
+        }
 
-        image = icon.getImage();
+        java.net.URL imageUrl = getClass().getResource(path);
+
+        // si no encontró la imagen
+        if (imageUrl == null) {
+            System.out.println("No se encontró: " + path);
+
+            imageUrl =
+                    getClass().getResource("/assets/img/default.png");
+        }
+
+        // si tampoco existe default.png
+        if (imageUrl != null) {
+            ImageIcon icon = new ImageIcon(imageUrl);
+            image = icon.getImage();
+        }
 
         setPreferredSize(new Dimension(160, 210));
         setMaximumSize(new Dimension(160, 210));
         setOpaque(false);
+    
+
     }
 
     @Override

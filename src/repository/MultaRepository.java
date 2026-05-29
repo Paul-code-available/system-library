@@ -82,11 +82,11 @@ public class MultaRepository {
 
                 Prestamo prestamo = new Prestamo(
                         rs.getInt("id_prestamo"),
-                        rs.getString("fecha_prestamo"),
-                        rs.getString("fecha_devolucion"),
-                        rs.getString("estado_prestamo"),
                         user,
-                        libro
+                        libro,
+                        rs.getDate("fecha_prestamo").toLocalDate(),
+                        rs.getDate("fecha_devolucion").toLocalDate(),
+                        rs.getString("estado_prestamo")
                 );
 
                 Multa multa = new Multa(
@@ -154,11 +154,11 @@ public class MultaRepository {
 
                 Prestamo prestamo = new Prestamo(
                         rs.getInt("id_prestamo"),
-                        rs.getString("fecha_prestamo"),
-                        rs.getString("fecha_devolucion"),
-                        rs.getString("estado_prestamo"),
                         user,
-                        libro
+                        libro,
+                        rs.getDate("fecha_prestamo").toLocalDate(),
+                        rs.getDate("fecha_devolucion").toLocalDate(),
+                        rs.getString("estado_prestamo")
                 );
 
                 Multa multa = new Multa(

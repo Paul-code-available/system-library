@@ -7,16 +7,19 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
+import java.util.List;
 
 import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -30,6 +33,9 @@ import javax.swing.border.LineBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import models.Book;
+import models.Categoria;
+import repository.CategoriaRepository;
 import views.components.TextPrompt;
 import utils.AppFont;
 import utils.SwingUtils;
@@ -38,7 +44,7 @@ public class FormBookView extends JDialog {
 	
 	JTextField txtTitle;
 	JTextField txtAutor;
-	JTextField txtCategory;
+	JComboBox<Categoria> cmbCategory;
 	JTextField txtPages;
 	JTextField txtPublishYear;
 	JTextField txtLanguage;
@@ -60,10 +66,17 @@ public class FormBookView extends JDialog {
 	
 	JPanel mainPanel;
 	
-	public FormBookView(JFrame parent) {
-		super(parent);
+	Book book;
+	private boolean saved = false;
+	
+	public FormBookView(JFrame parent, Book book) {
+		super(parent,true);
+		
+		this.book = book;
 				
 		setSize(360, 740);
+		
+		setTitle(book == null ? "Agregar libro" : "Editar libro");
 
 		setLocationRelativeTo(parent);
 		
@@ -78,12 +91,12 @@ public class FormBookView extends JDialog {
 		UIManager.put("Button.arc", 10);
 	
 		panelSuperior();
-		
 		panelCentro();
-		
 		panelInferior();
-		
 		assingListeners();
+		
+		loadCategories();
+		loadData();
 		
 	}
 	
@@ -91,8 +104,8 @@ public class FormBookView extends JDialog {
 		JPanel panelSuperior = new JPanel();
 		panelSuperior.setLayout(new BoxLayout(panelSuperior, BoxLayout.Y_AXIS));
 		panelSuperior.setBackground(Color.decode("#0F1524"));
-	
-		JLabel lblTitulo = new JLabel("Nuevo Libro");
+		
+		JLabel lblTitulo = new JLabel("Formulario");
 		
 		lblTitulo.setFont(AppFont.title());
 		lblTitulo.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -125,8 +138,11 @@ public class FormBookView extends JDialog {
 		lblErrorAutor = SwingUtils.createLblMessageError();
 		panelCentro.add(lblErrorAutor);
 		
-		txtCategory = SwingUtils.crearJtfText("Categoria");
-		panelCentro.add(txtCategory);
+		cmbCategory = new JComboBox<>(); 
+		cmbCategory.setMaximumSize(new Dimension(Integer.MAX_VALUE, 30));
+		cmbCategory.setBackground(Color.decode("#141D30"));
+		
+		panelCentro.add(cmbCategory);
 		
 		panelCentro.add(Box.createVerticalStrut(10));
 		
@@ -186,7 +202,7 @@ public class FormBookView extends JDialog {
 		txtDescription.setWrapStyleWord(true);
 		txtDescription.setBackground(Color.decode("#141D30"));
 		
-		TextPrompt promptNombre = new TextPrompt("Descripción", txtDescription);
+		TextPrompt promptNombre = new TextPrompt("Descripcin", txtDescription);
 
 		JScrollPane scroll = new JScrollPane(txtDescription);
 		scroll.setMaximumSize(new Dimension(Integer.MAX_VALUE, 100));
@@ -195,7 +211,7 @@ public class FormBookView extends JDialog {
 		panelCentro.add(scroll);
 		
 		mainPanel.add(panelCentro, BorderLayout.CENTER);
-		
+		/*
 		SwingUtils.moveFocus(txtTitle, "DOWN", "aAutor", txtAutor);
 		SwingUtils.moveFocus(txtAutor, "UP", "aNombre", txtTitle);
 		SwingUtils.moveFocus(txtAutor, "DOWN", "aEditorial", txtCategory);
@@ -208,7 +224,7 @@ public class FormBookView extends JDialog {
 		SwingUtils.moveFocus(txtLanguage, "UP", "aGenero", txtPublishYear);
 		SwingUtils.moveFocus(txtLanguage, "DOWN", "aNPaginas", txtAvailableBooks);
 		SwingUtils.moveFocus(txtAvailableBooks, "UP", "aIdioma", txtLanguage);
-		
+		*/
 	}
 	
 	public void panelInferior() {
@@ -227,6 +243,9 @@ public class FormBookView extends JDialog {
 		btnCancelar = new JButton("Cancelar");
 		panelInferior.add(btnCancelar);
 		
+		btnAgregar.addActionListener(e -> handleRegister());
+		btnCancelar.addActionListener(e -> dispose());
+		
 		mainPanel.add(panelInferior, BorderLayout.SOUTH);
 		
 		SwingUtils.moveFocus(txtAvailableBooks, "DOWN", "aRegistrar", btnAgregar);
@@ -234,6 +253,133 @@ public class FormBookView extends JDialog {
 		SwingUtils.moveFocus(btnAgregar, "RIGHT", "aCancelar", btnCancelar);
 		SwingUtils.moveFocus(btnCancelar, "LEFT", "aRegistar", btnAgregar);
 		SwingUtils.moveFocus(btnCancelar, "UP", "aNPaginas", txtAvailableBooks);
+		
+	}
+	
+	public void handleRegister() {
+		    
+		   try {
+			
+			   if (!validateForm()) {
+				   return;
+			   }
+			   
+			   save();
+			  
+			   
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void save() {
+
+	    String title = txtTitle.getText();
+	    String author = txtAutor.getText();
+
+	    Categoria category =
+	            (Categoria) cmbCategory.getSelectedItem();
+
+	    int pages = Integer.parseInt(txtPages.getText());
+
+	    int publishYear = Integer.parseInt(txtPublishYear.getText());
+
+	    String language = txtLanguage.getText();
+
+	    int availableBooks = Integer.parseInt(txtAvailableBooks.getText());
+
+	    int totalBooks = Integer.parseInt( txtTotalBooks.getText());
+
+	    String isbn = txtIsbn.getText();
+
+	    String coverPath = txtCoverPath.getText();
+
+	    String publisher = txtPublisher.getText();
+
+	    String description = txtDescription.getText();
+
+	    if (book == null) {
+	    	  book = new Book(
+	  	            title,
+	  	            author,
+	  	            category,
+	  	            pages,
+	  	            publishYear,
+	  	            language,
+	  	            availableBooks,
+	  	            totalBooks,
+	  	            isbn,
+	  	            coverPath,
+	  	            publisher,
+	  	            description
+	  	    );
+		} else {
+
+		    book.setTitle(title);
+		    book.setAuthor(author);
+		    book.setCategory(category);
+		    book.setPages(pages);
+		    book.setPublishYear(publishYear);
+		    book.setLanguage(language);
+		    book.setAvailableBooks(availableBooks);
+		    book.setTotalBooks(totalBooks);
+		    book.setIsbn(isbn);
+		    book.setCoverPath(coverPath);
+		    book.setPublisher(publisher);
+		    book.setDescription(description);
+			
+		}
+	    
+	  
+
+	    saved = true;
+	    dispose();
+	}
+	
+	public void loadData() {
+		if (book != null) {
+			   txtTitle.setText(book.getTitle());
+		        txtAutor.setText(book.getAuthor());
+
+		        cmbCategory.setSelectedItem(book.getCategory());
+
+		        txtPages.setText(String.valueOf(book.getPages()));
+		        txtPublishYear.setText(String.valueOf(book.getPublishYear()));
+		        txtLanguage.setText(book.getLanguage());
+
+		        txtAvailableBooks.setText(
+		                String.valueOf(book.getAvailableBooks())
+		        );
+
+		        txtTotalBooks.setText(
+		                String.valueOf(book.getTotalBooks())
+		        );
+
+		        txtIsbn.setText(book.getIsbn());
+		        txtCoverPath.setText(book.getCoverPath());
+		        txtPublisher.setText(book.getPublisher());
+
+		        txtDescription.setText(book.getDescription());
+		}
+	}
+	
+	public void loadCategories() {
+
+	    CategoriaRepository repo =
+	            new CategoriaRepository();
+
+	    List<Categoria> categorias =
+	            repo.getCategorias();
+
+	    for (Categoria categoria : categorias) {
+	        cmbCategory.addItem(categoria);
+	    }
+	}
+	
+	public boolean isSaved() {
+		
+		return saved;
 		
 	}
 	
@@ -322,7 +468,7 @@ public class FormBookView extends JDialog {
 	
 	public boolean validarAutor() {
 		if (txtAutor.getText().isBlank()) {
-			lblErrorTitle.setText("El autor es requerido");
+			lblErrorAutor.setText("El autor es requerido");
 			return false;
 		}
 		
@@ -332,12 +478,12 @@ public class FormBookView extends JDialog {
 		}
 		
 		if (txtTitle.getText().trim().length() < 2) {
-			lblErrorTitle.setText("El limite minimo es de 3 caracteres");
+			lblErrorAutor.setText("El limite minimo es de 3 caracteres");
 			return false;
 		}
 		
 		if (txtTitle.getText().trim().length() > 70) {
-			lblErrorTitle.setText("El limite maximo es de 50 caracteres");
+			lblErrorAutor.setText("El limite maximo es de 50 caracteres");
 			return false;
 		}
 		
@@ -345,5 +491,15 @@ public class FormBookView extends JDialog {
 		
 		return true;
 	}
+
+	public Book getBook() {
+		return book;
+	}
+
+	public void setBook(Book book) {
+		this.book = book;
+	}
+	
+	
 	
 }
