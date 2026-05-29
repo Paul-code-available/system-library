@@ -48,6 +48,7 @@ public class InicioView extends JPanel {
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        //mainPanel.setBackground(Color.decode("#0F1524"));
 
         mainPanel.add(crearPanelTarjetas());
         mainPanel.add(Box.createVerticalStrut(15));
@@ -93,25 +94,25 @@ public class InicioView extends JPanel {
 
     private JPanel crearTarjeta(String titulo, JLabel lblsubtitulo, JLabel lblnumero){
         JPanel card = new JPanel(new BorderLayout(5, 5));
-        card.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(new Color(220, 220, 220)), BorderFactory.createEmptyBorder(12, 15, 12, 15)));
-        card.setBackground(Color.WHITE);
+        card.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(new Color(220, 220, 220, 0)), BorderFactory.createEmptyBorder(12, 15, 12, 15)));
+        card.setBackground(Color.decode("#0F1524"));
 
         JPanel filaSuperior = new JPanel(new BorderLayout());
-        filaSuperior.setBackground(Color.WHITE);
+        filaSuperior.setBackground(Color.decode("#0F1524"));
 
         JLabel lblTitulo = new JLabel(titulo);
         lblTitulo.setFont(AppFont.medium());
-        lblTitulo.setForeground(new Color(100, 100, 100));
+        lblTitulo.setForeground(Color.WHITE);
 
         lblnumero.setFont(AppFont.medium());
-        lblnumero.setForeground(new Color(0, 120, 215));
+        lblnumero.setForeground(Color.WHITE);
         lblnumero.setHorizontalAlignment(SwingConstants.RIGHT);
 
         filaSuperior.add(lblTitulo, BorderLayout.WEST);
         filaSuperior.add(lblnumero, BorderLayout.EAST);
 
         lblsubtitulo.setFont(AppFont.medium());
-        lblsubtitulo.setForeground(new Color(150, 150, 150));
+        lblsubtitulo.setForeground(Color.WHITE);
 
         card.add(filaSuperior, BorderLayout.CENTER);
         card.add(lblsubtitulo, BorderLayout.SOUTH);
@@ -121,7 +122,6 @@ public class InicioView extends JPanel {
 
     private JPanel crearFilaMedia() {
         JPanel panel = new JPanel(new GridLayout(1, 2, 10, 0));
-        //panel.setBackground(new Color(245, 245, 245));
         panel.add(crearPanelDisponibilidad());
         panelRecentBorrows = crearPanelRecentBorrows();
         panel.add(panelRecentBorrows);
@@ -131,19 +131,18 @@ public class InicioView extends JPanel {
 
     private JPanel crearPanelDisponibilidad() {
         JPanel panel = new JPanel(new BorderLayout());
-        panel.setBackground(Color.WHITE);
-        panel.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new Color(220, 220, 220)),
-                BorderFactory.createEmptyBorder(15, 15, 15, 15)));
+        panel.setBackground(Color.decode("#0F1524"));
+        panel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
 
         JLabel titulo = new JLabel("Disponibilidad de libros");
         titulo.setFont(AppFont.large());
+        titulo.setForeground(Color.WHITE);
         titulo.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
         panel.add(titulo, BorderLayout.NORTH);
 
         JPanel contenido = new JPanel();
         contenido.setLayout(new BoxLayout(contenido, BoxLayout.Y_AXIS));
-        contenido.setBackground(Color.WHITE);
+        contenido.setBackground(Color.decode("#0F1524"));
 
         int disponibles = libroRepository.contarCopiasDisponibles();
         int prestados = libroRepository.totalCopiasPrestadas();
@@ -159,43 +158,44 @@ public class InicioView extends JPanel {
 
     private JPanel crearFilaDisponibilidad(String label, int valor, int total, Color color) {
         JPanel panel = new JPanel(new BorderLayout(0, 4));
-        panel.setBackground(Color.WHITE);
+        panel.setBackground(Color.decode("#0F1524"));
+        panel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
 
         JPanel filaNums = new JPanel(new BorderLayout());
-        filaNums.setBackground(Color.WHITE);
+        filaNums.setBackground(Color.decode("#0F1524"));
 
         JLabel lbl = new JLabel(label);
         lbl.setFont(AppFont.medium());
-        lbl.setForeground(new Color(80, 80, 80));
+        lbl.setForeground(Color.WHITE);
 
         JLabel num = new JLabel(String.valueOf(valor));
         num.setFont(AppFont.medium());
         num.setHorizontalAlignment(SwingConstants.RIGHT);
+        num.setForeground(Color.WHITE);
 
         filaNums.add(lbl, BorderLayout.WEST);
         filaNums.add(num, BorderLayout.EAST);
 
         panel.add(filaNums, BorderLayout.NORTH);
-        panel.add(crearBarra(valor, total, color, 40), BorderLayout.CENTER);
+        panel.add(crearProgressBar(valor, total, color, 5), BorderLayout.CENTER);
 
         return panel;
     }
 
     private JPanel crearPanelRecentBorrows() {
         JPanel panel = new JPanel(new BorderLayout());
-        panel.setBackground(Color.WHITE);
-        panel.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new Color(220, 220, 220)),
-                BorderFactory.createEmptyBorder(15, 15, 15, 15)));
+        panel.setBackground(Color.decode("#0F1524"));
+        panel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
 
         JLabel titulo = new JLabel("Préstamos recientes");
         titulo.setFont(AppFont.large());
+        titulo.setForeground(Color.WHITE);
         titulo.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
         panel.add(titulo, BorderLayout.NORTH);
 
         JPanel lista = new JPanel();
         lista.setLayout(new BoxLayout(lista, BoxLayout.Y_AXIS));
-        lista.setBackground(Color.WHITE);
+        lista.setBackground(Color.decode("#0F1524"));
 
         List<Prestamo> recientes = prestamoRepository.getRecentPrestamos(5);
 
@@ -210,26 +210,26 @@ public class InicioView extends JPanel {
 
     private JPanel crearFilaPrestamo(Prestamo p) {
         JPanel fila = new JPanel(new BorderLayout());
-        fila.setBackground(Color.WHITE);
+        fila.setBackground(Color.decode("#0F1524"));
         fila.setBorder(BorderFactory.createEmptyBorder(4, 0, 4, 0));
 
         JPanel izq = new JPanel(new GridLayout(2, 1));
-        izq.setBackground(Color.WHITE);
+        izq.setBackground(Color.decode("#0F1524"));
 
         JLabel titulo = new JLabel(p.getLibro().getTitle());
         titulo.setFont(AppFont.medium());
+        titulo.setForeground(Color.WHITE);
 
         JLabel usuario = new JLabel("por " + p.getUser().getName());
         usuario.setFont(AppFont.medium());
-        usuario.setForeground(new Color(130, 130, 130));
+        usuario.setForeground(Color.WHITE);
 
         izq.add(titulo);
         izq.add(usuario);
 
         String estado = p.getEstado();
         Color badgeColor = estado.equalsIgnoreCase("activo")   ? new Color(0, 150, 100) :
-                estado.equalsIgnoreCase("vencido")  ? new Color(200, 50, 50) :
-                        new Color(100, 100, 200);
+                estado.equalsIgnoreCase("vencido")  ? new Color(200, 50, 50) : new Color(100, 100, 200);
 
         JLabel badge = new JLabel(estado.toUpperCase());
         badge.setFont(AppFont.medium());
@@ -245,7 +245,6 @@ public class InicioView extends JPanel {
     private JPanel crearFilaInferior() {
         JPanel panel = new JPanel(new GridLayout(1, 2, 10, 0));
 
-        panel.setBackground(new Color(245, 245, 245));
         panelCategorias = crearPanelCategorias();
         panelPorAnio = crearPanelPorAnio();
         panel.add(panelCategorias);
@@ -255,19 +254,18 @@ public class InicioView extends JPanel {
 
     private JPanel crearPanelCategorias() {
         JPanel panel = new JPanel(new BorderLayout());
-        panel.setBackground(Color.WHITE);
-        panel.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new Color(220, 220, 220)),
-                BorderFactory.createEmptyBorder(15, 15, 15, 15)));
+        panel.setBackground(Color.decode("#0F1524"));
+        panel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
 
         JLabel titulo = new JLabel("Categorías de libros");
         titulo.setFont(AppFont.large());
+        titulo.setForeground(Color.WHITE);
         titulo.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
         panel.add(titulo, BorderLayout.NORTH);
 
         JPanel lista = new JPanel();
         lista.setLayout(new BoxLayout(lista, BoxLayout.Y_AXIS));
-        lista.setBackground(Color.WHITE);
+        lista.setBackground(Color.decode("#0F1524"));
 
         Map<String, Integer> categorias = libroRepository.totalLibrosCategoria();
         int totalLibros = libroRepository.count();
@@ -294,13 +292,14 @@ public class InicioView extends JPanel {
 
     private JPanel crearFilaCategoria(String nombre, int cantidad, int total, Color color) {
         JPanel panel = new JPanel(new BorderLayout(0, 4));
-        panel.setBackground(Color.WHITE);
+        panel.setBackground(Color.decode("#0F1524"));
 
         JPanel filaInfo = new JPanel(new BorderLayout());
-        filaInfo.setBackground(Color.WHITE);
+        filaInfo.setBackground(Color.decode("#0F1524"));
 
         JLabel lbl = new JLabel(nombre);
         lbl.setFont(AppFont.medium());
+        lbl.setForeground(Color.WHITE);
 
         JLabel num = new JLabel(cantidad + " libros");
         num.setFont(AppFont.medium());
@@ -310,12 +309,21 @@ public class InicioView extends JPanel {
         filaInfo.add(lbl, BorderLayout.WEST);
         filaInfo.add(num, BorderLayout.EAST);
 
+        /*
         JProgressBar bar = new JProgressBar(0, Math.max(total, 1));
         bar.setValue(cantidad);
         bar.setForeground(color);
         bar.setBackground(new Color(230, 230, 230));
         bar.setPreferredSize(new Dimension(0, 5));
         bar.setBorderPainted(false);
+         */
+
+        JProgressBar bar = crearProgressBar(
+                cantidad,
+                total,
+                color,
+                5
+        );
 
         panel.add(filaInfo, BorderLayout.NORTH);
         panel.add(bar,      BorderLayout.CENTER);
@@ -325,19 +333,18 @@ public class InicioView extends JPanel {
 
     private JPanel crearPanelPorAnio() {
         JPanel panel = new JPanel(new BorderLayout());
-        panel.setBackground(Color.WHITE);
-        panel.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new Color(220, 220, 220)),
-                BorderFactory.createEmptyBorder(15, 15, 15, 15)));
+        panel.setBackground(Color.decode("#0F1524"));
+        panel.setBorder( BorderFactory.createEmptyBorder(15, 15, 15, 15));
 
         JLabel titulo = new JLabel("Libros por año de publicación");
         titulo.setFont(AppFont.large());
+        titulo.setForeground(Color.WHITE);
         titulo.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
         panel.add(titulo, BorderLayout.NORTH);
 
         JPanel lista = new JPanel();
         lista.setLayout(new BoxLayout(lista, BoxLayout.Y_AXIS));
-        lista.setBackground(Color.WHITE);
+        lista.setBackground(Color.decode("#0F1524"));
 
         Map<Integer, Integer> porAnio = libroRepository.totalLibrosYear();
         int maxVal = porAnio.values().stream().mapToInt(v -> v).max().orElse(1);
@@ -353,18 +360,14 @@ public class InicioView extends JPanel {
 
     private JPanel crearFilaAnio(int anio, int cantidad, int max) {
         JPanel panel = new JPanel(new BorderLayout(10, 0));
-        panel.setBackground(Color.WHITE);
+        panel.setBackground(Color.decode("#0F1524"));
 
         JLabel lblAnio = new JLabel(String.valueOf(anio));
         lblAnio.setFont(AppFont.medium());
+        lblAnio.setForeground(Color.WHITE);
         lblAnio.setPreferredSize(new Dimension(40, 20));
 
-        JProgressBar bar = new JProgressBar(0, Math.max(max, 1));
-        bar.setValue(cantidad);
-        bar.setForeground(new Color(0, 180, 100));
-        bar.setBackground(new Color(230, 230, 230));
-        bar.setPreferredSize(new Dimension(0, 8));
-        bar.setBorderPainted(false);
+        JProgressBar bar = crearProgressBar(cantidad, max, new Color(0, 180, 100), 4);
 
         JLabel lblCant = new JLabel(cantidad + " libros");
         lblCant.setFont(AppFont.medium());
@@ -379,42 +382,20 @@ public class InicioView extends JPanel {
         return panel;
     }
 
-    private JPanel crearBarra(int valor, int total, Color color, int grosor) {
-        JPanel contenedor = new JPanel(null) {
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                int ancho = getWidth();
-                int porcentaje = total > 0 ? (int)((valor * 100.0) / total) : 0;
-                int anchoRelleno = (ancho * porcentaje) / 100;
+    private JProgressBar crearProgressBar(int valor, int maximo, Color color, int altura) {
 
-                // fondo gris
-                g.setColor(new Color(230, 230, 230));
-                g.fillRoundRect(0, 0, ancho, grosor, grosor, grosor);
+        JProgressBar bar = new JProgressBar(0, Math.max(maximo, 1));
+        bar.setValue(valor);
+        bar.setForeground(color);
+        bar.setBackground(new Color(230, 230, 230));
+        bar.setBorderPainted(false);
+        bar.setPreferredSize(new Dimension(0, altura));
+        Dimension size = new Dimension(Integer.MAX_VALUE, altura);
+        bar.setPreferredSize(size);
+        bar.setMinimumSize(size);
+        bar.setMaximumSize(size);
 
-                // barra de color
-                g.setColor(color);
-                g.fillRoundRect(0, 0, anchoRelleno, grosor, grosor, grosor);
-            }
-
-            @Override
-            public Dimension getPreferredSize() {
-                return new Dimension(0, grosor);
-            }
-
-            @Override
-            public Dimension getMinimumSize() {
-                return new Dimension(0, grosor);
-            }
-
-            @Override
-            public Dimension getMaximumSize() {
-                return new Dimension(Integer.MAX_VALUE, grosor);
-            }
-        };
-
-        contenedor.setOpaque(false);
-        return contenedor;
+        return bar;
     }
 
     private void cargarDatosUsers(){
@@ -451,7 +432,7 @@ public class InicioView extends JPanel {
 
             int disponibles = libroRepository.contarCopiasDisponibles();
             lblStatusLibrosNumero.setText(String.valueOf(disponibles));
-            lblStatusLibrosSubtitulo.setText("copias disponibles");
+            lblStatusLibrosSubtitulo.setText(disponibles + " copias disponibles");
         } catch (Exception ex) {
             lblTotalSolicitudesNumero.setText("N/A");
             lblTotalSolicitudesSubtitulo.setText("Error al cargar");

@@ -7,6 +7,9 @@ import com.formdev.flatlaf.FlatLightLaf;
 
 import controllers.HomeController;
 import controllers.RegisterController;
+import models.User;
+import repository.UserRepository;
+import utils.Session;
 import utils.ThemeManager;
 import controllers.LoginController;
 import views.*;
@@ -14,26 +17,31 @@ import views.*;
 public class Main {
 
 	public static void main(String[] args) {
-		
+
 		//FlatLightLaf.setup();
 		
 		UIManager.put("Text.Component.arc", 10);
         UIManager.put("Button.arc", 10);
-		
+
 		ThemeManager.applySavedTheme();
+        UserRepository userRepository = new UserRepository();
 
 		/*
 		LoginWindow ventanita = new LoginWindow();
 		new LoginController(ventanita.getLoginView());
 		*/
 
+
+        Session.login(userRepository.buscarRolAdmin());
         HomeWindow homesito = new HomeWindow();
         new HomeController(homesito.getHomeView());
 
-		/*
+
+        /*
 		FormUserWindow ventana = new FormUserWindow();
         new RegisterController(ventana.getFormUserView());
-		*/
+         */
+
 
 	}
 

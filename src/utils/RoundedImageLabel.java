@@ -7,6 +7,7 @@ import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.Shape;
 import java.awt.geom.RoundRectangle2D;
+import java.net.URL;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -17,10 +18,11 @@ public class RoundedImageLabel extends JPanel {
 
     public RoundedImageLabel(String path) {
 
-        ImageIcon icon = new ImageIcon(
-                getClass().getResource(path)
-        );
-
+        URL resource = getClass().getResource(path);
+        if (resource == null) {
+            return;
+        }
+        ImageIcon icon = new ImageIcon(resource);
         image = icon.getImage();
 
         setPreferredSize(new Dimension(160, 210));

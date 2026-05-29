@@ -5,6 +5,7 @@ import models.User;
 import repository.LibroRepository;
 import repository.PrestamoRepository;
 import repository.UserRepository;
+import utils.Session;
 import views.*;
 
 import javax.swing.*;
@@ -21,12 +22,9 @@ public class RegisterController {
 
     private FormUserView view;
     private UserRepository repository;
-    private PrestamoRepository prestamoRepository;
-    private LibroRepository libroRepository;
 
     public  RegisterController(FormUserView view){
         this.view = view;
-        
         repository = new UserRepository();
         registrarListeners();
     }
@@ -40,8 +38,6 @@ public class RegisterController {
                 controlRegistro();
             }
         });
-
-        //view.getBtnRegistro().addActionListener(e -> controlRegistro() );
 
         view.getBtnCancelar().addActionListener(e -> handleRegistration());
 
@@ -140,6 +136,23 @@ public class RegisterController {
             }
         });
 
+        view.getTxtCelular().getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                validarCelular();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                validarCelular();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                validarCelular();
+            }
+        });
+
         view.getTxtNombre().addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -166,21 +179,21 @@ public class RegisterController {
     private void controlRegistro(){
 
         try{
-        	
             if(validarCredenciales()){
-
-                new HomeWindow();
-                view.getWindow().dispose();
 
                 User user = new User(
                         view.getUserName(),
-                        view.getEmail()
+                        view.getEmail(),
+                        String.valueOf(view.getJpfContrasena().getPassword()),
+                        view.getCalular(),
+                        "usuario"
                 );
-                
+
+                Session.login(user);
                 registerUser(user);
 
                 HomeWindow homeWindow = new HomeWindow();
-                new HomeController(new HomeView(repository, libroRepository, prestamoRepository, homeWindow));
+                new HomeController(homeWindow.getHomeView());
 
                 view.getWindow().dispose();
             }
@@ -195,11 +208,7 @@ public class RegisterController {
     private void registerUser(User user) {
     	
     	try {
-    		
 			repository.save(user);
-			
-			JOptionPane.showConfirmDialog(view, "Usuario registrado");
-			
 		} catch (IOException ex) {
 			JOptionPane.showMessageDialog(view, ex.getMessage());
 		}
@@ -214,6 +223,10 @@ public class RegisterController {
         }
 
         if (!validarEmail()){
+            validar = false;
+        }
+
+        if(!validarCelular()){
             validar = false;
         }
 
@@ -262,6 +275,17 @@ public class RegisterController {
         }
 
         view.getLblEmailRequerido().setText("");
+
+        return true;
+    }
+
+    private  boolean validarCelular(){
+        if (view.getTxtCelular().getText().trim().isEmpty()){
+            view.getLblCelularRequerido().setText("El telefono celular es obligatorio");
+            return false;
+        }
+
+        view.getLblCelularRequerido().setText("");
 
         return true;
     }

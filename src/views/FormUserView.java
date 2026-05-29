@@ -13,11 +13,13 @@ public class FormUserView extends JPanel {
     private FormUserWindow window;
     private JTextField txtNombre;
     private  JTextField txtEmail;
+    private JTextField txtCelular;
     private JPasswordField jpfContrasena;
     private JPasswordField jpfConfirmarContrasena;
     private JLabel lblNombreRequerido;
     private JLabel lblEmailRequerido;
     private JLabel lblArrobaRequerido;
+    private JLabel lblCelularRequerido;
     private JLabel lblContrasenaRequerida;
     private JLabel lblConfirmarContrasena;
     private JLabel lblContrasenasDiferentes;
@@ -112,6 +114,26 @@ public class FormUserView extends JPanel {
         return txtEmail.getText();
     }
 
+    public String getCalular(){
+        return txtCelular.getText();
+    }
+
+    public JTextField getTxtCelular() {
+        return txtCelular;
+    }
+
+    public void setTxtCelular(JTextField txtCelular) {
+        this.txtCelular = txtCelular;
+    }
+
+    public JLabel getLblCelularRequerido() {
+        return lblCelularRequerido;
+    }
+
+    public void setLblCelularRequerido(JLabel lblCelularRequerido) {
+        this.lblCelularRequerido = lblCelularRequerido;
+    }
+
     public void panelSuperior(){
         JPanel panelVerticalSuperior = new JPanel();
         panelVerticalSuperior.setLayout(new BoxLayout(panelVerticalSuperior, BoxLayout.Y_AXIS));
@@ -185,6 +207,17 @@ public class FormUserView extends JPanel {
         panelVertical.add(Box.createVerticalStrut(20));
         lblArrobaRequerido.setAlignmentX(Component.LEFT_ALIGNMENT);
 
+        txtCelular = new JTextField();
+        SwingUtils.configurarComponente(0, 30, "Telefono Celular", txtCelular);
+        txtCelular.setAlignmentX(Component.LEFT_ALIGNMENT);
+        panelVertical.add(txtCelular);
+
+        lblCelularRequerido = new JLabel();
+        lblCelularRequerido.setFont(AppFont.small());
+        lblCelularRequerido.setForeground(Color.RED);
+        panelVertical.add(lblCelularRequerido);
+        panelVertical.add(Box.createVerticalStrut(20));
+        lblCelularRequerido.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         jpfContrasena = new JPasswordField();
         SwingUtils.configurarComponente(350, 30, "Contraseña", jpfContrasena);

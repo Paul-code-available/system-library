@@ -13,7 +13,7 @@ public class LoginRepository {
 	
 	public User login(String email, String password) {
 		
-		String sql = "SELECT id, email, password, role, name, phone FROM users WHERE email = ?";
+		String sql = "SELECT id_user, email, password, role, name, phone FROM users WHERE email = ?";
 		
 		try (
 			Connection conn = DatabaseConnection.getConnection();

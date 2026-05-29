@@ -1,11 +1,7 @@
 package repository;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,16 +17,8 @@ public class UserRepository {
     }
 
     public void save(User user) throws IOException {
-		// falta conenctarlo a base de datos
-		/*
-        List<User> users = getUsers();
-        users.add(user);
-    	*/
-		
 		String sql = "INSERT INTO users (name, email, password, phone, role)"
 				+ "VALUES (?, ?, ?, ?, ?)";
-		
-		System.out.println(sql);
 		
 		try (Connection connection = DatabaseConnection.getConnection();
 			 PreparedStatement pst = connection.prepareStatement(sql)) {
@@ -50,8 +38,6 @@ public class UserRepository {
 			
 			ex.printStackTrace();
 		}
-		
-		
 	}
 	
 	
@@ -96,13 +82,15 @@ public class UserRepository {
 			pst.setInt(1, id);
 			int affectedRows = pst.executeUpdate();
 			if (affectedRows > 0) {
-				System.out.println("Se eliminó");
 				return true;
 			}
 			
-		} catch (SQLException ex) {
-			ex.printStackTrace();
-		}
+		}catch (SQLIntegrityConstraintViolationException ex){
+            throw new RuntimeException("No es posible eliminar un usuario con prestamos o reservas asociadas");
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
 		
 		return false;
 		
@@ -150,5 +138,31 @@ public class UserRepository {
             ex.printStackTrace();
         }
         return 0;
+    }
+    
+    public User buscarRolAdmin(){
+
+        String sql = "SELECT * FROM users WHERE role = 'admin'";
+        User user = null;
+
+        try(Connection connection = DatabaseConnection.getConnection();
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(sql)
+        ){
+
+            while (rs.next()) {
+                user = new User(
+                        rs.getInt("id_user"),
+                        rs.getString("name"),
+                        rs.getString("email"),
+                        rs.getString("phone"),
+                        rs.getString("role")
+                );
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return user;
     }
 }

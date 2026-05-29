@@ -68,11 +68,16 @@ public class UserController {
                     "Confirmar", JOptionPane.YES_NO_OPTION);
 
             if (confirm == JOptionPane.YES_OPTION) {
-                boolean deleted = repo.delete(model.getUserAt(row).getId());
-                if (deleted) {
-                    model.removeRow(row);
-                    inicioView.refresh();
+                try{
+                    boolean deleted = repo.delete(model.getUserAt(row).getId());
+                    if (deleted) {
+                        model.removeRow(row);
+                        inicioView.refresh();
+                    }
+                }catch (RuntimeException ex){
+                    JOptionPane.showMessageDialog(view, ex.getMessage());
                 }
+
             }
 		});
 
