@@ -20,38 +20,51 @@ public class LibroRepository {
 
     public boolean save(Book libro){
 
-        String sql = "INSERT INTO libro (title, publish_year, categoria_id, pages," +
-                "language, available_books, total_books, isbn, cover_path," +
-                "publisher, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql =
+                "INSERT INTO libro (" +
+                "title, autor, publish_year, categoria_id, " +
+                "pages, language, available_books, total_books, " +
+                "isbn, cover_path, publisher, description" +
+                ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        try (Connection connection = DatabaseConnection.getConnection();
-             PreparedStatement pst = connection.prepareStatement(sql)
+        try (
+                Connection connection =
+                        DatabaseConnection.getConnection();
+
+                PreparedStatement pst =
+                        connection.prepareStatement(sql)
         ){
 
             pst.setString(1, libro.getTitle());
-            pst.setInt(2, libro.getPublishYear());
-            //pst.setInt(3, libro.getCategory().getIdCategoria);
-            pst.setInt(4, libro.getPages());
-            pst.setString(5, libro.getLanguage());
-            pst.setInt(6, libro.getAvailableBooks());
-            pst.setInt(7, libro.getTotalBooks());
-            pst.setString(8, libro.getIsbn());
-            pst.setString(9, libro.getCoverPath());
-            pst.setString(10, libro.getPublisher());
-            pst.setString(11, libro.getDescription());
+            pst.setString(2, libro.getAuthor());
+            pst.setInt(3, libro.getPublishYear());
+            pst.setInt(4, libro.getCategory().getIdCategoria());
+            pst.setInt(5, libro.getPages());
+            pst.setString(6, libro.getLanguage());
+            pst.setInt(7, libro.getAvailableBooks());
+            pst.setInt(8, libro.getTotalBooks());
+            pst.setString(9, libro.getIsbn());
+            pst.setString(10, libro.getCoverPath());
+            pst.setString(11, libro.getPublisher());
+            pst.setString(12, libro.getDescription());
 
             return pst.executeUpdate() > 0;
+
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+
         return false;
     }
-
+    
     public List<Book> getLibros(){
 
         List<Book> libros = new ArrayList<>();
-        String sql = "select l.*, c.id_categoria, c.nombre, c.descripcion from libro as l" +
-                "join categoria as c on l.categoria_id = c.id_categoria;";
+        String sql = "select l.*, c.id_categoria, " +
+                "c.nombre, c.descripcion " +
+                "from libro as l " +
+                "join categoria as c " +
+                "on l.categoria_id = c.id_categoria;";
 
         try(Connection connection = DatabaseConnection.getConnection();
             Statement statement = connection.createStatement();
@@ -60,9 +73,9 @@ public class LibroRepository {
             while(rs.next()){
 
                 Categoria categoria = new Categoria(
-                        rs.getInt("categoria_id"),
-                        rs.getString("nombre_categoria"),
-                        rs.getString("desc_categoria")
+                        rs.getInt("id_categoria"),
+                        rs.getString("nombre"),
+                        rs.getString("descripcion")
                 );
 
                 Book libro = new Book(
@@ -111,14 +124,14 @@ public class LibroRepository {
         String sql = "UPDATE libro SET title = ?, publish_year = ?, categoria_id = ?," +
                 "pages = ?, language = ?, available_books = ?, total_books = ?," +
                 "isbn = ?, cover_path = ?, publisher = ?, description = ?, autor = ?" +
-                "WHERE id_libro = ?";
+                " WHERE id_libro = ?";
 
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement pst = connection.prepareStatement(sql)) {
 
             pst.setString(1, libro.getTitle());
             pst.setInt(2, libro.getPublishYear());
-            //pst.setInt(3, libro.getCategory().getIdCategoria());
+            pst.setInt(3, libro.getCategory().getIdCategoria());
             pst.setInt(4, libro.getPages());
             pst.setString(5, libro.getLanguage());
             pst.setInt(6, libro.getAvailableBooks());

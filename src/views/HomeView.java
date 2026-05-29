@@ -119,9 +119,6 @@ public class HomeView extends JPanel{
         borrowView = new BorrowView();
         accountView = new AccountView();
 
-        
-    
-        
         contenedor.add(inicioView, HOME);
         contenedor.add(usersView, USERS);
         contenedor.add(booksView, BOOKS);

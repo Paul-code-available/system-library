@@ -44,74 +44,6 @@ public class FormUserView extends JPanel {
         //asignarListeners();
     }
 
-    public JCheckBox getCheckTerminos() {
-        return checkTerminos;
-    }
-
-    public FormUserWindow getWindow() {
-        return window;
-    }
-
-    public JTextField getTxtNombre() {
-        return txtNombre;
-    }
-
-    public JTextField getTxtEmail() {
-        return txtEmail;
-    }
-
-    public JPasswordField getJpfContrasena() {
-        return jpfContrasena;
-    }
-
-    public JPasswordField getJpfConfirmarContrasena() {
-        return jpfConfirmarContrasena;
-    }
-
-    public JLabel getLblNombreRequerido() {
-        return lblNombreRequerido;
-    }
-
-    public JLabel getLblEmailRequerido() {
-        return lblEmailRequerido;
-    }
-
-    public JLabel getLblArrobaRequerido() {
-        return lblArrobaRequerido;
-    }
-
-    public JLabel getLblContrasenaRequerida() {
-        return lblContrasenaRequerida;
-    }
-
-    public JLabel getLblConfirmarContrasena() {
-        return lblConfirmarContrasena;
-    }
-
-    public JLabel getLblContrasenasDiferentes() {
-        return lblContrasenasDiferentes;
-    }
-
-    public JLabel getLblCheckTerminosRequerido() {
-        return lblCheckTerminosRequerido;
-    }
-
-    public JButton getBtnRegistro() {
-        return btnRegistro;
-    }
-
-    public JButton getBtnCancelar() {
-        return btnCancelar;
-    }
-
-    public String getUserName(){
-        return txtNombre.getText();
-    }
-
-    public String getEmail(){
-        return txtEmail.getText();
-    }
-
     public void panelSuperior(){
         JPanel panelVerticalSuperior = new JPanel();
         panelVerticalSuperior.setLayout(new BoxLayout(panelVerticalSuperior, BoxLayout.Y_AXIS));
@@ -296,6 +228,76 @@ public class FormUserView extends JPanel {
             System.exit(0);
         }
     }
+    
+
+    public JCheckBox getCheckTerminos() {
+        return checkTerminos;
+    }
+
+    public FormUserWindow getWindow() {
+        return window;
+    }
+
+    public JTextField getTxtNombre() {
+        return txtNombre;
+    }
+
+    public JTextField getTxtEmail() {
+        return txtEmail;
+    }
+
+    public JPasswordField getJpfContrasena() {
+        return jpfContrasena;
+    }
+
+    public JPasswordField getJpfConfirmarContrasena() {
+        return jpfConfirmarContrasena;
+    }
+
+    public JLabel getLblNombreRequerido() {
+        return lblNombreRequerido;
+    }
+
+    public JLabel getLblEmailRequerido() {
+        return lblEmailRequerido;
+    }
+
+    public JLabel getLblArrobaRequerido() {
+        return lblArrobaRequerido;
+    }
+
+    public JLabel getLblContrasenaRequerida() {
+        return lblContrasenaRequerida;
+    }
+
+    public JLabel getLblConfirmarContrasena() {
+        return lblConfirmarContrasena;
+    }
+
+    public JLabel getLblContrasenasDiferentes() {
+        return lblContrasenasDiferentes;
+    }
+
+    public JLabel getLblCheckTerminosRequerido() {
+        return lblCheckTerminosRequerido;
+    }
+
+    public JButton getBtnRegistro() {
+        return btnRegistro;
+    }
+
+    public JButton getBtnCancelar() {
+        return btnCancelar;
+    }
+
+    public String getUserName(){
+        return txtNombre.getText();
+    }
+
+    public String getEmail(){
+        return txtEmail.getText();
+    }
+
 
 
 }

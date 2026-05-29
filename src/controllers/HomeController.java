@@ -70,7 +70,7 @@ public class HomeController {
         });
         
         homeView.btnBooks.addActionListener(e -> {
-        	homeView.mostrarVista(HomeView.BOOKS);
+        	
         	
         	createBook();
 
@@ -136,6 +136,8 @@ public class HomeController {
 
     }
     
+    
+    
     public void showBorrows() {
     	if (borrowController == null) {
 			borrowController = new BorrowController(homeView.borrowView);
@@ -150,9 +152,10 @@ public class HomeController {
     	
     	if (bookController == null) {
     		bookController = new BookController(homeView.booksView);
-			
-		}
+    	}
     	
+    	homeView.mostrarVista(homeView.BOOKS);
+		
     }
     
    

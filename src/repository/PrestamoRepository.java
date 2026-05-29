@@ -19,26 +19,36 @@ public class PrestamoRepository {
 
     public boolean save(Prestamo prestamo){
 
-        String sql = "INSERT INTO prestamo (id_prestamo, fecha_prestamo, fecha_devolucion, estado, id_user, id_libro)";
+        String sql = "INSERT INTO prestamo (fecha_prestamo, fecha_devolucion, estado, id_user, id_libro) " +
+                     "VALUES (?, ?, ?, ?, ?)";
 
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement pst = connection.prepareStatement(sql)
         ){
 
-            pst.setInt(1, prestamo.getIdPrestamo());
-            pst.setString(2, prestamo.getFechaPrestamo());
-            pst.setString(3, prestamo.getFechaDevolucion());
-            pst.setString(4, prestamo.getEstado());
-            pst.setInt(5, prestamo.getUser().getId());
-            pst.setInt(6, prestamo.getLibro().getIdLibro());
+            pst.setDate(1, java.sql.Date.valueOf(prestamo.getFechaPrestamo()));
+            pst.setDate(2, java.sql.Date.valueOf(prestamo.getFechaDevolucion()));
+            pst.setString(3, prestamo.getEstado());
+            pst.setInt(4, prestamo.getUser().getId());
+            pst.setInt(5, prestamo.getLibro().getIdLibro());
 
-            return pst.executeUpdate() > 0;
+            System.out.println("FECHA PRESTAMO: " + prestamo.getFechaPrestamo());
+            System.out.println("FECHA DEV: " + prestamo.getFechaDevolucion());
+            System.out.println("ESTADO: " + prestamo.getEstado());
+            System.out.println("USER ID: " + prestamo.getUser().getId());
+            System.out.println("LIBRO ID: " + prestamo.getLibro().getIdLibro());
+
+            int rows = pst.executeUpdate();   
+
+            return rows > 0;
+
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+
         return false;
     }
-
+    
     public List<Prestamo> getPrestamos(){
 
         List<Prestamo> prestamos = new ArrayList<>();
@@ -60,15 +70,15 @@ public class PrestamoRepository {
             while(rs.next()){
 
                 User user = new User(
-                        rs.getInt("id"),
-                        rs.getString("nombre"),
-                        rs.getString("password"),
+                        rs.getInt("id_user"),
+                        rs.getString("name"),
+                        rs.getString("email"),
                         rs.getString("phone"),
                         rs.getString("role")
                 );
 
                 Categoria categoria = new Categoria(
-                        rs.getInt("categoria_id"),
+                        rs.getInt("id_categoria"),
                         rs.getString("nombre_categoria"),
                         rs.getString("desc_categoria")
                 );
@@ -91,11 +101,11 @@ public class PrestamoRepository {
 
                 Prestamo prestamo = new Prestamo(
                         rs.getInt("id_prestamo"),
-                        rs.getString("fecha_prestamo"),
-                        rs.getString("fecha_devolucion"),
-                        rs.getString("estado_prestamo"),
                         user,
-                        libro
+                        libro,
+                        rs.getDate("fecha_prestamo").toLocalDate(),
+                        rs.getDate("fecha_devolucion").toLocalDate(),
+                        rs.getString("estado_prestamo")
                 );
                 prestamos.add(prestamo);
             }
@@ -149,11 +159,11 @@ public class PrestamoRepository {
 
                 Prestamo prestamo = new Prestamo(
                         rs.getInt("id_prestamo"),
-                        rs.getString("fecha_prestamo"),
-                        rs.getString("fecha_devolucion"),
-                        rs.getString("estado_prestamo"),
                         user,
-                        libro
+                        libro,
+                        rs.getDate("fecha_prestamo").toLocalDate(),
+                        rs.getDate("fecha_devolucion").toLocalDate(),
+                        rs.getString("estado_prestamo")
                 );
                 prestamos.add(prestamo);
             }
@@ -192,8 +202,8 @@ public class PrestamoRepository {
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement pst = connection.prepareStatement(sql)) {
 
-            pst.setString(1, prestamo.getFechaPrestamo());
-            pst.setString(2, prestamo.getFechaDevolucion());
+        	pst.setDate(1, java.sql.Date.valueOf(prestamo.getFechaPrestamo()));
+        	pst.setDate(2, java.sql.Date.valueOf(prestamo.getFechaDevolucion()));
             pst.setString(3, prestamo.getEstado());
             pst.setInt(4, prestamo.getUser().getId());
             pst.setInt(5, prestamo.getLibro().getIdLibro());
@@ -289,13 +299,14 @@ public class PrestamoRepository {
                         rs.getString("role"));
 
                 prestamos.add(new Prestamo(
-                                rs.getInt("id_prestamo"),
-                                rs.getString("fecha_prestamo"),
-                                rs.getString("fecha_devolucion"),
-                                rs.getString("estado_prestamo"),
-                                user,
-                                libro)
-                );
+                        rs.getInt("id_prestamo"),
+                        user,
+                        libro,
+                        rs.getDate("fecha_prestamo").toLocalDate(),
+                        rs.getDate("fecha_devolucion").toLocalDate(),
+                        rs.getString("estado_prestamo")
+                ));
+                
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
