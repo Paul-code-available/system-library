@@ -36,11 +36,11 @@ public class Main {
         HomeWindow homesito = new HomeWindow();
         new HomeController(homesito.getHomeView());
 
-
-        /*
+		/*
 		FormUserWindow ventana = new FormUserWindow();
         new RegisterController(ventana.getFormUserView());
-         */
+		*/
+
 
 
 	}

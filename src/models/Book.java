@@ -8,7 +8,6 @@ public class Book {
 	private String title;
 	private String author;
 	private Categoria category;
-    private String categoria;
 	private int pages;
 	private int publishYear;
 
@@ -19,17 +18,19 @@ public class Book {
 	private String isbn;
 	private String coverPath;
 	
-	private RoundedImageLabel roundedImageLabel;
-	
 	private String publisher;
 	private String description;
-
-	public Book(String title, String author, String category, int pages, int publishYear, String language,
+	
+	public Book() {
+		
+	}
+	
+	public Book(String title, String author, Categoria category, int pages, int publishYear, String language,
                 int availableBooks, int totalBooks, String isbn, String coverPath, String publisher, String description) {
 		
 		this.title = title;
 		this.author = author;
-		this.categoria = category;
+		this.category = category;
 		this.pages = pages;
 		this.publishYear = publishYear;
 		this.language = language;
@@ -56,25 +57,7 @@ public class Book {
         this.publisher = publisher;
         this.description = description;
     }
-
-    public Book(String title, String author, Categoria category, int pages, int publishYear, String language,
-                int availableBooks, int totalBooks, String isbn, RoundedImageLabel roundedImageLabel, String publisher,
-                String description) {
-		this.title = title;
-		this.author = author;
-		this.category = category;
-		this.pages = pages;
-		this.publishYear = publishYear;
-		this.language = language;
-		this.availableBooks = availableBooks;
-		this.totalBooks = totalBooks;
-		this.isbn = isbn;
-		this.roundedImageLabel = roundedImageLabel;
-		this.publisher = publisher;
-		this.description = description;
-	}
-
-
+    
     public String getTitle() {
 		return title;
 	}
@@ -91,15 +74,17 @@ public class Book {
 		this.author = author;
 	}
 
-	public String getCategory() {
-		return categoria;
+	
+
+    public Categoria getCategory() {
+		return category;
 	}
 
-	public void setCategory(String category) {
-		this.categoria = category;
+	public void setCategory(Categoria category) {
+		this.category = category;
 	}
 
-    public int getPages() {
+	public int getPages() {
 		return pages;
 	}
 
@@ -177,5 +162,10 @@ public class Book {
 
     public void setIdLibro(int idLibro) {
         this.idLibro = idLibro;
+    }
+    
+    @Override
+    public String toString() {
+        return title;
     }
 }

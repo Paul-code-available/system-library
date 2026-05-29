@@ -7,7 +7,6 @@ import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.Shape;
 import java.awt.geom.RoundRectangle2D;
-import java.net.URL;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -18,16 +17,32 @@ public class RoundedImageLabel extends JPanel {
 
     public RoundedImageLabel(String path) {
 
-        URL resource = getClass().getResource(path);
-        if (resource == null) {
-            return;
+        // si path viene null o vacío
+        if (path == null || path.isBlank()) {
+            path = "/assets/img/default.png";
         }
-        ImageIcon icon = new ImageIcon(resource);
-        image = icon.getImage();
+
+        java.net.URL imageUrl = getClass().getResource(path);
+
+        // si no encontró la imagen
+        if (imageUrl == null) {
+            System.out.println("No se encontró: " + path);
+
+            imageUrl =
+                    getClass().getResource("/assets/img/default.png");
+        }
+
+        // si tampoco existe default.png
+        if (imageUrl != null) {
+            ImageIcon icon = new ImageIcon(imageUrl);
+            image = icon.getImage();
+        }
 
         setPreferredSize(new Dimension(160, 210));
         setMaximumSize(new Dimension(160, 210));
         setOpaque(false);
+
+
     }
 
     @Override

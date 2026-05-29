@@ -19,7 +19,7 @@ public class UserRepository {
     public void save(User user) throws IOException {
 		String sql = "INSERT INTO users (name, email, password, phone, role)"
 				+ "VALUES (?, ?, ?, ?, ?)";
-		
+
 		try (Connection connection = DatabaseConnection.getConnection();
 			 PreparedStatement pst = connection.prepareStatement(sql)) {
 			
@@ -39,8 +39,6 @@ public class UserRepository {
 			ex.printStackTrace();
 		}
 	}
-	
-	
 	
 	public List<User> getUsers() throws IOException{
         
@@ -139,7 +137,7 @@ public class UserRepository {
         }
         return 0;
     }
-    
+
     public User buscarRolAdmin(){
 
         String sql = "SELECT * FROM users WHERE role = 'admin'";
