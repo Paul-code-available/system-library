@@ -117,15 +117,22 @@ public class HomeView extends JPanel{
         usersView = new UsersView();
         booksView = new BooksView();
         borrowView = new BorrowView();
-        accountView = new AccountView();
+        accountView = null;
 
         contenedor.add(inicioView, HOME);
         contenedor.add(usersView, USERS);
         contenedor.add(booksView, BOOKS);
         contenedor.add(borrowView, BORROW);
-        contenedor.add(accountView, ACCOUNT);
+        contenedor.add(new JPanel(), ACCOUNT);
+        //contenedor.add(accountView, ACCOUNT);
 
         add(contenedor, BorderLayout.CENTER);
+    }
+
+    public void mostrarAccount() {
+        accountView = new AccountView();
+        contenedor.add(accountView, ACCOUNT);
+        cardLayout.show(contenedor, ACCOUNT);
     }
 
     public void mostrarVista(String view){

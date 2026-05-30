@@ -50,6 +50,7 @@ public class HomeController {
 
     	homeView.btnHome.addActionListener(e -> {
     		homeView.mostrarVista(HomeView.HOME);
+
     		
     		resetearBotones();
     		resetearTexto();
@@ -92,7 +93,7 @@ public class HomeController {
         });
        
         homeView.btnAccount.addActionListener(e -> {
-        	homeView.mostrarVista(HomeView.ACCOUNT);
+        	homeView.mostrarAccount();
         	
         	resetearBotones();
         	resetearTexto();
